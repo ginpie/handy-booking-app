@@ -6,11 +6,15 @@ class Date extends React.Component {
         this.state = {
             today: new Date(),
             timeSpan: 30
-        }
+        };
 
         this.getDate = this.getDate.bind(this);
         this.getMaximumDate = this.getMaximumDate.bind(this);
         this.setTimeSpan = this.setTimeSpan.bind(this);
+    }
+
+    getToday() {
+        return this.state.today;
     }
 
     getDate(date) {
@@ -38,7 +42,7 @@ class Date extends React.Component {
     } 
 
     render() {
-        const today = this.getDate(this.state.today);
+        const today = this.getDate(this.getToday());
         const maximum = this.getDate(this.getMaximumDate());
 
         return (
