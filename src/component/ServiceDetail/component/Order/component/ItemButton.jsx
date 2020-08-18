@@ -10,6 +10,8 @@ class ItemButton extends React.Component {
         };
 
         this.getNumber = this.getNumber.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
+        this.handleMinus = this.handleMinus.bind(this)
     }
 
     getNumber() {
@@ -17,21 +19,48 @@ class ItemButton extends React.Component {
     }
 
     setMaxNumber(number) {
-        this.setState = {
+        this.setState({
             maxNumber: number
-        };
+        });
     }
 
     setMinNumber(number) {
-        this.setState = {
+        this.setState({
             minNumber: number
-        };
+        });
+    }
+
+    handleAdd(event) {
+        event.preventDefault();
+        const currentNumber = this.state.number;
+        if (currentNumber < this.state.maxNumber) {
+            this.setState({
+                number: currentNumber + 1
+            });
+        }
+        console.log("add");
+    }
+
+    handleMinus(event) {
+        event.preventDefault();
+        const currentNumber = this.state.number;
+        if (currentNumber > this.state.minNumber) {
+            this.setState({
+                number: currentNumber - 1
+            });
+        }
+        console.log("minus");
+
     }
 
     render() {
+        const number = this.getNumber();
 
         return (
             <div>
+                <button onClick={this.handleMinus}>-</button>
+                <p>{number}</p>
+                <button onClick={this.handleAdd}>+</button>
             </div>
         )
     }
