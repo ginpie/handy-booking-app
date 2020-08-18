@@ -6,7 +6,7 @@ class ItemButton extends React.Component {
         this.state = {
             number: 0,
             maxNumber: 10,
-            minNumber: 0,
+            minNumber: 0
         };
 
         this.getNumber = this.getNumber.bind(this);
