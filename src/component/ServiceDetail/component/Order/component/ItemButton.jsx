@@ -6,7 +6,7 @@ class ItemButton extends React.Component {
         this.state = {
             number: 0,
             maxNumber: 10,
-            minNumber: 0
+            minNumber: 0,
         };
 
         this.getNumber = this.getNumber.bind(this);
@@ -38,7 +38,6 @@ class ItemButton extends React.Component {
                 number: currentNumber + 1
             });
         }
-        console.log("add");
     }
 
     handleMinus(event) {
@@ -49,17 +48,17 @@ class ItemButton extends React.Component {
                 number: currentNumber - 1
             });
         }
-        console.log("minus");
-
     }
 
     render() {
         const number = this.getNumber();
+        const name = this.props.children;
 
         return (
             <div>
+                <label>{name}</label>
                 <button onClick={this.handleMinus}>-</button>
-                <p>{number}</p>
+                <input value={number}></input>
                 <button onClick={this.handleAdd}>+</button>
             </div>
         )
