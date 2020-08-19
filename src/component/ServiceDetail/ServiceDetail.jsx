@@ -3,7 +3,7 @@ import Order from './component/Order';
 
 const ServiceDetail = () => (
     <div>
-        <Order />
+        <Order>Furniture Assembly</Order>
     </div>
 );
 
