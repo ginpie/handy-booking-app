@@ -1,10 +1,11 @@
 import React from 'react';
+import style from '../Profile.module.css';
 
 const InformationPair = (props) => (
-    <div>
-        <p>{props.children}</p>
-        <p>{props.content}</p>
-    </div>
+    <tr>
+        <td>{props.children}</td>
+        <td>{props.content}</td>
+    </tr>
 );
 
 export default InformationPair;

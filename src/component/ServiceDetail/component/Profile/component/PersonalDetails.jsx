@@ -23,14 +23,14 @@ class PersonalDetails extends React.Component {
         const intro = this.state.introduction;
         return (
             <div>
-                {details.map((content) => {
-                    return (
-                        <div>
-                            <InformationPair content={content.value}>{content.key}</InformationPair>
-                            <Introduction>{intro}</Introduction>
-                        </div>
-                    )
-                })}
+                <table>
+                    {details.map((content) => {
+                        return (
+                                <InformationPair content={content.value}>{content.key}</InformationPair>
+                        )
+                    })}
+                </table>
+                <Introduction>{intro}</Introduction>
             </div>
         )
     } 
