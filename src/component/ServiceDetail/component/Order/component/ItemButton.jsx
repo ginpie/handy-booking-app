@@ -58,7 +58,7 @@ class ItemButton extends React.Component {
             <div>
                 <label>{name}</label>
                 <button onClick={this.handleMinus}>-</button>
-                <input value={number}></input>
+                <input value={number} name={name} id = {name}></input>
                 <button onClick={this.handleAdd}>+</button>
             </div>
         )
