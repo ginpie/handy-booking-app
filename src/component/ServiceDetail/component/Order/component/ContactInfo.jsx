@@ -4,7 +4,7 @@ import InputItem from './InputItem';
 class ContactInfo extends React.Component {
     constructor(props) {
         super(props);
-        this.needInfo = ["ZIP Code", "Email", "Phone(Optional)"];
+        this.needInfo = ["ZIP Code", "Email", "Phone(Optional)", "Additional Information"];
         this.state = {
             needInfo : this.needInfo,
         };
