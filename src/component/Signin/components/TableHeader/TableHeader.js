@@ -1,8 +1,4 @@
 import React from "react";
-const TableHeader = () => (
-    <div>
-        <p>{props.children}</p>
-    </div>
-);
-
+import "./table.scss";
+const TableHeader = () => <div className="tableHeader">Join Us</div>;
 export default TableHeader;

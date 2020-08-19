@@ -1,16 +1,10 @@
 import React from "react";
-import TableContentItemRow from "../TableContentItemRow";
+import "./tableContent.scss";
+import Form from "./Form";
 
-// test后需创建 邮箱， 密码
 const TableContent = () => (
-  <div>
-    <TableContentItemRow
-      title="User Name"
-      type="text"
-      name="Username"
-      value="Please input your User Name"
-    ></TableContentItemRow>
+  <div className="tableContent">
+    <Form />
   </div>
 );
-
 export default TableContent;

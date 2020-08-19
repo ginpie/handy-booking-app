@@ -1,0 +1,9 @@
+.tableRow {
+  display: flex;
+  &--label {
+    min-width: 50%;
+  }
+  &--input {
+    max-width: 20%;
+  }
+}
