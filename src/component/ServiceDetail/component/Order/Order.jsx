@@ -1,5 +1,6 @@
 import React from 'react';
 import ItemButton from './component/ItemButton';
+import ContactInfo from './component/ContactInfo';
 
 class Order extends React.Component {
     constructor(props) {
@@ -33,7 +34,9 @@ class Order extends React.Component {
                                 );
                             }) 
                         );
-                    })}
+                    })
+                }
+                <ContactInfo />
             </form>
         );
     }
