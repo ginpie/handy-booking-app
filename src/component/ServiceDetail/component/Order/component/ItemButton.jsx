@@ -1,4 +1,5 @@
 import React from 'react';
+import style from '../Order.module.scss';
 
 class ItemButton extends React.Component {
     constructor(props) {
@@ -57,9 +58,12 @@ class ItemButton extends React.Component {
         return (
             <div>
                 <label>{name}</label>
-                <button onClick={this.handleMinus}>-</button>
-                <input value={number} name={name} id = {name}></input>
-                <button onClick={this.handleAdd}>+</button>
+                <div>
+                    <button onClick={this.handleMinus}>-</button>
+                    <input value={number} name={name} id = {name} className={style.input_item}></input>
+                    <button onClick={this.handleAdd}>+</button>
+                </div>
+
             </div>
         )
     }

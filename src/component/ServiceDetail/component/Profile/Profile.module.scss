@@ -1,0 +1,28 @@
+@import '../../variable.scss';
+
+.avatar {
+    width: 300px;
+    height: 300px;
+    border-radius: 300px;
+}
+.avatar_container {
+    text-align: center;
+}
+.key {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.table {
+    padding: 20px 50px;
+    margin: 0 auto;
+}
+.title {
+    font-size: $title_size;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+.intro {
+    width: 80%;
+    margin: 0 auto;
+}

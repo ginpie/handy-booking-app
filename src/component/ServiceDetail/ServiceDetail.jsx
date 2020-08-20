@@ -17,11 +17,8 @@ class ServiceDetail extends React.Component {
         const order = this.state.order;
         return (
             <div className={style.page}>
-                <div className={style.title}>
-                    <p>{order}</p>
-                </div>
-                <Profile />
-                <Order>{order}</Order>
+                <Profile className={style.column} order={order}/>
+                <Order className={style.order_form}>{order}</Order>
             </div>
         )
     }

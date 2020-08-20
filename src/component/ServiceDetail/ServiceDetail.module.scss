@@ -3,12 +3,14 @@
 .page {
     display: flex;
     padding-top: $top_gap;
-    padding-left: $left_gap;
+    width: 1000px;
     flex-wrap: wrap;
-
+    margin: 0 auto;
 }
-.title {
-    font-size: $title_size;
-    // padding-left: $left_gap;
-    width: 100%;
+.column {
+    width: $column_width;
+    margin: 0 auto;
+}
+.order_form {
+    width: $form_width;
 }

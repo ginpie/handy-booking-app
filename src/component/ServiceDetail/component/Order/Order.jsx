@@ -1,6 +1,7 @@
 import React from 'react';
 import ItemButton from './component/ItemButton';
 import ContactInfo from './component/ContactInfo';
+import style from './Order.module.scss';
 
 class Order extends React.Component {
     constructor(props) {
@@ -19,8 +20,9 @@ class Order extends React.Component {
     render() {
         const page = this.props.children;
         const orderType = this.state.category;
+        const className = this.props.className;
         return (
-            <form>
+            <form className={style.form_container + " " + className} >
                 {
                     orderType.map((type) => {
                         if (type.key !== page) {

@@ -1,8 +1,8 @@
 import React from 'react';
-import style from '../Profile.module.css';
+import style from '../Profile.module.scss';
 
 const Avatar = (props) => (
-    <div>
+    <div className={style.avatar_container}>
         <img alt="avatar" src={props.link} className={style.avatar} />
     </div>
 );
