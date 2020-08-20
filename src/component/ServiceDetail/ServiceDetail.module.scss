@@ -1,0 +1,14 @@
+@import './variable.scss';
+
+.page {
+    display: flex;
+    padding-top: $top_gap;
+    padding-left: $left_gap;
+    flex-wrap: wrap;
+
+}
+.title {
+    font-size: $title_size;
+    // padding-left: $left_gap;
+    width: 100%;
+}
