@@ -10,7 +10,6 @@ class PersonalDetails extends React.Component {
             {key:"Name", value: "Ian Yin"},
             {key: "Title", value: "Mr"},
             {key: "Gender", value: "Male"},
-            {key: "Age", value: 27},
             {key: "Language", value: "English, Mandarin"},
         ];
         this.state = {
@@ -27,7 +26,7 @@ class PersonalDetails extends React.Component {
                 <table className={style.table}>
                     {details.map((content) => {
                         return (
-                                <InformationPair content={content.value}>{content.key}</InformationPair>
+                            <InformationPair content={content.value}>{content.key}</InformationPair>
                         )
                     })}
                 </table>
