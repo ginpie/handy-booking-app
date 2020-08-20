@@ -8,7 +8,7 @@ class NameForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleEmail = this.handleEmail.bind(this);
+    // this.handleEmail = this.handleEmail.bind(this);
   }
 
   handleChange(event) {
@@ -17,8 +17,7 @@ class NameForm extends React.Component {
       Passwordvalue: event.target.Passwordvalue,
     });
   }
- 
-
+  //需debug提交后的反馈
   handleSubmit(event) {
     alert(
       "Email: " +
@@ -32,23 +31,29 @@ class NameForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
-          Email:
+        <div className="form--layout">
+          <label className="form--layout--label">Email:</label>
           <input
+            className="form--layout--input"
             type="text"
             value={this.state.Emailvalue}
-            onChange={(this.handleChange, this.handleEmail)}
+            onChange={this.handleChange}
           />
-        </label>
-        <label>
-          Password :
+
+          <label className="form--layout--label">Password :</label>
           <input
+            className="form--layout--input"
             type="text"
             value={this.state.Passwordvalue}
             onChange={this.handleChange}
           />
-        </label>
-        <input type="submit" value="Join XXXXXXXXX" />
+
+          <input
+            className="form--layout--input submit"
+            type="submit"
+            value="Join XXXXXXXXX"
+          />
+        </div>
       </form>
     );
   }
