@@ -1,0 +1,91 @@
+@import "../utils/mixin.scss";
+
+@mixin jobListInLargeScreen {
+    display: flex;
+    flex-grow: 2;
+    .jobList {
+        flex-direction: column;
+        width: 100%;
+        &__title {
+            font-size: 26px;
+            margin-top: 25px;
+        }
+        &__nav {
+            height: 50px;
+            width: 100%;
+            margin-top: 25px;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            &--item {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: none;
+                flex-grow: initial;
+                width: 100px;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #eeeeee;
+                }
+            }
+            &--active {
+                border-bottom: 2px solid #ff8e33;
+                margin-top: -1px;
+            }
+        }
+    }
+}
+
+@mixin jobListOnSmallScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    .jobList {
+        flex-direction: column;
+        width: 90%;
+        &__title {
+            display: none;
+        }
+        &__nav {
+            height: 40px;
+            width: 100%;
+            margin-top: 20px;
+            background-color: white;
+            display: flex;
+            &--item {
+                height: 100%;
+                flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #e0e0e0;
+            }
+            &--active {
+                border-bottom: 2px solid #ff8e33;
+                margin-top: -1px;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+
+.jobListContainer {
+    @include jobListOnSmallScreen;
+    @include respond-to(small) {
+        @include jobListOnSmallScreen;
+    }
+    @include respond-to(medium) {
+        @include jobListInLargeScreen;
+    }
+    @include respond-to(large) {
+        @include jobListInLargeScreen;
+    }
+    @include respond-to(extra-large) {
+        @include jobListInLargeScreen;
+    }
+    // background-color: lightgoldenrodyellow;
+}
