@@ -7,10 +7,15 @@ import "./categories.css";
 
 const Categories = () => (
   <section className="categories">
-    <CategoryAssembly />
-    <CategoryCleaning />
-    <CategoryInstallation />
-    <CategoryMoving />
+    <div className="categories__title-box">
+      <h3 className="categories__title">All Categories</h3>
+    </div>
+    <div className="card-box">
+      <CategoryAssembly />
+      <CategoryCleaning />
+      <CategoryInstallation />
+      <CategoryMoving />
+    </div>
   </section>
 );
 
