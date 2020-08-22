@@ -1,5 +1,4 @@
 .jobs {
-    min-height: 350px;
     margin-top: 25px;
     border: 5px dashed #e0e0e0;
     display: flex;
@@ -22,5 +21,18 @@
         font-size: 20px;
         opacity: 0.6;
         font-weight: 500;
+    }
+    &__button {
+        margin-top:20px;
+        margin-bottom: 20px;
+        border: none;
+        padding: 10px 50px;
+        color: white;
+        background-color: #ff8e33;
+        border-radius: 5px;
+        &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
     }
 }

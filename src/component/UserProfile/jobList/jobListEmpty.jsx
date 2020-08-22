@@ -20,6 +20,9 @@ const JobListEmpty = () => {
             <div className="jobs__message">
                 3 &nbsp; You can contact these tradies or wait for them to contact you.
             </div>
+            <button className="jobs__button">
+                Get Quotes Now
+            </button>
         </div>
      );
 }
