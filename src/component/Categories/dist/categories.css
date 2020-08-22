@@ -1,0 +1,97 @@
+.categories {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.card {
+  height: 240px;
+  width: 220px;
+  text-align: start;
+  font-family: Helvetica;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: gray 5px 5px 15px;
+  border-radius: 10px;
+  margin: 20px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.card:hover {
+  /* opacity: 0.8; */
+  cursor: pointer;
+  transform: translate(-2px, -2px);
+  transition: all ease 0.1s;
+}
+.card__image-container {
+  width: 220px;
+  height: 150px;
+  overflow: hidden;
+}
+.card__image {
+  width: 100%;
+  height: 150px;
+  opacity: 0.8;
+}
+.card__heart {
+  width: 30px;
+  position: relative;
+  transform: translate(180px, -140px);
+  fill: white;
+  opacity: 0.8;
+}
+.card__heart:hover {
+  fill: red;
+}
+.card__dbox {
+  margin: 5px 15px 0px;
+}
+.card__dbox__title {
+  font-size: 15px;
+  color: #0270c2;
+  margin: 0 0px -5px 0px;
+}
+.card__dbox__description {
+  font-size: 12px;
+  color: #3d3d3d;
+}
+.card__findmore {
+  font-size: 12px;
+  color: #909090;
+  width: 100%;
+  margin: -15px 10px 0;
+  padding: 0 10px;
+  text-align: right;
+}
+.card__review {
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 10px 10px;
+}
+.card__review__points {
+  width: 30px;
+  font-family: Cambria;
+  color: white;
+  background-color: #02367f;
+  padding: 5px;
+  border-radius: 5px 5px 5px 0;
+  box-sizing: border-box;
+}
+.card__review__rates {
+  font-size: 13px;
+  color: #02367f;
+}
+.card__review__dot {
+  color: #909090;
+  font-size: 16px;
+}
+.card__review__number {
+  font-size: 12px;
+  color: #909090;
+}
