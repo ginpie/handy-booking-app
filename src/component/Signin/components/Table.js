@@ -1,15 +1,51 @@
 import React from "react";
+import { Modal } from "react-bootstrap";
 import TableHeader from "./TableHeader";
 import TableContent from "./TableContent";
-import Styles from "./Table.module.css";
 import TableFooter from "./TableFooter";
+import "bootstrap/dist/css/bootstrap.min.css";
+// import Styles from "./Table.module.css";
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          <TableHeader />
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <TableContent />
+      </Modal.Body>
+      <Modal.Footer>
+        <TableFooter />
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+function UseExample() {
+  const [modalShow, setModalShow] = React.useState(false);
+
+  return (
+    <>
+      <button onClick={() => setModalShow(true)}>Sign in / Log in</button>
+
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+    </>
+  );
+}
+
 const Table = () => (
-  <div className={Styles.table}>
-    <div className={Styles.container}>
-      <TableHeader />
-      <TableContent />
-      <TableFooter />
-    </div>
+  <div>
+    <UseExample />
   </div>
 );
 

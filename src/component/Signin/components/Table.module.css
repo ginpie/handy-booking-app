@@ -1,8 +1,7 @@
-.table {
-  width: 50vw;
-  margin: auto;
-  border: 1px black solid;
+.modal-header {
+  background-color: blue;
+  color: brown;
 }
-.container {
-  margin: 2%;
+.modal-footer {
+  border-top: none;
 }
