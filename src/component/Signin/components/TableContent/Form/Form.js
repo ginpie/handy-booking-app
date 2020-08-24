@@ -1,5 +1,5 @@
 import React from "react";
-import "./Form.scss";
+import Styles from "./Form.module.css";
 
 class NameForm extends React.Component {
   constructor(props) {
@@ -31,25 +31,25 @@ class NameForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="form--layout">
-          <label className="form--layout--label">Email:</label>
+        <div className={Styles.layout}>
+          <label className={Styles.label}>Email:</label>
           <input
-            className="form--layout--input"
+            className={Styles.input}
             type="text"
             value={this.state.Emailvalue}
             onChange={this.handleChange}
           />
 
-          <label className="form--layout--label">Password :</label>
+          <label className={Styles.label}>Password :</label>
           <input
-            className="form--layout--input"
+            className={Styles.input}
             type="text"
             value={this.state.Passwordvalue}
             onChange={this.handleChange}
           />
-
+          {/* <button className={Styles.forget}>Forget Password ?</button> */}
           <input
-            className="form--layout--input submit"
+            className={Styles.submit}
             type="submit"
             value="Join XXXXXXXXX"
           />

@@ -1,9 +1,9 @@
 import React from "react";
-import "./tableContent.scss";
+import Styles from "./TableContent.module.css";
 import Form from "./Form";
 
 const TableContent = () => (
-  <div className="tableContent">
+  <div className={Styles.tableContent}>
     <Form />
   </div>
 );

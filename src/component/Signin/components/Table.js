@@ -1,11 +1,15 @@
 import React from "react";
 import TableHeader from "./TableHeader";
 import TableContent from "./TableContent";
-import "./table.scss";
+import Styles from "./Table.module.css";
+import TableFooter from "./TableFooter";
 const Table = () => (
-  <div className="table">
-    <TableHeader />
-    <TableContent />
+  <div className={Styles.table}>
+    <div className={Styles.container}>
+      <TableHeader />
+      <TableContent />
+      <TableFooter />
+    </div>
   </div>
 );
 

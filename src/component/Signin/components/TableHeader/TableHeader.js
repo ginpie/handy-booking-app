@@ -1,4 +1,4 @@
 import React from "react";
-import "./table.scss";
-const TableHeader = () => <div className="tableHeader">Join Us</div>;
+import Styles from "./TableHeader.module.css";
+const TableHeader = () => <div className={Styles.tableHeader}>Join Us</div>;
 export default TableHeader;
