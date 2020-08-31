@@ -10,7 +10,7 @@ const Profile = (props) => (
             <p>{props.order}</p>
         </div>
         <Avatar link={Photo} />
-        <PersonalDetails />
+        <PersonalDetails rating={props.rating} />
     </div>
 );
 
