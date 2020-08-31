@@ -1,6 +1,7 @@
 import React from 'react';
 import Order from './component/Order';
 import Profile from './component/Profile';
+import Comments from './component/Comments';
 
 import style from './ServiceDetail.module.scss';
 
@@ -23,10 +24,15 @@ class ServiceDetail extends React.Component {
         const order = this.state.order;
         const rating = this.state.rating;
         return (
-            <div className={style.page}>
-                <Profile className={style.column} order={order} rating={rating} />
-                <Order className={style.order_form}>{order}</Order>
+            <div>
+                <div className={style.page}>
+                    <Profile className={style.column} order={order} rating={rating} />
+                    <Order className={style.order_form}>{order}</Order>
+
+                </div>
+                <Comments rating={rating} />
             </div>
+
         )
     }
 }
