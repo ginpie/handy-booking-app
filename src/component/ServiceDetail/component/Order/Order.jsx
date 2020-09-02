@@ -2,6 +2,7 @@ import React from 'react';
 import ItemButton from './component/ItemButton';
 import ContactInfo from './component/ContactInfo';
 import style from './Order.module.scss';
+import RelativeTradies from '../RelativeTradies';
 
 class Order extends React.Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class Order extends React.Component {
                     })
                 }
                 <ContactInfo />
+                <RelativeTradies />
             </form>
         );
     }
