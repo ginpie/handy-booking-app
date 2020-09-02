@@ -1,0 +1,160 @@
+@import "../utils/mixin.scss";
+
+@mixin sideBarInLargeScreen {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: 10px;
+    // width: 200px;
+    .sidebarNav {
+        width: 90%;
+        background-color: white;
+        margin-top: 25px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &__user {
+            margin-top:30px;
+            width: 90%;
+            display: flex;
+            align-items: center;
+            &--avatar {
+                display: flex;
+                justify-content: center;
+                img {
+                    width: 60px;
+                    border-radius: 50%;
+                }
+            }
+            &--name {
+                font-size: 20px;
+                margin-left: 20px;
+            }
+        }
+        &__getQuotes {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            button {
+                border: none;
+                padding: 10px 50px;
+                color: white;
+                background-color: #ff8e33;
+                border-radius: 5px;
+                &:hover {
+                    opacity: 0.8;
+                    cursor: pointer;
+                }
+            }
+        }
+        &__navLinks {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            background-color: #fafafa;
+            &--item {
+                text-decoration: none;
+                color: black;
+                padding: 0.6rem 0.9rem;
+                &:hover {
+                    background-color: #eeeeee;
+                }
+            }
+        }
+        
+    }
+    .sidebarSupport {
+        width: 90%;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        &__title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+        &__message {
+            margin-left: 15px;
+            font-size: 15px;
+            opacity: 0.6;
+        }
+        &__phone {
+            margin-top: 20px;
+            display: flex;
+            margin-left: 15px;
+            &--number {
+                font-size: 13px;
+                margin-left: 10px;
+            }
+        }
+        &__email {
+            display: flex;
+            margin-left: 15px;
+            &--address {
+                font-size: 13px;
+                margin-left: 10px;
+            }
+        }
+    }
+    .sidebarFeedback {
+        margin-top: 20px;
+        width: 90%;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: wrap;
+        &__topline {
+            width: 100%;
+            background-color: #00b9bd;
+            height: 4px;
+        }
+        &__message {
+            margin-top: 20px;
+            width: 240px;
+            overflow-wrap: break-word;
+            text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        &__button {
+            margin-top: 20px;
+            margin-bottom:10px;
+            button {
+                border: 1px solid #bebebe;
+                padding: 10px 70px;
+                border-radius: 5px;
+                &:hover {
+                    opacity: 0.8;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+}
+
+.sidebarContainer {
+    display: none;
+    @include respond-to(small) {
+        display: none;
+    }
+    @include respond-to(medium) {
+        @include sideBarInLargeScreen;
+    }
+    @include respond-to(large) {
+        @include sideBarInLargeScreen;
+    }
+    @include respond-to(extra-large) {
+        @include sideBarInLargeScreen;
+    }
+}
