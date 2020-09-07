@@ -5,6 +5,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 import Categories from "../Categories/Categories";
 import SearchBar from "../SearchBar/SearchBar";
+import Reviews from "../Reviews/Reviews";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Header />
       <SearchBar />
       <Categories />
+      <Reviews />
       <Footer />
     </div>
   );
