@@ -1,0 +1,112 @@
+$font: 'Roboto Condensed',
+sans-serif;
+$nav_color: #ffda44;
+
+.search-bar {
+  margin: auto;
+  padding: 50px 0;
+  width: 100%;
+  height: 300px;
+  background-image: url("./img/background.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  font-family: $font;
+  font-weight: bold;
+
+  &__title-box {
+    margin: 0 auto 0 10%;
+  }
+
+  &__title {
+    color: white;
+    font-size: 50px;
+    text-shadow: 2px 2px 5px gray;
+    width: 150px;
+    margin: 10px 0;
+  }
+
+  &__subtitle {
+    color: white;
+    font-size: medium;
+    text-shadow: 2px 2px 2px gray;
+    margin: 10px 0;
+  }
+
+  &__container {
+    margin: 0 auto 0 10%;
+    width: 60%;
+    min-width: 500px;
+    max-width: 700px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .form {
+      width: 100%;
+      text-align: center;
+      display: flex;
+
+      .input-box {
+        height: 40px;
+        // border-radius: 2px 0 0 2px;
+        border: none;
+        padding: 0;
+        margin: 0 1px;
+        display: flex;
+        background-color: white;
+
+        .fas {
+          width: 50px;
+          font-size: 22px;
+          align-self: center;
+        }
+
+        .input {
+          height: 40px;
+          width: 95%;
+          border: none;
+          padding: 0 0 0 5px;
+          font-size: small;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      .input-box--name {
+        width: 50%;
+      }
+
+      .input-box--address {
+        width: 30%;
+      }
+
+      .button {
+        width: 12%;
+        height: 40px;
+        // border-radius: 0 2px 2px 0;
+        border: none;
+        padding: 0;
+        margin: 0;
+        background-color: $nav_color;
+      }
+    }
+
+  }
+
+  .get-started {
+    margin: 0 auto 0 10%;
+    background-color: $nav_color;
+    border: none;
+    width: 140px;
+    height: 40px;
+    font-family: $font;
+    font-size: medium;
+  }
+}
