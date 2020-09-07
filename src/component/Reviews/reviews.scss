@@ -1,0 +1,25 @@
+$text-shadow: rgb(61, 61, 61) 2px 2px 5px;
+$color-white: rgb(255, 255, 255);
+$shadow: gray 5px 5px 15px;
+$color-gray: #909090;
+$color-blue: #02367f;
+$background: #f5f8fc;
+$color: #ffda44;
+$font-color: #000;
+$font: 'Roboto Condensed',
+sans-serif;
+
+
+.reviews {
+  height: 500px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: $background;
+  font-family: $font;
+
+  &__title-box {
+    text-align: center;
+  }
+}

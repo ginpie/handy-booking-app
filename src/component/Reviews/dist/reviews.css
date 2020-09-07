@@ -1,0 +1,12 @@
+.reviews {
+  height: 500px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #f5f8fc;
+  font-family: "Roboto Condensed", sans-serif;
+}
+.reviews__title-box {
+  text-align: center;
+}
