@@ -6,6 +6,7 @@ import Footer from "../Footer";
 import Categories from "../Categories/Categories";
 import SearchBar from "../SearchBar/SearchBar";
 import Reviews from "../Reviews/Reviews";
+import Tradies from "../Tradies/Tradies";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <SearchBar />
       <Categories />
       <Reviews />
+      <Tradies />
       <Footer />
     </div>
   );
