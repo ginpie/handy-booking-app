@@ -19,7 +19,7 @@
   height: 100%;
 }
 .navbar__logo-box div .navbar__logo {
-  background-image: url(/src/component/Header/component/img/logo.png);
+  background-image: url(./img/logo.png);
   background-size: cover;
   display: flex;
   justify-content: center;
