@@ -14,7 +14,7 @@ class SearchBar extends Component {
         <div className="search-bar__container">
           <form className="form" id="addItemForm">
             <div className="input-box input-box--name">
-              <i class="fas fa-search"></i>
+              <i className="fas fa-search"></i>
               <input
                 type="text"
                 className="input"
@@ -23,7 +23,7 @@ class SearchBar extends Component {
               />
             </div>
             <div className="input-box input-box--address">
-              <i class="fas fa-map-marker-alt"></i>
+              <i className="fas fa-map-marker-alt"></i>
               <input
                 type="text"
                 className="input"
@@ -31,7 +31,7 @@ class SearchBar extends Component {
                 placeholder="Enter postcode"
               />
             </div>
-            <button className="button" onClick={"" /* search function here */}>
+            <button className="button" /*onClick={  search function here }*/>
               Go
             </button>
           </form>
