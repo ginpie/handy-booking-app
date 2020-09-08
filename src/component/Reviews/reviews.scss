@@ -1,25 +1,219 @@
-$text-shadow: rgb(61, 61, 61) 2px 2px 5px;
-$color-white: rgb(255, 255, 255);
-$shadow: gray 5px 5px 15px;
-$color-gray: #909090;
-$color-blue: #02367f;
-$background: #f5f8fc;
+$text-shadow: #616161 2px 2px 4px;
+$shadow: #999999 0px 0px 5px 1px;
+
 $color: #ffda44;
+$color-gray: #a1a1a1;
+$color-tab: #0270c2;
+$color-background: #f5f8fc;
+
 $font-color: #000;
 $font: 'Roboto Condensed',
 sans-serif;
+$title-size: 28px;
 
 
 .reviews {
-  height: 500px;
+  height: 600px;
   width: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color: $background;
+  align-items: center;
+  background-image: url(./img/wood_background.jpg);
+  background-size: cover;
   font-family: $font;
 
   &__title-box {
     text-align: center;
+    font-size: $title-size;
+  }
+
+  &__tabs {
+
+    .tabs-wrapper {
+      .tabs {
+        list-style-type: none;
+        display: flex;
+
+        .tab {
+          width: auto;
+          margin: 0 20px;
+          cursor: pointer;
+          font-size: 20px;
+          padding-bottom: 5px;
+          border-bottom: transparent 10px solid;
+
+          &:hover {
+            color: $color-tab;
+
+            &:after {
+              opacity: 1;
+              transform: translateY(1px);
+              transition: linear 0.3s;
+            }
+          }
+
+          &:after {
+            content: "";
+            position: relative;
+            display: block;
+            top: 6px;
+            width: 100%;
+            height: 4px;
+            border-radius: 4px;
+            background: $color-tab;
+            transition: all .15s cubic-bezier(.615, .19, .305, .91);
+            transform: translateY(-4px);
+            opacity: 0
+          }
+        }
+
+        .active {
+          color: $color-tab;
+
+          &:after {
+            opacity: 1;
+            transform: translateY(1px);
+          }
+        }
+      }
+    }
+  }
+
+  &__tasks {
+    height: 320px;
+    width: 100%;
+
+    .floating-tasks-container {
+      width: 100%;
+      height: 310px;
+      padding-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+
+      .floating-tasks-wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 1800px;
+
+        .tasks-card {
+          width: 280px;
+          height: 140px;
+          padding: 5px 10px;
+          margin: 10px 10px;
+          text-decoration: none;
+          color: $font-color;
+          border: 2px white solid;
+          border-radius: 3px;
+          box-shadow: $shadow;
+          display: flex;
+          box-sizing: border-box;
+          flex-direction: column;
+          background-color: $color-background;
+          justify-content: space-around;
+
+          &__header {
+            display: flex;
+            justify-content: space-between;
+            height: 25%;
+            width: 100%;
+            margin: auto;
+            font-size: 20px;
+
+            .title {
+              margin: 0;
+              align-self: center;
+              font-weight: bolder;
+            }
+
+            .price {
+              align-self: center;
+
+              &::before {
+                content: "$";
+              }
+            }
+          }
+
+          &__body {
+            height: 50%;
+            width: 100%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            .img {
+              width: 50px;
+              height: 50px;
+            }
+
+            .description {
+              width: 70%;
+              margin-left: 10px;
+              padding: 10px;
+            }
+          }
+
+          &__rating {
+            height: 25%;
+            display: flex;
+            align-items: center;
+
+            .fa-star {
+              color: $color-gray;
+            }
+
+            .checked {
+              color: $color;
+            }
+          }
+        }
+      }
+
+      .row1 {
+        animation: slide 300s linear infinite;
+      }
+
+      .row2 {
+        animation: reverseSlide 300s linear infinite;
+      }
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-1920px)
+      }
+    }
+
+    @keyframes reverseSlide {
+      0% {
+        transform: translateX(-920px)
+      }
+
+      to {
+        transform: translateX(900px)
+      }
+    }
+
+  }
+
+  .get-started {
+    margin: 20px auto;
+    background-color: $color;
+    border: none;
+    border-radius: 20px;
+    width: 140px;
+    height: 40px;
+    font-family: $font;
+    font-size: medium;
+    cursor: pointer;
+    outline: none;
   }
 }
