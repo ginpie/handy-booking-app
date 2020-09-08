@@ -1,0 +1,78 @@
+$color-background: #a0a0a0;
+
+$font-color: #ffffff;
+
+.footer {
+  height: 300px;
+  padding: 30px 50px;
+  background-color: $color-background;
+  display: flex;
+  justify-content: space-between;
+  color: $font-color;
+
+  a {
+    text-decoration: none;
+    color: $font-color;
+    display: inline-block;
+  }
+
+  .advantage {
+    width: 25%;
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__item {
+      font-size: 13px;
+      margin: 10px 0;
+    }
+  }
+
+  .contact {
+    width: 25%;
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__item-box {
+      font-size: 13px;
+      margin: 10px 0;
+
+      .item {
+        margin: 0;
+      }
+    }
+  }
+
+  .social-icon {
+    width: 25%;
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__container {
+      display: flex;
+      justify-content: flex-start;
+
+      .fab {
+        font-size: 25px;
+        margin-right: 10px;
+      }
+
+      .fa-facebook-square {
+        color: #1b77f2;
+      }
+
+      .fa-instagram-square {
+        color: #c53466;
+      }
+
+      .fa-twitter-square {
+        color: #1fa1f1;
+      }
+    }
+  }
+}

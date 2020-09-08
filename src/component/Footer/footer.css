@@ -1,0 +1,61 @@
+.footer {
+  height: 300px;
+  padding: 30px 50px;
+  background-color: #a0a0a0;
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+}
+.footer a {
+  text-decoration: none;
+  color: #ffffff;
+  display: inline-block;
+}
+.footer .advantage {
+  width: 25%;
+}
+.footer .advantage__title {
+  font-size: 18px;
+}
+.footer .advantage__item {
+  font-size: 13px;
+  margin: 10px 0;
+}
+.footer .contact {
+  width: 25%;
+}
+.footer .contact__title {
+  font-size: 18px;
+}
+.footer .contact__item-box {
+  font-size: 13px;
+  margin: 10px 0;
+}
+.footer .contact__item-box .item {
+  margin: 0;
+}
+.footer .social-icon {
+  width: 25%;
+}
+.footer .social-icon__title {
+  font-size: 18px;
+}
+.footer .social-icon__container {
+  display: flex;
+  justify-content: flex-start;
+}
+.footer .social-icon__container .fab {
+  font-size: 25px;
+  margin-right: 10px;
+}
+.footer .social-icon__container .fa-facebook-square {
+  color: #1b77f2;
+}
+.footer .social-icon__container .fa-instagram-square {
+  color: #c53466;
+}
+.footer .social-icon__container .fa-twitter-square {
+  color: #1fa1f1;
+}
+
+/*# sourceMappingURL=footer.css.map */
