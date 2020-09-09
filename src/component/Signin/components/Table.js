@@ -4,7 +4,6 @@ import TableHeader from "./TableHeader";
 import TableContent from "./TableContent";
 import TableFooter from "./TableFooter";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Styles from "./Table.module.css";
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -20,10 +19,8 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
       <Modal.Body>
         <TableContent />
-      </Modal.Body>
-      <Modal.Footer>
         <TableFooter />
-      </Modal.Footer>
+      </Modal.Body>
     </Modal>
   );
 }
