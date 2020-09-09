@@ -1,83 +1,56 @@
 import React from "react";
 import Styles from "./Form.module.css";
+import { useFormik } from "formik";
 
-class NameForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      Emailvalue: "Email",
-      Passwordvalue: "Password",
-      ConfirmPasswordvalue: "Password",
-    };
+const NameForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmpassword: "",
+    },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePassword = this.handlePassword(this);
-    // this.handleEmail = this.handleEmail.bind(this);
-  }
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      <div className={Styles.layout}>
+        <label className={Styles.label}>Email:</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          className={Styles.input}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+        />
 
-  handleChange(event) {
-    this.setState({
-      Emailvalue: event.target.Emailvalue,
-      Passwordvalue: event.target.Passwordvalue,
-    });
-  }
-  handlePassword(event) {
-    this.setState({
-      ConfirmPasswordvalue: event.target.ConfirmPasswordvalue,
-    });
-    if (this.state.ConfirmPasswordvalue !== this.state.Passwordvalue) {
-      document.querySelector(".submit").appendChild(".errorPassword");
-    }
-  }
-  //需debug提交后的反馈
-  handleSubmit(event) {
-    alert(
-      "Email: " +
-        this.state.Emailvalue +
-        "Password：" +
-        this.state.Passwordvalue
-    );
-    event.preventDefault();
-  }
+        <label className={Styles.label}>Password :</label>
+        <input
+          id="password"
+          name="password"
+          type="text"
+          className={Styles.input}
+          value={formik.values.passwordvalue}
+          onChange={formik.handleChange}
+        />
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <div className={Styles.layout}>
-          <label className={Styles.label}>Email:</label>
-          <input
-            className={Styles.input}
-            type="text"
-            value={this.state.Emailvalue}
-            onChange={this.handleChange}
-          />
-
-          <label className={Styles.label}>Password :</label>
-          <input
-            className={Styles.input}
-            type="text"
-            value={this.state.Passwordvalue}
-            onChange={this.handlePassword}
-          />
-
-          <label className={Styles.label}>Confirm-Password :</label>
-          <input
-            className={Styles.input}
-            type="text"
-            value={this.state.ConfirmPasswordvalue}
-            onChange={this.handlePassword}
-          />
-          {/* <button className={Styles.forget}>Forget Password ?</button> */}
-          <input
-            className={Styles.submit}
-            type="submit"
-            value="Join XXXXXXXXX"
-          />
-        </div>
-      </form>
-    );
-  }
-}
+        <label className={Styles.label}>Confirm-Password :</label>
+        <input
+          id="confirmpassword"
+          name="confirmpassword"
+          type="text"
+          className={Styles.input}
+          value={formik.values.confirmpassword}
+          onChange={formik.handleChange}
+        />
+        {/* <button className={Styles.forget}>Forget Password ?</button> */}
+        <input className={Styles.submit} type="submit" value="Join XXXXXXXXX" />
+      </div>
+    </form>
+  );
+};
 
 export default NameForm;
