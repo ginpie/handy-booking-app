@@ -10,6 +10,7 @@
   color: rgb(41, 43, 50);
   padding-bottom: 8px;
 }
+
 .input {
   align-self: center;
   margin: 0;
@@ -50,4 +51,9 @@
   align-self: center;
   background-color: rgba(144, 236, 144, 0.836);
   border-color: transparent;
+}
+.errorText {
+  color: red;
+  font-size: 2%;
+  text-align: center;
 }

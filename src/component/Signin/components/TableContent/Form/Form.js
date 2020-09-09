@@ -17,7 +17,7 @@ const validate = (values) => {
   }
   if (!values.confirmpassword) {
     errors.confirmpassword = "Required";
-  } else if (values.confirmpassword != values.password) {
+  } else if (values.confirmpassword !== values.password) {
     errors.password = "Not Same";
   }
   return errors;
@@ -39,6 +39,7 @@ const NameForm = () => {
     <form onSubmit={formik.handleSubmit}>
       <div className={Styles.layout}>
         <label className={Styles.label}>Email:</label>
+
         <input
           id="email"
           name="email"
@@ -48,7 +49,9 @@ const NameForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+        {formik.errors.email ? (
+          <div className={Styles.errorText}>{formik.errors.email}</div>
+        ) : null}
         <label className={Styles.label}>Password :</label>
         <input
           id="password"
@@ -59,8 +62,10 @@ const NameForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        
-        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+
+        {formik.errors.password ? (
+          <div className={Styles.errorText}>{formik.errors.password}</div>
+        ) : null}
         <label className={Styles.label}>Confirm-Password :</label>
         <input
           id="confirmpassword"
@@ -72,7 +77,9 @@ const NameForm = () => {
           onBlur={formik.handleBlur}
         />
         {formik.errors.confirmpassword ? (
-          <div>{formik.errors.confirmpassword}</div>
+          <div className={Styles.errorText}>
+            {formik.errors.confirmpassword}
+          </div>
         ) : null}
 
         {/* <button className={Styles.forget}>Forget Password ?</button> */}
