@@ -42,41 +42,44 @@ const NameForm = () => {
 
         <input
           id="email"
-          name="email"
+          // name="email"
           type="email"
           className={Styles.input}
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          // value={formik.values.email}
+          // onChange={formik.handleChange}
+          // onBlur={formik.handleBlur}
+          {...formik.getFieldProps("email")}
         />
-        {formik.errors.email ? (
+        {formik.touched.email && formik.errors.email ? (
           <div className={Styles.errorText}>{formik.errors.email}</div>
         ) : null}
         <label className={Styles.label}>Password :</label>
         <input
           id="password"
-          name="password"
+          // name="password"
           type="text"
           className={Styles.input}
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          // value={formik.values.password}
+          // onChange={formik.handleChange}
+          // onBlur={formik.handleBlur}
+          {...formik.getFieldProps("password")}
         />
 
-        {formik.errors.password ? (
+        {formik.touched.password && formik.errors.password ? (
           <div className={Styles.errorText}>{formik.errors.password}</div>
         ) : null}
         <label className={Styles.label}>Confirm-Password :</label>
         <input
           id="confirmpassword"
-          name="confirmpassword"
+          // name="confirmpassword"
           type="text"
           className={Styles.input}
-          value={formik.values.confirmpassword}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          // value={formik.values.confirmpassword}
+          // onChange={formik.handleChange}
+          // onBlur={formik.handleBlur}
+          {...formik.getFieldProps("confirmpassword")}
         />
-        {formik.errors.confirmpassword ? (
+        {formik.touched.confirmpassword && formik.errors.confirmpassword ? (
           <div className={Styles.errorText}>
             {formik.errors.confirmpassword}
           </div>
