@@ -64,7 +64,7 @@ const NameForm = () => {
             label="Email Address"
             name="email"
             type="email"
-            placeholder="jane@formik.com"
+            placeholder="JRNB@gmail.com"
           />
           <MyTextInput
             label="Password"
