@@ -28,7 +28,7 @@ async function deleteCustomer(req, res) {
   }
   return res.sendStatus(204);
 }
-
+git
 async function updateCustomer(req, res) {
   const { id: code } = req.params;
   const { email, password } = req.body;
@@ -38,10 +38,11 @@ async function updateCustomer(req, res) {
     { new: true }
   );
 
-  if (!student) {
-    return res.status(404).json("Student Not Found");
+  if (!customer) {
+    return res.status(404).json("customer Not Found");
   }
-  return res.sendStatus(204);
+  await customer.save();
+  return res.json(customer);
 }
 
 module.exports = {
