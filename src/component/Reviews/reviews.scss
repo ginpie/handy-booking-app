@@ -98,6 +98,10 @@ $title-size: 28px;
         flex-direction: row;
         width: 1800px;
 
+        &:hover {
+          animation-play-state: paused;
+        }
+
         .tasks-card {
           width: 280px;
           height: 140px;

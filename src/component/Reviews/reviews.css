@@ -71,6 +71,9 @@
   flex-direction: row;
   width: 1800px;
 }
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper:hover {
+  animation-play-state: paused;
+}
 .reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card {
   width: 280px;
   height: 140px;
