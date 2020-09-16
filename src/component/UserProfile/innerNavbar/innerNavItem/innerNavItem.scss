@@ -1,0 +1,20 @@
+.innerNavItem {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 16px;
+    &:hover {
+        color: #41a1ad;
+        cursor: pointer;
+    }
+}
+
+.innerNavItemActived {
+    color: #41a1ad;
+    box-shadow:inset 0px -2px 0px 0px  #41a1ad;
+}
+
+@media screen and (max-width: 500px) {
+    .innerNavItem {
+        font-size: 12px;
+    }
+}

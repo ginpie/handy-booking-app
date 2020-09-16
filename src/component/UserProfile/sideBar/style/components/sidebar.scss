@@ -1,0 +1,54 @@
+@import "../utils/mixin.scss";
+
+@mixin sidebarProperty {
+    flex:1;
+    min-height: 100vh;
+    background-color: #fddb3a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__logo-wrapper {
+        width: 90%;
+        color: white;
+        margin-top: 10px;
+    }
+    &__avatar-wrapper {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    &__name {
+        margin-top: 5%;
+        font-size: 20px;
+        font-weight: 700;
+        @include respond-to(large) {
+            font-size: 22px;
+        }
+        @include respond-to(extra-large) {
+            font-size: 30px;
+        }
+    }
+    &__navItems {
+        width: 100%;
+        margin-top: 15px;
+        &--item {
+            width: 100%;
+        }
+    }
+}
+.sidebar {
+    display: none;
+    @include respond-to(small) {
+        display: none;
+    }
+    @include respond-to(medium) {
+        @include sidebarProperty;
+    }
+    @include respond-to(large) {
+        @include sidebarProperty;
+    }
+    @include respond-to(extra-large) {
+        @include sidebarProperty;
+    }
+}

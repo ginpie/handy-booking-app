@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import '../style/components/navbar.scss';
 
@@ -11,6 +12,7 @@ const NavBar = () => {
         setIsDropdownListOpen(newStatus)
     }
     return (
+        <BrowserRouter> 
         <div className="navbarContainer">
             <div className="navbarLargeScreen">
                 <div className="navbar">
@@ -53,6 +55,7 @@ const NavBar = () => {
                 }
             </div>
         </div>
+        </BrowserRouter> 
      );
 }
  
