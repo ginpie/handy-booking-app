@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from './navbar/components/navbar';
+// import NavBar from './navbar/components/navbar';
 import SideBar from './sideBar/components/sidebar';
 import MyOrders from './orders/components/orders';
 import PromoCode from './promoCode/components/promoCode';
@@ -18,7 +18,6 @@ class UserProfile extends Component {
         fakeUserData:{},
         currentPage:'',
      }
-    
 
     componentDidMount() {
         this.setState({fakeUserData:{
@@ -39,19 +38,19 @@ class UserProfile extends Component {
 
     render() {
         const navItems = [
-            {key: 'PLACEORDERS', value: 'Place orders', icon:placeOrderIcon, content:(<div></div>)},
+            {key: 'PLACEORDERS', value: 'Place orders', icon:placeOrderIcon, content:(<div />)},
             {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders/>)},
-            {key: 'MYMESSAGES', value: 'My Messages', icon:myMessagesIcon, content:(<div></div>)},
+            {key: 'MYMESSAGES', value: 'My Messages', icon:myMessagesIcon, content:(<MyOrders/>)},
             {key: 'MYPROMOCODES', value: 'My promo codes', icon:myPromoCodesIcon, content:((<PromoCode/>))},
             {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.fakeUserData}/>)},
-            {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div></div>))},
+            {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div/>))},
         ]
 
         const { fakeUserData, currentPage } = this.state
 
         return (
                 <div className="outerContainer">
-                    <NavBar />
+                    {/* <NavBar /> */}
                     <div className="contentContainer">
                         <SideBar 
                             fakeUserData={fakeUserData}

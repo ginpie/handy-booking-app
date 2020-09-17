@@ -2,6 +2,7 @@ import React, {useState, Fragment} from 'react';
 import ContentHeader from '../../contentHeader/contentHeader';
 import InnerNavBar from '../../innerNavbar/innerNavbar';
 import General from './general/general';
+import SignInAndSecuirty from './signInAndSecurity/signInAndSecurity';
 import '../settings.scss';
 
 const Settings = ({fakeUserData}) => {
@@ -9,8 +10,8 @@ const Settings = ({fakeUserData}) => {
 
     const innerNavItems = [
         {key:"GENERAL", value:"GENERAL", content:(<General fakeUserData={fakeUserData}/>)},
-        {key:"SINGINANDSECURITY", value:"SING IN AND SECURITY", content:(<div />)},
-        {key:"NOTIFICATIONS", value:"NOTIFICATIONS", content:(<div />)},
+        {key:"SINGINANDSECURITY", value:"SING IN AND SECURITY", content:(<SignInAndSecuirty fakeUserData={fakeUserData}/>)},
+        {key:"NOTIFICATIONS", value:"NOTIFICATIONS", content:(<div />)}
     ]
 
     return ( 

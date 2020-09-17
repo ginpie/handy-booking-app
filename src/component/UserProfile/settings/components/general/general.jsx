@@ -56,7 +56,7 @@ const General = ({fakeUserData}) => {
             <div className="phone">
                 <BoxContainer title="Phone number" buttonName='Add Phone'>
                     {(phone)?(
-                        <div>a</div>
+                        <div>content</div>
                     ):(
                         <DisplayEmptyContent
                         icon={phoneIcon}

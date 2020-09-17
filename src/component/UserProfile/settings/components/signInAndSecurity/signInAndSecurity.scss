@@ -1,0 +1,21 @@
+.signedAccountContainer {
+    width: 100%;
+    height: 300px;
+}
+
+.signedAccount {
+    width: 100%;
+    height: 248px;
+    display: flex;
+    justify-content: space-between;
+    background-color: red;
+    &__left {
+        flex:1;
+        background-color: ivory;
+    }
+    &__right {
+        flex:1;
+        background-color: khaki;
+    }
+    
+}
