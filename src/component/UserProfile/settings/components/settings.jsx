@@ -11,7 +11,6 @@ const Settings = ({fakeUserData}) => {
     const innerNavItems = [
         {key:"GENERAL", value:"GENERAL", content:(<General fakeUserData={fakeUserData}/>)},
         {key:"SINGINANDSECURITY", value:"SING IN AND SECURITY", content:(<SignInAndSecuirty fakeUserData={fakeUserData}/>)},
-        {key:"NOTIFICATIONS", value:"NOTIFICATIONS", content:(<div />)}
     ]
 
     return ( 
