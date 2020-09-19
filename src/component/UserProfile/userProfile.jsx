@@ -20,13 +20,17 @@ class UserProfile extends Component {
      }
 
     componentDidMount() {
-        this.setState({fakeUserData:{
-            firstName: "Mingxin",
-            lastName: "DONG",
-            DOB: "DD-MM-YY",
-            email: {address: "xxxxx@gmail.com", status:"Verified"},
-            messages:[
-                {sender:"Sam Li", text:"Hi, We have a meeting today", senderAvatar:""},
+        this.setState(
+            {fakeUserData:
+                {
+                    firstName: "Mingxin",
+                    lastName: "DONG",
+                    DOB: "DD-MM-YY",
+                    email: {address: "xxxxx@gmail.com", status:"Verified"},
+                    messages:[
+                {
+                    sender:"Sam Li", text:"Hi, We have a meeting today", senderAvatar:""
+                },
             ]
         }, currentPage:'My orders'})
     }
