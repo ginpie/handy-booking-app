@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const LogoContainer = styled.div`
     width: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
 `
 
 const Img = styled.img`
