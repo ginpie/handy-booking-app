@@ -44,7 +44,6 @@ class UserProfile extends Component {
         const navItems = [
             {key: 'PLACEORDERS', value: 'Place orders', icon:placeOrderIcon, content:(<div />)},
             {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders/>)},
-            {key: 'MYMESSAGES', value: 'My Messages', icon:myMessagesIcon, content:(<MyOrders/>)},
             {key: 'MYPROMOCODES', value: 'My promo codes', icon:myPromoCodesIcon, content:((<PromoCode/>))},
             {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.fakeUserData}/>)},
             {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div/>))},
