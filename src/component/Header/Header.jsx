@@ -4,7 +4,7 @@ import Logo from './component/Logo';
 import LinkItem from './component/LinkItem';
 
 const Container = styled.div`
-    background-color: #ffffff;
+    background-color: rgb(253, 219, 58);
     display: flex;
     align-items: center;
     height: 70px;
