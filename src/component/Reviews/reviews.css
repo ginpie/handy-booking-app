@@ -1,0 +1,175 @@
+.reviews {
+  height: 600px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-image: url(./img/wood_background.jpg);
+  background-size: cover;
+  font-family: "Roboto Condensed", sans-serif;
+}
+.reviews__title-box {
+  text-align: center;
+  font-size: 28px;
+}
+.reviews__tabs .tabs-wrapper .tabs {
+  list-style-type: none;
+  display: flex;
+}
+.reviews__tabs .tabs-wrapper .tabs .tab {
+  width: auto;
+  margin: 0 20px;
+  cursor: pointer;
+  font-size: 20px;
+  padding-bottom: 5px;
+  border-bottom: transparent 10px solid;
+}
+.reviews__tabs .tabs-wrapper .tabs .tab:hover {
+  color: #0270c2;
+}
+.reviews__tabs .tabs-wrapper .tabs .tab:hover:after {
+  opacity: 1;
+  transform: translateY(1px);
+  transition: linear 0.3s;
+}
+.reviews__tabs .tabs-wrapper .tabs .tab:after {
+  content: "";
+  position: relative;
+  display: block;
+  top: 6px;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background: #0270c2;
+  transition: all 0.15s cubic-bezier(0.615, 0.19, 0.305, 0.91);
+  transform: translateY(-4px);
+  opacity: 0;
+}
+.reviews__tabs .tabs-wrapper .tabs .active {
+  color: #0270c2;
+}
+.reviews__tabs .tabs-wrapper .tabs .active:after {
+  opacity: 1;
+  transform: translateY(1px);
+}
+.reviews__tasks {
+  height: 320px;
+  width: 100%;
+}
+.reviews__tasks .floating-tasks-container {
+  width: 100%;
+  height: 310px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 1800px;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper:hover {
+  animation-play-state: paused;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card {
+  width: 280px;
+  height: 140px;
+  padding: 5px 10px;
+  margin: 10px 10px;
+  text-decoration: none;
+  color: #000;
+  border: 2px white solid;
+  border-radius: 3px;
+  box-shadow: #999999 0px 0px 5px 1px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  background-color: #f5f8fc;
+  justify-content: space-around;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__header {
+  display: flex;
+  justify-content: space-between;
+  height: 25%;
+  width: 100%;
+  margin: auto;
+  font-size: 20px;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__header .title {
+  margin: 0;
+  align-self: center;
+  font-weight: bolder;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__header .price {
+  align-self: center;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__header .price::before {
+  content: "$";
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__body {
+  height: 50%;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__body .img {
+  width: 50px;
+  height: 50px;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__body .description {
+  width: 70%;
+  margin-left: 10px;
+  padding: 10px;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__rating {
+  height: 25%;
+  display: flex;
+  align-items: center;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__rating .fa-star {
+  color: #a1a1a1;
+}
+.reviews__tasks .floating-tasks-container .floating-tasks-wrapper .tasks-card__rating .checked {
+  color: #ffda44;
+}
+.reviews__tasks .floating-tasks-container .row1 {
+  animation: slide 300s linear infinite;
+}
+.reviews__tasks .floating-tasks-container .row2 {
+  animation: reverseSlide 300s linear infinite;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-1920px);
+  }
+}
+@keyframes reverseSlide {
+  0% {
+    transform: translateX(-920px);
+  }
+  to {
+    transform: translateX(900px);
+  }
+}
+.reviews .get-started {
+  margin: 20px auto;
+  background-color: #ffda44;
+  border: none;
+  border-radius: 20px;
+  width: 140px;
+  height: 40px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: medium;
+  cursor: pointer;
+  outline: none;
+}
+
+/*# sourceMappingURL=reviews.css.map */
