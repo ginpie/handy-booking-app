@@ -3,7 +3,7 @@ import React from "react";
 // import './App.css';
 // import Header from '../Header';
 // import Footer from '../Footer';
-import UserProfile from '../UserProfile';
+import UserProfile from "../UserProfile";
 
 import Header from "../Header";
 import Footer from "../Footer";
@@ -11,14 +11,12 @@ import SignInTable from "../Signin";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-
-      <Footer />
-    </div>
-      // <UserProfile />
-      // <Footer />
-      // <SignInTable />
+    // <div className="App">
+    //   <Header />
+    // <SignInTable />
+    <UserProfile />
+    //   <Footer />
+    // </div>
   );
 }
 
