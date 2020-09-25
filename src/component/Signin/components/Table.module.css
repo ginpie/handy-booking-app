@@ -1,0 +1,7 @@
+.modal-header {
+  background-color: blue;
+  color: brown;
+}
+.modal-footer {
+  border-top: none;
+}
