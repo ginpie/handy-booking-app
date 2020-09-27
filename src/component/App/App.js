@@ -12,15 +12,17 @@ import SearchBar from "../SearchBar/SearchBar";
 import Reviews from "../Reviews/Reviews";
 import Tradies from "../Tradies/Tradies";
 import SignInTable from "../Signin";
+import ServiceDetail from '../ServiceDetail';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <SearchBar />
+      {/* <SearchBar />
       <Categories />
       <Reviews />
-      <Tradies />
+      <Tradies /> */}
+      <ServiceDetail />
       <Footer />
       {/* <SignInTable />
       <UserProfile />
