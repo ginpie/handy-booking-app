@@ -5,8 +5,9 @@ import Dropdown from '../Dropdown';
 
 const Wrapper = styled.div`
     position: relative;
-
 `;
+
+const LINKS = ["Cleaning", "Furniture Assembly", "Moving", "Electrical installation", "Handyman"];
 
 class CategoriesDropdown extends React.Component {
     constructor(props) {
@@ -24,7 +25,6 @@ class CategoriesDropdown extends React.Component {
         this.setState((prevState) => ({
             showDropdown: !prevState.showDropdown,
         }));
-        console.log(this.state.showDropdown);
     }
 
     render() {
@@ -33,7 +33,7 @@ class CategoriesDropdown extends React.Component {
         return (
             <Wrapper onMouseEnter={this.toggleDropdown} onMouseLeave={this.toggleDropdown}>
                 <LinkItem href="/service" linkType={"nav"}>Service</LinkItem>
-                {showDropdown && <Dropdown />}
+                {showDropdown && <Dropdown content={LINKS}/>}
             </Wrapper>
         )
     }

@@ -6,7 +6,7 @@ const Container = styled.ul`
   position: absolute;
   left: 0;
   padding: 0;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   transition: ease 0.2s;
   border-radius: 5px;
 `;
@@ -28,23 +28,28 @@ const DropdownLink = styled.a`
   }
 `;
 
-const Dropdown = () => (
+const DropCalendar = styled.input`
+`;
+
+const DropSet = (type, content) => {
+  return ( {
+    "link": (
+      (content != null)? content.map((item) => {
+        return (
+          <DropdownItem>
+            <DropdownLink href={`/${item}`}>{item}</DropdownLink>
+          </DropdownItem>
+        )
+      }) : null
+    ),
+    "calendar": <DropCalendar type="date"/>,
+  }[type]);
+}
+
+const Dropdown = (props) => (
   <Container>
-    <DropdownItem>
-      <DropdownLink href="/cleaning">Cleaning</DropdownLink>
-    </DropdownItem>
-    <DropdownItem>
-      <DropdownLink>Furniture Assembly</DropdownLink>
-    </DropdownItem>
-    <DropdownItem>
-      <DropdownLink>Moving</DropdownLink>
-    </DropdownItem>
-    <DropdownItem>
-      <DropdownLink>Electrical installation</DropdownLink>
-    </DropdownItem>
-    <DropdownItem>
-      <DropdownLink>Handyman</DropdownLink>
-    </DropdownItem>
+    {console.log({"link":1, "calendar": 2}["link"])}
+    {DropSet(props.type, props.content)}
   </Container>
 );
 

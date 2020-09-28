@@ -4,24 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 const Container = styled.div`
-    padding-left: 20px;
+
+    cursor: pointer;
 `;
 
 const Button = styled.span`
     outline: none;
     background-color: white;
     border: transparent;
-    cursor: pointer;
-    padding-right: 5px;
+
+    padding-right: 10px;
 `;
 
 const FilterButton = ({
-    type,
+    title,
+    clickMethod,
     children
 }) => (
     <Container>
-        <Button>{children}</Button>
-        <FontAwesomeIcon icon={faCaretDown} color="rgb(253, 219, 58)"/>
+        <Button onClick={clickMethod} id={title}>{children}</Button>
+        <FontAwesomeIcon icon={faCaretDown} color="rgb(253, 219, 58)" size="lg"/>
     </Container>
 );
 
