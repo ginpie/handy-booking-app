@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../Layout";
 import LinkItem from "../LinkItem";
 import SignInModal from "./components/SignInModal";
-
+import SignUpModal from "./components/SignUpModal";
 const MODAL = {
   signIn: "SIGN_IN",
   signUp: "SIGN_UP",
@@ -47,7 +47,12 @@ class Private extends React.Component {
             onSignUp={this.showModal(MODAL.signUp)}
           />
         )}
-        {showModal === MODAL.signUp && <div>SIGn Up</div>}
+        {showModal === MODAL.signUp && (
+          <SignUpModal
+            onClose={this.showModal(MODAL.empty)}
+            onSignIn={this.showModal(MODAL.signIn)}
+          />
+        )}
       </>
     );
   }

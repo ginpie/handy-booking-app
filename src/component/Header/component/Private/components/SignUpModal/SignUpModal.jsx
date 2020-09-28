@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import NakedButton from "../../../NakedButton";
 import Modal from "../../../Modal";
+import NakedButton from "../../../NakedButton";
+
 const SignInModal = ({ onClose, onSignUp }) => (
   <Modal
     onClose={onClose}
