@@ -3,23 +3,23 @@ import PropTypes from "prop-types";
 import Modal from "../../../Modal";
 import NakedButton from "../../../NakedButton";
 
-const SignInModal = ({ onClose, onSignUp }) => (
+const SignUpModal = ({ onClose, onSignIn }) => (
   <Modal
     onClose={onClose}
-    title="Sign-In"
+    title="Sign-Up"
     content="THi is Body"
     footer={
       <>
-        Not a member yet?&nbsp;
-        <NakedButton variant="link" onClick={onSignUp}>
-          Sign-Up
+        Already Member?&nbsp;
+        <NakedButton variant="link" onClick={onSignIn}>
+          Sign-In
         </NakedButton>
       </>
     }
   />
 );
-SignInModal.propType = {
+SignUpModal.propType = {
   onClose: PropTypes.func.isRequired,
-  onSignUp: PropTypes.func.isRequired,
+  onSignIn: PropTypes.func.isRequired,
 };
-export default SignInModal;
+export default SignUpModal;
