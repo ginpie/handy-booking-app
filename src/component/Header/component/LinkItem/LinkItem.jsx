@@ -8,6 +8,10 @@ const LinkItem = styled.a`
   color: black;
   transition: ease, 0.2s;
 
+  &:hover {
+    text-decoration: none;
+  }
+
   ${(props) => {
     const style = {
       nav: css`
@@ -36,7 +40,7 @@ const LinkItem = styled.a`
       `,
 
       text: css`
-        width: 60px;
+        width: 80px;
         &:hover {
           color: #ffffff;
         }
