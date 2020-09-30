@@ -9,6 +9,7 @@ const Container = styled.ul`
   /* margin-top: 10px; */
   transition: ease 0.2s;
   border-radius: 5px;
+  z-index: 100;
 `;
 
 const DropdownItem = styled.li`

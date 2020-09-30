@@ -21,7 +21,6 @@ class CategoriesDropdown extends React.Component {
 
     toggleDropdown(event) {
         event.preventDefault();
-
         this.setState((prevState) => ({
             showDropdown: !prevState.showDropdown,
         }));
@@ -29,12 +28,13 @@ class CategoriesDropdown extends React.Component {
 
     render() {
         const showDropdown = this.state.showDropdown;
+        console.log(showDropdown);
 
         return (
             <Wrapper onMouseEnter={this.toggleDropdown} onMouseLeave={this.toggleDropdown}>
                 <LinkItem href="/service" linkType={"nav"}>Service</LinkItem>
-                {showDropdown && <Dropdown content={LINKS}/>}
-            </Wrapper>
+                {showDropdown && <Dropdown type={"link"} content={LINKS}/>}
+            </Wrapper> 
         )
     }
 }
