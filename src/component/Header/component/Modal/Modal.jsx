@@ -61,26 +61,20 @@ const Hr = styled.hr`
   border-color: #dadada;
 `;
 
-const Modal = ({ onClose, title, content, footer }) => (
+const Modal = ({ onClose, children }) => (
   <Overlay onClick={onClose}>
     <StyledModal onClick={(event) => event.stopPropagation()}>
-      <Header>
-        <Title> {title}</Title>
-        <Close onClick={onClose}>X</Close>
-      </Header>
-      <Hr />
-      <Body>{content}</Body>
-      <Hr />
-      <Footer>{footer}</Footer>
+      {children}
+      <Close onClick={onClose}>X</Close>
     </StyledModal>
   </Overlay>
 );
 
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  title: PropTypes.node.isRequired,
-  content: PropTypes.node.isRequired,
-  footer: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
-
+Modal.Header = Header;
+Modal.Body = Body;
+Modal.Footer = Footer;
 export default Modal;
