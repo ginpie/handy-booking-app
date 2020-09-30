@@ -3,9 +3,9 @@ import React from "react";
 // import './App.css';
 import Header from "../Header";
 import Footer from "../Footer";
-import Categories from "../Categories/Categories";
-import SearchBar from "../SearchBar/SearchBar";
-import Reviews from "../Reviews/Reviews";
+import Categories from "../Categories/index";
+import SearchBar from "../SearchBar/index";
+import Reviews from "../Reviews/index";
 import Tradies from "../Tradies/Tradies";
 
 function App() {
