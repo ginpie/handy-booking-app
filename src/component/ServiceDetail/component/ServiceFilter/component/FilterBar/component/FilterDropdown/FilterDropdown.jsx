@@ -1,6 +1,6 @@
 import React from 'react';
 import FilterButton from '../FilterButton';
-import Dropdown from '../../../../../Header/component/Public/component/Dropdown';
+import Dropdown from '../../../../../../../Header/component/Public/component/Dropdown';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

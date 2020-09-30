@@ -48,7 +48,7 @@ class FilterBar extends React.Component {
         const name = event.target.innerHTML;
         const currentOpen = this.state.active;
         let newContent = this.state.content;
-        newContent[currentOpen] = `name`;
+        newContent[currentOpen] = name;
         this.setState({
             content: newContent,
             active: "",
