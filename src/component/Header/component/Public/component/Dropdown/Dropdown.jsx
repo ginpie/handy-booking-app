@@ -32,25 +32,37 @@ const DropdownLink = styled.a`
 const DropCalendar = styled.input`
 `;
 
-const DropSet = (type, content) => {
+const DropSet = (type, content, click) => {
   return ( {
     "link": (
-      (content != null)? content.map((item) => {
+      (content != "")? content.map((item) => {
+        return (
+          <DropdownItem>
+            <DropdownLink href={`/${item}`} onClick={click}>{item}</DropdownLink>
+          </DropdownItem>
+        )
+      }) : null
+    ),
+    "calendar": <DropCalendar type="date"/>,
+    "nav": (
+      (content != "")? content.map((item) => {
         return (
           <DropdownItem>
             <DropdownLink href={`/${item}`}>{item}</DropdownLink>
           </DropdownItem>
         )
       }) : null
-    ),
-    "calendar": <DropCalendar type="date"/>,
+    )
   }[type]);
 }
 
-const Dropdown = (props) => (
+const Dropdown = ({
+  content,
+  type,
+  clickTicket
+}) => (
   <Container>
-    {console.log({"link":1, "calendar": 2}["link"])}
-    {DropSet(props.type, props.content)}
+    {DropSet(type, content, clickTicket)}
   </Container>
 );
 

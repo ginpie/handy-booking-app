@@ -13,29 +13,22 @@ class FilterDropdown extends React.Component {
     constructor(props){
         super(props);
     }
-    // handleClick(event) {
-    //     event.preventDefault();
-    //     const prev = this.state.active;
-    //     const current = event.target.id;
-    //     this.setState({
-
-    //         active: (prev===current)?"":current,
-    //     })
-    //     console.log(this.state);
-    // }
-
-
 
     render() {
-        const {content, children, active, clickMethod, title} = this.props;
-        // console.log(active);
-        const type = (content===undefined)?"calendar":"link";
-        // console.log(type);
-
+        const {
+            content, 
+            children, 
+            active, 
+            clickMethod, 
+            title,
+            clickTicket,
+        } = this.props;
+        const type = (content==="")?"calendar":"link";
+    
         return (
             <Wrapper>
                 <FilterButton clickMethod={clickMethod} title={title}>{children}</FilterButton>
-                {(children == active) && <Dropdown content={content} type={type}/>}
+                {(title == active) && <Dropdown content={content} type={type} clickTicket={clickTicket}/>}
             </Wrapper>
         )
     }

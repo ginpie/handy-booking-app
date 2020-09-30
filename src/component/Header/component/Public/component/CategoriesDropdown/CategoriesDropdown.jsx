@@ -33,7 +33,7 @@ class CategoriesDropdown extends React.Component {
         return (
             <Wrapper onMouseEnter={this.toggleDropdown} onMouseLeave={this.toggleDropdown}>
                 <LinkItem href="/service" linkType={"nav"}>Service</LinkItem>
-                {showDropdown && <Dropdown type={"link"} content={LINKS}/>}
+                {showDropdown && <Dropdown type={"nav"} content={LINKS}/>}
             </Wrapper> 
         )
     }
