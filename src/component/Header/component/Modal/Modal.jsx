@@ -27,9 +27,9 @@ const Header = styled.div`
   position: relative;
 `;
 
-const Title = styled.div`
-  font-size: 18px;
-`;
+// const Title = styled.div`
+//   font-size: 18px;
+// `;
 
 const Close = styled.button`
   outline: 0;
@@ -54,11 +54,6 @@ const Body = styled.div`
 
 const Footer = styled.div`
   padding: 16px 24px;
-`;
-const Hr = styled.hr`
-  margin: 0;
-
-  border-color: #dadada;
 `;
 
 const Modal = ({ onClose, children }) => (

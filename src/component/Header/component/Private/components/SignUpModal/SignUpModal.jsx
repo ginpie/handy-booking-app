@@ -10,48 +10,101 @@ import styled from "styled-components";
 const Form = styled.div`
   padding: 16px 0;
 `;
-
-const FORM = [
-  {
-    key: "email",
+const EMAIL_REGEXP = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const FORM = {
+  email: {
     label: "Email",
+    type: "text",
+    getErrorMessage: (value) => {
+      if (!value) {
+        return "Please enter your email address";
+      }
+
+      if (!EMAIL_REGEXP.test(value)) {
+        return "Please enter a valid email address";
+      }
+
+      return "";
+    },
   },
-  {
+  password: {
     key: "password",
     label: "Password",
     type: "password",
-  },
-  {
-    key: "confimpassword",
-    label: "Confim-Password",
-    type: "password",
-  },
-];
+    getErrorMessage: (value) => {
+      if (!value) {
+        return "Please enter your password";
+      }
 
+      return "";
+    },
+  },
+  confirmPassword: {
+    key: "confirmPassword",
+    label: "Confirm password",
+    type: "password",
+    getErrorMessage: (value, data) => {
+      if (!value) {
+        return "Please enter your confirm password";
+      }
+
+      if (value !== data.password) {
+        return "Your confirm password does not match";
+      }
+
+      return "";
+    },
+  },
+};
 class SignUpModal extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       formData: {
-        email: "",
-        password: "",
-        confirmpassword: "",
+        email: {
+          value: "",
+          touched: false,
+        },
+        password: {
+          value: "",
+          touched: false,
+        },
+        confirmPassword: {
+          value: "",
+          touched: false,
+        },
       },
     };
     this.handleFormDataChange = this.handleFormDataChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
+  getErrorMessage(target) {
+    const { formData } = this.state;
+    const data = Object.keys(formData).reduce(
+      (obj, key) => ({
+        ...obj,
+        [key]: formData[key].value,
+      }),
+      {}
+    );
+
+    return FORM[target].getErrorMessage(formData[target].value, data);
+  }
+
   handleFormDataChange(target) {
     return (event) => {
-      const { value } = event.target;
       event.preventDefault();
+      const { value } = event.target;
 
       this.setState((prevState) => ({
-        forData: {
+        formData: {
           ...prevState.formData,
-          [target]: value,
+          [target]: {
+            value,
+            touched: true,
+          },
         },
       }));
     };
@@ -59,27 +112,71 @@ class SignUpModal extends React.Component {
 
   handleFormSubmit(event) {
     const { formData } = this.state;
+
     event.preventDefault();
-    console.log(formData);
+
+    if (!this.isFormValid()) {
+      console.log("There are validation errors");
+
+      return;
+    }
+
+    console.log("Sign up...", formData);
   }
+
+  isFormValid() {
+    const { formData } = this.state;
+
+    const errorMessages = Object.keys(formData)
+      .map((key) => {
+        const errorMessage = this.getErrorMessage(key);
+
+        return errorMessage;
+      })
+      .filter((v) => !!v);
+
+    return !errorMessages.length;
+  }
+
   render() {
+    const { formData } = this.state;
     const { onClose, onSignIn } = this.props;
+
     return (
       <Modal onClose={onClose}>
         <Modal.Header>Sign-Up</Modal.Header>
         <Modal.Body>
           <Form onSubmit={this.handleFormSubmit}>
-            {FORM.map(({ key, label, type }) => (
-              <FormItem key={key} htmlFor={key} label={label}>
-                <Input
-                  onChange={this.handleFormDataChange(key)}
-                  id={key}
-                  type={type}
-                />
-              </FormItem>
-            ))}
+            {Object.keys(FORM).map((key) => {
+              const { label, type } = FORM[key];
+
+              const { value, touched } = formData[key];
+
+              const errorMessage = touched ? this.getErrorMessage(key) : "";
+
+              return (
+                <FormItem
+                  key={key}
+                  htmlFor={key}
+                  label={label}
+                  errorMessage={errorMessage}
+                >
+                  <Input
+                    id={key}
+                    type={type}
+                    error={errorMessage}
+                    value={value}
+                    onChange={this.handleFormDataChange(key)}
+                  />
+                </FormItem>
+              );
+            })}
             <FormItem>
-              <Button width="100%" variant="success">
+              <Button
+                disabled={!this.isFormValid()}
+                width="100%"
+                variant="success"
+              >
                 Sign Up
               </Button>
             </FormItem>

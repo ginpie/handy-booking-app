@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Input = styled.input`
   display: block;
@@ -10,6 +10,12 @@ const Input = styled.input`
   border-radius: 4px;
   border: 1px solid #dadada;
   width: 100%;
+  ${(props) =>
+    props.error &&
+    css`
+      color: #e0466d;
+      border-color: #e0466d;
+    `}
 `;
 
 export default Input;

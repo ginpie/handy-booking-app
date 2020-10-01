@@ -31,10 +31,10 @@ class Private extends React.Component {
     return (
       <>
         <Layout>
-          <LinkItem linkType={"text"} onClick={this.showModal(MODAL.signIn)}>
+          <LinkItem linkType={"text"} onClick={this.showModal(MODAL.signUp)}>
             Sign Up
           </LinkItem>
-          <LinkItem linkType={"text"} onClick={this.showModal(MODAL.signUp)}>
+          <LinkItem linkType={"text"} onClick={this.showModal(MODAL.signIn)}>
             Log In
           </LinkItem>
           <LinkItem linkType={"button"} href="/enroll">
