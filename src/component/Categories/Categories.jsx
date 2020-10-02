@@ -7,8 +7,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color: $background;
-  font-family: $font;
+  background-color: #f9f7e8;
+  font-family: "Roboto Condensed", sans-serif;
 
   .flickity-page-dots {
     bottom: 10px;
