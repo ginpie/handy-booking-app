@@ -58,6 +58,7 @@ const ChooseBar = styled.div`
     position: absolute;
     top: 0px;
     right: 0px;
+    border-radius: 0 3px 3px 0;
 `;
 
 const Stars = styled.div``;
