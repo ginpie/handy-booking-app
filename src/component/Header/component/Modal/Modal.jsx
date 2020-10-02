@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-
+import NakedButton from "../../../NakedButton";
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -19,30 +19,26 @@ const Overlay = styled.div`
 const StyledModal = styled.div`
   width: 500px;
   background: white;
+  position: relative;
 `;
 
 const Header = styled.div`
   padding: 16px 24px;
   text-align: center;
-  position: relative;
+  /* position: relative; */
 `;
 
 // const Title = styled.div`
 //   font-size: 18px;
 // `;
 
-const Close = styled.button`
-  outline: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
+const Close = styled(NakedButton)`
   position: absolute;
-  padding-right: 24px;
+  padding: 16px 24px 0 0;
   display: flex;
   align-items: center;
   top: 0;
   right: 0;
-  bottom: 0;
   &:active {
     outline: 0;
     border: 0;
