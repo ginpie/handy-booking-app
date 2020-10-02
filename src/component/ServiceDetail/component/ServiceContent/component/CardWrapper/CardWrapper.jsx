@@ -7,12 +7,14 @@ const Layout = styled.div`
     flex-wrap: wrap;
 `;
 
-const CardWrapper = () => (
+const CardWrapper = ({
+    current,
+    data,
+}) => (
     <Layout>
-        <PersonalCard />
-        <PersonalCard />
-        <PersonalCard />
-        <PersonalCard />
+        {data.map(({name, label, rating}) => {
+            return <PersonalCard name={name} label={label} rating={rating} current={(current===name)?true:false} />
+        })}
     </Layout>
 );
 

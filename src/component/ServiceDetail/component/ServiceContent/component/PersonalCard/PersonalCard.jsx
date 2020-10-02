@@ -31,7 +31,7 @@ const Avatar = styled.img`
 const Label = styled.p`
     margin-bottom: 0;
     margin-right: 5px;
-    font-size: 0.8rem;
+    font-size: 0.5rem;
     background-color: rgb(14, 135, 151);
     color: white;
     padding: 0 3px;
@@ -39,14 +39,14 @@ const Label = styled.p`
     border-radius: 2px;
 `;
 
-const LableSets = styled.div`
+const LabelSets = styled.div`
     display: flex;
     flex-wrap: wrap;
 `;
 
 const Info = styled.div`
     display: flex;
-    align-items: center;
+    align-items: start;
     margin-top: 5px;
     margin-bottom: 5px;
 `;
@@ -63,25 +63,34 @@ const ChooseBar = styled.div`
 
 const Stars = styled.div``;
 
+const createRating = (rating) => {
+    let ratingElements = [];
+    for (let i = 0; i < rating; i++) {
+        ratingElements.push(<FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm"  />);
+    }
+    return ratingElements;
+}
 
-const PersonalCard = () => (
+const PersonalCard = ({
+    name,
+    label,
+    rating,
+    current,
+}) => (
     <Card>
-        <Title>Name</Title>
+        <Title>{name}</Title>
         <Info>
             <Avatar src={photo} alt="Avatar" />
-            <LableSets>
-                <Label>lable</Label>
-                <Label>lable</Label>
-                <Label>lable</Label>
-                <Label>lable</Label>
-            </LableSets>
+            <LabelSets>
+                {label.map((item) => {
+                    return <Label>{item}</Label>
+                })}
+            </LabelSets>
         </Info>
         <Stars>
-            <FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm" />
-            <FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm"  />
-            <FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm"  />
+            {createRating(rating)}
         </Stars>
-        <ChooseBar />
+        {current && <ChooseBar />}
     </Card>
 );
 

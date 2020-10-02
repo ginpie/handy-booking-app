@@ -10,7 +10,7 @@ const Layout = styled.div`
 const ServiceDetail = () => (
     <Layout>
         <ServiceFilter />
-        <ServiceContent />
+        <ServiceContent title="Cleaning" />
     </Layout>
 );
 
