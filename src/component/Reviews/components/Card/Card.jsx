@@ -81,9 +81,9 @@ const RatingBox = styled.div`
   align-items: center;
 `;
 
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
+const Stars = styled(ReactStars)`
+  box-shadow: #efefef 1px 2px 2px;
+`;
 
 // function stars(num) {
 //   let a = [];
@@ -96,14 +96,13 @@ const ratingChanged = (newRating) => {
 //   return a;
 // }
 
+const ratingChanged = (newRating) => {
+  console.log(newRating);
+};
+
 const Rating = ({ num }) => (
   <RatingBox>
-    <ReactStars
-      count={5}
-      onChange={ratingChanged}
-      size={24}
-      activeColor="#ffda44"
-    />
+    <Stars count={5} onChange={null} size={24} activeColor="#ffda44" />
   </RatingBox>
 );
 
