@@ -76,8 +76,9 @@ const PersonalCard = ({
     label,
     rating,
     current,
+    action,
 }) => (
-    <Card>
+    <Card onClick={action}>
         <Title>{name}</Title>
         <Info>
             <Avatar src={photo} alt="Avatar" />

@@ -10,10 +10,11 @@ const Layout = styled.div`
 const CardWrapper = ({
     current,
     data,
+    handleClick,
 }) => (
     <Layout>
         {data.map(({name, label, rating}) => {
-            return <PersonalCard name={name} label={label} rating={rating} current={(current===name)?true:false} />
+            return <PersonalCard action={handleClick} name={name} label={label} rating={rating} current={(current===name)?true:false} />
         })}
     </Layout>
 );

@@ -24,19 +24,28 @@ class ServiceContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: "Ian Yin",
-            isChosen: false,
+            current: "",
         }
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event) {
+        this.setState({
+            current: event.target.innerHTML,
+        });
+        console.log(event.target.innerHTML);
     }
 
     render() {
         const title = this.props.title;
         const current = this.state.current;
+        const handleClick = this.handleClick;
 
         return (
             <Layout>
                 <Header>{` ${title} Recommendations:`}</Header>
-                <CardWrapper current={current} data={tradiesData}/>
+                <CardWrapper current={current} data={tradiesData} handleClick={handleClick} />
             </Layout>
         )
     }
