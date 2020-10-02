@@ -2,11 +2,11 @@ import React from "react";
 // import logo from './logo.svg';
 // import './App.css';
 import Header from "../Header";
-import Footer from "../Footer";
+import Footer from "../Footer/index";
 import Categories from "../Categories/index";
 import SearchBar from "../SearchBar/index";
 import Reviews from "../Reviews/index";
-import Tradies from "../Tradies/Tradies";
+import Tradies from "../Tradies/index";
 
 function App() {
   return (
