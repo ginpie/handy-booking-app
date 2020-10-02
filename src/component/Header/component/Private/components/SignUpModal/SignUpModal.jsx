@@ -10,7 +10,9 @@ import styled from "styled-components";
 const Form = styled.form`
   padding: 16px 0;
 `;
+
 const EMAIL_REGEXP = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
 const FORM = {
   email: {
     label: "Email",
@@ -56,6 +58,7 @@ const FORM = {
     },
   },
 };
+
 class SignUpModal extends React.Component {
   constructor(props) {
     super(props);
@@ -78,10 +81,10 @@ class SignUpModal extends React.Component {
         },
       },
     };
+
     this.handleFormDataChange = this.handleFormDataChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
-
   getData() {
     const { formData } = this.state;
     const data = Object.keys(formData).reduce(
@@ -93,7 +96,6 @@ class SignUpModal extends React.Component {
     );
     return data;
   }
-
   getErrorMessage(target) {
     const { formData } = this.state;
     const data = this.getData();
@@ -184,7 +186,7 @@ class SignUpModal extends React.Component {
 
     return (
       <Modal onClose={onClose}>
-        <Modal.Header>Sign-Up</Modal.Header>
+        <Modal.Header>Sign Up</Modal.Header>
         <Modal.Body>
           <Form onSubmit={this.handleFormSubmit}>
             {error}
@@ -224,9 +226,9 @@ class SignUpModal extends React.Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          Already Member?&nbsp;
+          Already a member?&nbsp;
           <NakedButton variant="link" onClick={onSignIn}>
-            Sign-In
+            Sign in now
           </NakedButton>
         </Modal.Footer>
       </Modal>
