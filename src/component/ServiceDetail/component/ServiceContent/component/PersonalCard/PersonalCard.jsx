@@ -12,6 +12,7 @@ const Card = styled.div`
     margin-right: 30px;
     margin-top: 20px;
     box-shadow: 1px 0px 1px rgb(172, 170, 170, 0.6), 0px 2px 2px rgb(142, 142, 146, 0.4);
+    position: relative;
 `;
 
 const Title = styled.p`
@@ -50,6 +51,15 @@ const Info = styled.div`
     margin-bottom: 5px;
 `;
 
+const ChooseBar = styled.div`
+    width: 4px;
+    height: 100%;
+    background-color: rgb(14, 135, 151);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+`;
+
 const Stars = styled.div``;
 
 
@@ -70,6 +80,7 @@ const PersonalCard = () => (
             <FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm"  />
             <FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm"  />
         </Stars>
+        <ChooseBar />
     </Card>
 );
 
