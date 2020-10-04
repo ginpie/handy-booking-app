@@ -66,7 +66,7 @@ const Stars = styled.div``;
 const createRating = (rating) => {
     let ratingElements = [];
     for (let i = 0; i < rating; i++) {
-        ratingElements.push(<FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm"  />);
+        ratingElements.push(<FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm" />);
     }
     return ratingElements;
 }
