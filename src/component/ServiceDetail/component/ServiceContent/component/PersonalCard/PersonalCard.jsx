@@ -6,6 +6,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 const Card = styled.div`
     width: 230px;
+    height: 110px;
     border: 1px rgb(175, 173, 173) solid;
     border-radius: 4px;
     padding: 8px;

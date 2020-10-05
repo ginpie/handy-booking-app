@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TradiesDetail from './component/TradiesDetail';
+import OrderForm from './component/OrderForm';
 
 const Layout = styled.div`
     margin-top: 20px;
@@ -13,6 +14,7 @@ const Layout = styled.div`
 const OrderLayout = () => (
     <Layout>
         <TradiesDetail />
+        <OrderForm />
     </Layout>
 );
 
