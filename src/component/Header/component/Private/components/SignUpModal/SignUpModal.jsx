@@ -6,65 +6,20 @@ import FormItem from "../../../../../FormItem";
 import Button from "../../../../../Button";
 import Input from "../../../../../Input";
 import styled from "styled-components";
+import form from "./form";
+import signUp from "../../../../../../apis/signUp";
+import Alert from "../../../Alert";
 
 const Form = styled.form`
   padding: 16px 0;
 `;
-
-const EMAIL_REGEXP = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-const FORM = {
-  email: {
-    label: "Email",
-    type: "text",
-    getErrorMessage: (value) => {
-      if (!value) {
-        return "Please enter your email address";
-      }
-
-      if (!EMAIL_REGEXP.test(value)) {
-        return "Please enter a valid email address";
-      }
-
-      return "";
-    },
-  },
-  password: {
-    key: "password",
-    label: "Password",
-    type: "password",
-    getErrorMessage: (value) => {
-      if (!value) {
-        return "Please enter your password";
-      }
-
-      return "";
-    },
-  },
-  confirmPassword: {
-    key: "confirmPassword",
-    label: "Confirm password",
-    type: "password",
-    getErrorMessage: (value, data) => {
-      if (!value) {
-        return "Please enter your confirm password";
-      }
-
-      if (value !== data.password) {
-        return "Your confirm password does not match";
-      }
-
-      return "";
-    },
-  },
-};
 
 class SignUpModal extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      error: "",
+      error: null,
       loading: false,
       formData: {
         email: {
@@ -96,11 +51,12 @@ class SignUpModal extends React.Component {
     );
     return data;
   }
+
   getErrorMessage(target) {
     const { formData } = this.state;
     const data = this.getData();
 
-    return FORM[target].getErrorMessage(formData[target].value, data);
+    return form[target].getErrorMessage(formData[target].value, data);
   }
 
   handleFormDataChange(target) {
@@ -120,11 +76,13 @@ class SignUpModal extends React.Component {
     };
   }
 
+  
   handleFormSubmit(event) {
+    const { onClose, onSignUpSuccess } = this.props;
     event.preventDefault();
 
     this.setState({
-      error: "",
+      error: null,
       loading: true,
     });
 
@@ -135,24 +93,19 @@ class SignUpModal extends React.Component {
     }
     const data = this.getData();
 
-    fetch("http://localhost:3000/api/users", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "content-type": "application/json",
-      },
-    })
+    signUp(data)
       .then((res) => {
         this.setState({
           loading: false,
         });
-        if (res.status !== 200) {
+        if (!res.ok) {
           throw res;
         }
         return res.json();
       })
-      .then(() => {
-        console.log("User Created");
+      .then((user) => {
+        onClose();
+        onSignUpSuccess(user);
       })
       .catch((error) => {
         if (error.status === 409) {
@@ -163,6 +116,7 @@ class SignUpModal extends React.Component {
         }
 
         this.setState({ error: "Something unexpect happen, try again later" });
+        throw error;
       });
   }
 
@@ -183,15 +137,18 @@ class SignUpModal extends React.Component {
   render() {
     const { formData, error, loading } = this.state;
     const { onClose, onSignIn } = this.props;
-
     return (
       <Modal onClose={onClose}>
         <Modal.Header>Sign Up</Modal.Header>
         <Modal.Body>
           <Form onSubmit={this.handleFormSubmit}>
-            {error}
-            {Object.keys(FORM).map((key) => {
-              const { label, type } = FORM[key];
+            {error && (
+              <FormItem>
+                <Alert>{error}</Alert>
+              </FormItem>
+            )}
+            {Object.keys(form).map((key) => {
+              const { label, type } = form[key];
 
               const { value, touched } = formData[key];
 

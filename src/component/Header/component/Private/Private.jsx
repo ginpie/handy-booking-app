@@ -13,13 +13,22 @@ class Private extends React.Component {
     super(props);
     this.state = {
       showModal: MODAL.empty,
+      user: null,
       // showSignInModal: false,
     };
     this.showModal = this.showModal.bind(this);
+    this.setUser = this.setUser.bind(this);
   }
+
+  setUser(target) {
+    this.setState({ user: target });
+  }
+
   showModal(target) {
     return (event) => {
-      event.preventDefault();
+      if (event) {
+        event.preventDefault();
+      }
 
       this.setState({
         showModal: target,
@@ -27,32 +36,46 @@ class Private extends React.Component {
     };
   }
   render() {
-    const { showModal } = this.state;
+    const { showModal, user } = this.state;
     return (
       <>
         <Layout>
-          <LinkItem linkType={"text"} onClick={this.showModal(MODAL.signUp)}>
-            Sign Up
-          </LinkItem>
-          <LinkItem linkType={"text"} onClick={this.showModal(MODAL.signIn)}>
-            Log In
-          </LinkItem>
+          {user ? (
+            <LinkItem href="/dashBoard">DashBoard</LinkItem>
+          ) : (
+            <>
+              <LinkItem
+                linkType={"text"}
+                onClick={this.showModal(MODAL.signUp)}
+              >
+                Sign Up
+              </LinkItem>
+              <LinkItem
+                linkType={"text"}
+                onClick={this.showModal(MODAL.signIn)}
+              >
+                Sign In
+              </LinkItem>
+              {showModal === MODAL.signIn && (
+                <SignInModal
+                  onClose={this.showModal(MODAL.empty)}
+                  onSignUp={this.showModal(MODAL.signUp)}
+                  onSignInSuccess={this.setUser}
+                />
+              )}
+              {showModal === MODAL.signUp && (
+                <SignUpModal
+                  onClose={this.showModal(MODAL.empty)}
+                  onSignIn={this.showModal(MODAL.signIn)}
+                  onSignUpSuccess={this.setUser}
+                />
+              )}
+            </>
+          )}
           <LinkItem linkType={"button"} href="/enroll">
             Become a Tradie
           </LinkItem>
         </Layout>
-        {showModal === MODAL.signIn && (
-          <SignInModal
-            onClose={this.showModal(MODAL.empty)}
-            onSignUp={this.showModal(MODAL.signUp)}
-          />
-        )}
-        {showModal === MODAL.signUp && (
-          <SignUpModal
-            onClose={this.showModal(MODAL.empty)}
-            onSignIn={this.showModal(MODAL.signIn)}
-          />
-        )}
       </>
     );
   }
