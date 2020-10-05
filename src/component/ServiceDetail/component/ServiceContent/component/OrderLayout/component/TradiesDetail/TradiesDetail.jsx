@@ -34,6 +34,7 @@ const Rating = styled.div`
 
 const RatingText = styled.p`
     margin: 0;
+    font-size: 0.8rem;
 `;
 
 const AddressWrapper = styled.div`

@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import CardWrapper from './component/CardWrapper';
+import OrderLayout from './component/OrderLayout';
 
 const Wrapper = styled.div`
 `;
@@ -15,13 +16,22 @@ const Header = styled.h1`
     font-size: 1.2rem;
 `;
 
-const OrderLayout =  styled.div``;
+const Content = styled.div`
+    display: flex;
+
+    ${props => props.isClicked && css`
+        width: 260px;
+    `}
+`;
 
 const tradiesData = [
     {name: "Ian Yin", label: ["Cleaning", "Furniture Assembly", "House Moving", "Installation"], rating: 3},
     {name: "David", label: ["Cleaning", "Furniture Assembly", "House Moving"], rating: 5},
     {name: "Jinpei", label: ["Cleaning", "Furniture Assembly", "House Moving"], rating: 4},
     {name: "Ming", label: ["Cleaning", "Furniture Assembly"], rating: 5},
+    {name: "katrina", label: ["Cleaning", "Furniture Assembly"], rating: 4},
+    {name: "Lightman", label: ["Cleaning", "Furniture Assembly"], rating: 4},
+    {name: "Mason", label: ["Installation"], rating: 5},
 ]
 
 class ServiceContent extends React.Component {
@@ -55,8 +65,11 @@ class ServiceContent extends React.Component {
             <Wrapper>
                 <Layout>
                     <Header>{` ${title} Recommendations:`}</Header>
-                    <CardWrapper current={current} data={tradiesData} handleClick={handleClick} isClicked={isClicked} />
-                    
+                    <Content isClicked={isClicked}>
+                        <CardWrapper current={current} data={tradiesData} handleClick={handleClick} isClicked={isClicked} />
+                        {isClicked && <OrderLayout />}
+                    </Content>
+
                 </Layout>
             </Wrapper>
 

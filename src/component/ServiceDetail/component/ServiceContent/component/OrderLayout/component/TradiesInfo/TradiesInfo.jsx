@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Layout = styled.div``;
+const Layout = styled.div`
+`;
 
 const Table = styled.table`
     margin-top: 30px;
     margin-left: 10px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 `;
 
 const Row = styled.tr`
@@ -21,7 +22,7 @@ const Content = styled.td`
 `;
 
 const About = styled.p`
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     width: 70%;
     margin: 0 auto;
 `;

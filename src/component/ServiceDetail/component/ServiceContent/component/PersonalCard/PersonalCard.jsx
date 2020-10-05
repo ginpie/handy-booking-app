@@ -79,7 +79,7 @@ const PersonalCard = ({
     current,
     action,
 }) => (
-    <Card onClick={action.bind(this, name)}>
+    <Card onClick={action?action.bind(this, name):null}>
         <Title>{name}</Title>
         <Info>
             <Avatar src={photo} alt="Avatar" />
