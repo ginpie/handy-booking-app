@@ -53,7 +53,6 @@ const OrderForm = () => (
             <OrderInput name="large_furniture" type="number">Large Furniture:</OrderInput>
         </InputRow>
         <InputRow>
-            {/* <OrderInput name="name" type="text">Name:</OrderInput> */}
             <OrderInput name="name" type="text">Name:</OrderInput>
             <OrderInput name="email" type="text">Email:</OrderInput>
         </InputRow>
