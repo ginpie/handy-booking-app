@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 
 const Layout = styled.div`
     padding: 30px;
-    max-width: 960px;
+    max-width: 1024px;
     margin: 0 auto;
 `;
 
@@ -21,6 +21,7 @@ const Content = styled.div`
 
     ${props => props.isClicked && css`
         width: 260px;
+
     `}
 `;
 
@@ -69,7 +70,6 @@ class ServiceContent extends React.Component {
                         <CardWrapper current={current} data={tradiesData} handleClick={handleClick} isClicked={isClicked} />
                         {isClicked && <OrderLayout />}
                     </Content>
-
                 </Layout>
             </Wrapper>
 

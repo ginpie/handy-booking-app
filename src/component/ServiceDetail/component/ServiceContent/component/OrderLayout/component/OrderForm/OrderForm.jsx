@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import OrderInput from './component/OrderInput';
 
 const Form = styled.form`
-    margin: 40px 46px 0 46px;
+    margin: 40px 0;
 `;
 
 const FormHeader = styled.h2`

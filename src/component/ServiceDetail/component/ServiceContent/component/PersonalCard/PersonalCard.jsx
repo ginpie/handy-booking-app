@@ -10,8 +10,8 @@ const Card = styled.div`
     border: 1px rgb(175, 173, 173) solid;
     border-radius: 4px;
     padding: 8px;
-    margin-right: 30px;
     margin-top: 20px;
+    margin-right: 20px;
     box-shadow: 1px 0px 1px rgb(172, 170, 170, 0.6), 0px 2px 2px rgb(142, 142, 146, 0.4);
     position: relative;
 `;
@@ -64,6 +64,10 @@ const ChooseBar = styled.div`
 
 const Stars = styled.div``;
 
+const Comment = styled.div`
+    font-size: 0.7rem;
+`;
+
 const createRating = (rating) => {
     let ratingElements = [];
     for (let i = 0; i < rating; i++) {
@@ -78,16 +82,17 @@ const PersonalCard = ({
     rating,
     current,
     action,
+    comment,
 }) => (
     <Card onClick={action?action.bind(this, name):null}>
         <Title>{name}</Title>
         <Info>
             <Avatar src={photo} alt="Avatar" />
-            <LabelSets>
+            {label?(<LabelSets>
                 {label.map((item) => {
                     return <Label>{item}</Label>
                 })}
-            </LabelSets>
+            </LabelSets>):<Comment>{comment}</Comment>}
         </Info>
         <Stars>
             {createRating(rating)}
