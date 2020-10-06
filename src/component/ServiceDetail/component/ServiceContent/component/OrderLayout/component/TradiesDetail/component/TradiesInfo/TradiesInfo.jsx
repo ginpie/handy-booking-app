@@ -27,30 +27,29 @@ const About = styled.p`
     margin: 0 auto;
 `;
 
-const TradiesInfo = () => (
+const TableRows = (data) => {
+    const validKeys = ["name", "language", "skills", "about"];
+    let content = [];
+    for (let key in data) {
+        if (validKeys.includes(key)) {
+            content.push(
+                    <Row>
+                        <Head>{key}</Head>
+                        {key==="about"?null:<Content>{data[key]}</Content>}
+                    </Row>
+            );
+        }
+    }
+    return content;
+}
+
+const TradiesInfo = (props) => (
     <Layout>
         <Table>
-            <Row>
-                <Head>Name:</Head>
-                <Content>Ian Yin</Content>
-            </Row>
-            <Row>
-                <Head>Language</Head>
-                <Content>English, Mandarin</Content>
-            </Row>
-            <Row>
-                <Head>Skills:</Head>
-                <Content>XXX, XXX, XXXX</Content>
-            </Row>
-            <Row>
-                <Head>About:</Head>
-            </Row>
+            {TableRows(props.data)}
         </Table>
-        <About>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis eget 
-            lectus dui. Neque duis id imperdiet amet. 
-            Pulvinar massa varius ipsum adipiscing 
-            tincidunt ultrices lectus libero. A arcu 
-            aliquet lorem non metus.
+        <About>
+            {props.data.about}
         </About>
     </Layout>
 );

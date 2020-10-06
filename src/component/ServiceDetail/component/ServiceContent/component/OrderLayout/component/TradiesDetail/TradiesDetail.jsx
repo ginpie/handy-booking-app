@@ -4,6 +4,7 @@ import samplePhoto from '../../../../assets/sample_avatar.jpg';
 import TradiesInfo from './component/TradiesInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import RatingRender from '../../../RatingRender';
 
 const Layout  = styled.div`
     display: flex;
@@ -56,27 +57,36 @@ const IconWrapper = styled.div`
     margin: 0 5px;
 `;
 
+const person = {
+    name: "Ian Yin",
+    language: "English, Mandarin",
+    skills: "xxx, xxx, xxxx",
+    about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis eget lectus dui. Neque duis id imperdiet amet. Pulvinar massa varius ipsum adipiscing tincidunt ultrices lectus libero. A arcu aliquet lorem non metus.",
+    address: "South Yarra VIC",
+    rating: 3,
+    register_date: "12th Mar 2018",
+}
+
 const TradiesDetail = () => (
     <Layout>   
         <Left>
             <Avatar src={samplePhoto} />
             <Rating>
                 <RatingText>Rating:</RatingText>
-                <IconWrapper><FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm" /></IconWrapper>
-                <IconWrapper><FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm" /></IconWrapper>
-                <IconWrapper><FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm" /></IconWrapper>
+
+                {RatingRender(person.rating, true)}
             </Rating>
             <AddressWrapper>
                 <FontAwesomeIcon icon={faMapMarkerAlt} size="sm" />
                 <Address>
-                    South Yarra VIC, <br/>
+                    {`${person.address},`} <br/>
                     Australia<br/>
-                    Member since 12th <br/>
-                    Mar 2018
+                    Member since<br/>
+                    {person.register_date}
                 </Address>
             </AddressWrapper>
         </Left>
-        <Right><TradiesInfo /></Right>
+        <Right><TradiesInfo data={person}/></Right>
     </Layout>
 );
 

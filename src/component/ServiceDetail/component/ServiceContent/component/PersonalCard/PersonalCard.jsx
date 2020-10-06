@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import photo from '../../assets/sample_avatar.jpg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+import RatingRender from '../RatingRender';
 
 const Card = styled.div`
     width: 230px;
@@ -62,19 +61,13 @@ const ChooseBar = styled.div`
     border-radius: 0 3px 3px 0;
 `;
 
-const Stars = styled.div``;
+const Stars = styled.div`
+    display: flex;
+`;
 
 const Comment = styled.div`
     font-size: 0.7rem;
 `;
-
-const createRating = (rating) => {
-    let ratingElements = [];
-    for (let i = 0; i < rating; i++) {
-        ratingElements.push(<FontAwesomeIcon icon={faStar} color="rgb(253, 219, 58)" size="sm" />);
-    }
-    return ratingElements;
-}
 
 const PersonalCard = ({
     name,
@@ -95,7 +88,7 @@ const PersonalCard = ({
             </LabelSets>):<Comment>{comment}</Comment>}
         </Info>
         <Stars>
-            {createRating(rating)}
+            {RatingRender(rating, false)}
         </Stars>
         {current && <ChooseBar />}
     </Card>
