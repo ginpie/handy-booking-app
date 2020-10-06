@@ -13,9 +13,6 @@ const tradiesData = [
     {name: "David", label: ["Cleaning", "Furniture Assembly", "House Moving"], rating: 5},
     {name: "Jinpei", label: ["Cleaning", "Furniture Assembly", "House Moving"], rating: 4},
     {name: "Ming", label: ["Cleaning", "Furniture Assembly"], rating: 5},
-    {name: "katrina", label: ["Cleaning", "Furniture Assembly"], rating: 4},
-    {name: "Lightman", label: ["Cleaning", "Furniture Assembly"], rating: 4},
-    {name: "Mason", label: ["Installation"], rating: 5},
 ];
 
 const Reviews = () => (

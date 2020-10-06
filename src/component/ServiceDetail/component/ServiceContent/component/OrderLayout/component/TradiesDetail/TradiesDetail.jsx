@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import samplePhoto from '../../../../assets/sample_avatar.jpg';
-import TradiesInfo from '../TradiesInfo';
+import TradiesInfo from './component/TradiesInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 
