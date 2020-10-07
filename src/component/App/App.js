@@ -1,7 +1,7 @@
 import React from "react";
 // import logo from './logo.svg';
 // import './App.css';
-import Header from "../Header";
+import Header from "../Header/index";
 import Footer from "../Footer/index";
 import Categories from "../Categories/index";
 import SearchBar from "../SearchBar/index";
