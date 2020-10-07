@@ -76,7 +76,6 @@ class SignUpModal extends React.Component {
     };
   }
 
-  
   handleFormSubmit(event) {
     const { onClose, onSignUpSuccess } = this.props;
     event.preventDefault();
