@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../Layout";
 import LinkItem from "../LinkItem";
 import SignInModal from "./components/SignInModal";
@@ -18,7 +18,6 @@ class Private extends React.Component {
     this.state = {
       showModal: MODAL.empty,
       user: null,
-      // showSignInModal: false,
     };
     this.showModal = this.showModal.bind(this);
     this.setUser = this.setUser.bind(this);
