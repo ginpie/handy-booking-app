@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import NakedButton from "../../../../../NakedButton";
+import NakedButton from "../NakedButton";
 import Modal from "../../../Modal";
 import FormItem from "../../../../../FormItem";
 import Button from "../../../../../Button";
