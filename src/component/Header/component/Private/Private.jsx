@@ -15,6 +15,7 @@ const MODAL = {
 class Private extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showModal: MODAL.empty,
       user: null,
@@ -44,6 +45,7 @@ class Private extends React.Component {
     return (
       <>
         <Layout>
+
           {user ? (
             <LinkItem href="/dashBoard">DashBoard</LinkItem>
           ) : (
@@ -91,7 +93,7 @@ class Private extends React.Component {
               )}
             </>
           )}
-          <LinkItem linkType={"button"} href="/enroll">
+          <LinkItem linkType={"button"} href="/join-us">
             Become a Tradie
           </LinkItem>
         </Layout>
