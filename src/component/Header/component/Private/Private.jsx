@@ -92,7 +92,7 @@ class Private extends React.Component {
               )}
             </>
           )}
-          <LinkItem linkType={"button"} href="/enroll">
+          <LinkItem linkType={"button"} href="/join-us">
             Become a Tradie
           </LinkItem>
         </Layout>
