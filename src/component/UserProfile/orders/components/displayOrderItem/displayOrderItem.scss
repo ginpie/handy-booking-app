@@ -1,0 +1,157 @@
+// Map breakpoints
+$breakpoints: (
+    "extra-large": 1200px,//Extra large devices
+    "large" : 1050px, //Large devices
+    "medium-large" : 910px, //small-large devices
+    "medium" : 768px, //Medium devices
+    "small" : 600px, //Small devices
+    "extra-small" : 375px //Extra small
+);
+
+@mixin respond-to($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media screen and (min-width: #{map-get($breakpoints, $breakpoint)}) {
+            @content
+        }
+    }
+};
+
+@mixin orderItemInBrower {
+    width: 100%;
+    height: 80px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #c7c7c7;
+    display: flex;
+    justify-content: space-between;
+    &__info {
+        display: flex;
+        flex-direction: column;
+        margin-top:10px;
+        margin-left:30px;
+        &--orderName{
+            font: 15px;
+            font-weight: 500;
+        }
+        &--info {
+            margin-top: 20px;
+            display: flex;
+            font-size: 13px;
+            color: #c7c7c7;
+            &--orderNumber {
+                border-right: 1px solid #c7c7c7;
+                padding: 0px 10px;
+            }
+            &--trader{
+                border-right: 1px solid #c7c7c7;
+                padding: 0px 10px;
+                
+            }
+            &--other {
+                padding: 0px 10px;
+            }
+        }
+    }
+    &__status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &--button {
+            color: white;
+            width: 100px;
+            height: 30px;
+            background-color: #32c2ad;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            border-radius: 8px;
+        }
+    
+    }
+    &__price {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        font-weight: 600;
+    }
+    &__more {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        &--button {
+            width: 25px;
+            cursor: pointer;
+            img {
+                width:100%
+            }
+        }
+    }
+}
+
+.displayOrderItem {
+    width: 100%;
+    height: 80px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #c7c7c7;
+    display: flex;
+    justify-content: space-between;
+    &__info {
+        display: flex;
+        flex-direction: column;
+        margin-top:28px;
+        margin-left: 5px;
+        &--orderName{
+            font: 15px;
+            font-weight: 500;
+        }
+        &--info {
+            display: none;
+        }
+    }
+    &__status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &--button {
+            color: white;
+            width: 100px;
+            height: 30px;
+            background-color: #32c2ad;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            border-radius: 8px;
+        }
+    
+    }
+    &__price {
+        display: none;
+    }
+    &__more {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-right: 5px;
+        &--button {
+            width: 25px;
+            cursor: pointer;
+            img {
+                width:100%
+            }
+        }
+    }
+    @include respond-to(small) {
+        @include orderItemInBrower;
+    }
+    @include respond-to(medium-large) {
+        @include orderItemInBrower;
+    }
+    @include respond-to(large) {
+        @include orderItemInBrower;
+    }
+    @include respond-to(extra-large) {
+        @include orderItemInBrower;
+    }
+}

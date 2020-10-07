@@ -1,12 +1,12 @@
 import React from "react";
-// import logo from './logo.svg';
-// import './App.css';
-import Header from "../Header/index";
-import Footer from "../Footer/index";
-import Categories from "../Categories/index";
-import SearchBar from "../SearchBar/index";
-import Reviews from "../Reviews/index";
-import Tradies from "../Tradies/index";
+
+import Header from "../Header";
+import Footer from "../Footer";
+import Categories from "../Categories/Categories";
+import SearchBar from "../SearchBar/SearchBar";
+import Reviews from "../Reviews/Reviews";
+import Tradies from "../Tradies/Tradies";
+
 
 function App() {
   return (
