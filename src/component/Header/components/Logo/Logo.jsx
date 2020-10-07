@@ -14,7 +14,7 @@ const Img = styled.img`
 `;
 
 const Logo = () => (
-  <LogoContainer href="localhost:3001">
+  <LogoContainer href="/">
     <Img src="https://res.cloudinary.com/dfcalhv9i/image/upload/v1600845305/handyman/logo_egnpb4.png" />
   </LogoContainer>
 );

@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import JoinUsPage from "./component/JoinUs";
 import ContactUsPage from "./component/ContactUs";
+import ServiceDetail from "./component/ServiceDetail";
 
 const rootElement = document.getElementById("root");
 
@@ -17,6 +18,7 @@ ReactDOM.render(
       <Route exact path="/" component={App} />
       <Route path="/join-us" component={JoinUsPage} />
       <Route path="/contact" component={ContactUsPage} />
+      <Route path="/service" component={ServiceDetail} />
     </Switch>
   </BrowserRouter>,
   rootElement
