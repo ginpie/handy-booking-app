@@ -132,6 +132,11 @@ class SignInModal extends React.Component {
 
     return !errorMessages.length;
   }
+
+  componentDidMount() {
+    this.nameInput.focus();
+  }
+
   render() {
     const { onClose, onSignUp } = this.props;
     const { formData, error, loading } = this.state;
@@ -166,6 +171,9 @@ class SignInModal extends React.Component {
                     error={errorMessage}
                     value={value}
                     onChange={this.handleFormDataChange(key)}
+                    ref={(input) => {
+                      if (form[key] === form.email) this.nameInput = input;
+                    }}
                   />
                 </FormItem>
               );
