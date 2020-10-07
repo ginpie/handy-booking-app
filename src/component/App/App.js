@@ -11,7 +11,6 @@ import Categories from "../Categories/Categories";
 import SearchBar from "../SearchBar/SearchBar";
 import Reviews from "../Reviews/Reviews";
 import Tradies from "../Tradies/Tradies";
-import SignInTable from "../Signin";
 
 function App() {
   return (
