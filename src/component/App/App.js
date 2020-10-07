@@ -7,6 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import Reviews from "../Reviews/Reviews";
 import Tradies from "../Tradies/Tradies";
 
+
 function App() {
   return (
     <div className="App">

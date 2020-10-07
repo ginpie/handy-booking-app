@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../Layout";
 import LinkItem from "../LinkItem";
 import SignInModal from "./components/SignInModal";
@@ -15,6 +15,7 @@ const MODAL = {
 class Private extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showModal: MODAL.empty,
       user: null,
@@ -45,6 +46,7 @@ class Private extends React.Component {
     return (
       <>
         <Layout>
+
           {user ? (
             <LinkItem href="/dashBoard">DashBoard</LinkItem>
           ) : (
