@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../Layout";
 import LinkItem from "../LinkItem";
 import SignInModal from "./components/SignInModal";
 import SignUpModal from "./components/SignUpModal";
+import { CSSTransition } from "react-transition-group";
+import "./styles.css";
+
 const MODAL = {
   signIn: "SIGN_IN",
   signUp: "SIGN_UP",
   empty: "",
 };
+
 class Private extends React.Component {
   constructor(props) {
     super(props);
@@ -37,6 +41,7 @@ class Private extends React.Component {
   }
   render() {
     const { showModal, user } = this.state;
+
     return (
       <>
         <Layout>
@@ -50,6 +55,7 @@ class Private extends React.Component {
               >
                 Sign Up
               </LinkItem>
+
               <LinkItem
                 linkType={"text"}
                 onClick={this.showModal(MODAL.signIn)}
@@ -57,18 +63,32 @@ class Private extends React.Component {
                 Sign In
               </LinkItem>
               {showModal === MODAL.signIn && (
-                <SignInModal
-                  onClose={this.showModal(MODAL.empty)}
-                  onSignUp={this.showModal(MODAL.signUp)}
-                  onSignInSuccess={this.setUser}
-                />
+                <CSSTransition
+                  in={!(showModal === MODAL.empty)}
+                  appear={true}
+                  timeout={1000}
+                  classNames="model"
+                >
+                  <SignInModal
+                    onClose={this.showModal(MODAL.empty)}
+                    onSignUp={this.showModal(MODAL.signUp)}
+                    onSignInSuccess={this.setUser}
+                  />
+                </CSSTransition>
               )}
               {showModal === MODAL.signUp && (
-                <SignUpModal
-                  onClose={this.showModal(MODAL.empty)}
-                  onSignIn={this.showModal(MODAL.signIn)}
-                  onSignUpSuccess={this.setUser}
-                />
+                <CSSTransition
+                  in={!(showModal === MODAL.empty)}
+                  appear={true}
+                  timeout={1000}
+                  classNames="model"
+                >
+                  <SignUpModal
+                    onClose={this.showModal(MODAL.empty)}
+                    onSignIn={this.showModal(MODAL.signIn)}
+                    onSignUpSuccess={this.setUser}
+                  />
+                </CSSTransition>
               )}
             </>
           )}
