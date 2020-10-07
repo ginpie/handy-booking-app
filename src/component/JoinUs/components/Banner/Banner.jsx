@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
+  margin-top: 70px;
   height: 600px;
   width: 100%;
   background: url(https://res.cloudinary.com/dr99oorie/image/upload/v1602050260/henry-co-3coKbdfnAFg-unsplash_genvg1.jpg),
