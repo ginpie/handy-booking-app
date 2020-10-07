@@ -7,7 +7,10 @@ import Button from "../../../../../Button";
 import Input from "../../../../../Input";
 import styled from "styled-components";
 import form from "./form";
-import signUp from "../../../../../../apis/signUp";
+import signUpUser from "../../../../../../apis/signUpUser";
+
+import signUpCustomer from "../../../../../../apis/signUpCustomer";
+import signUpTradie from "../../../../../../apis/signUpTradie";
 import Alert from "../../../Alert";
 
 const Form = styled.form`
@@ -21,6 +24,10 @@ class SignUpModal extends React.Component {
     this.state = {
       error: null,
       loading: false,
+      userType: {
+        value: "customer",
+        touched: false,
+      },
       formData: {
         email: {
           value: "",
@@ -39,6 +46,7 @@ class SignUpModal extends React.Component {
 
     this.handleFormDataChange = this.handleFormDataChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   getData() {
     const { formData } = this.state;
@@ -77,6 +85,7 @@ class SignUpModal extends React.Component {
   }
 
   handleFormSubmit(event) {
+    const { userType, formData } = this.state;
     const { onClose, onSignUpSuccess } = this.props;
     event.preventDefault();
 
@@ -91,32 +100,119 @@ class SignUpModal extends React.Component {
       return;
     }
     const data = this.getData();
+    const email = formData.email.value;
 
-    signUp(data)
-      .then((res) => {
-        this.setState({
-          loading: false,
-        });
-        if (!res.ok) {
-          throw res;
-        }
-        return res.json();
-      })
-      .then((user) => {
-        onClose();
-        onSignUpSuccess(user);
-      })
-      .catch((error) => {
-        if (error.status === 409) {
+    if (userType.value === "customer") {
+      signUpUser(data)
+        .then((res) => {
           this.setState({
-            error: "Email Existed",
+            loading: false,
           });
-          return;
-        }
+          if (!res.ok) {
+            throw res;
+          }
+          return res.json();
+        })
+        .then((user) => {
+          onClose();
+          onSignUpSuccess(user);
+          signUpCustomer(email).then((res) => {
+            if (!res.ok) {
+              throw res;
+            }
+            return res.json();
+          });
+        })
+        .catch((error) => {
+          if (error.status === 409) {
+            this.setState({
+              error: "Email Existed",
+            });
+            return;
+          }
 
-        this.setState({ error: "Something unexpect happen, try again later" });
-        throw error;
-      });
+          this.setState({
+            error: "Something unexpect happen, try again later",
+          });
+          throw error;
+        });
+
+      // alert("Type: " + this.state.userType.value);
+    } else if (userType.value === "tradie") {
+      signUpUser(data)
+        .then((res) => {
+          this.setState({
+            loading: false,
+          });
+          if (!res.ok) {
+            throw res;
+          }
+          return res.json();
+        })
+        .then((user) => {
+          onClose();
+          onSignUpSuccess(user);
+          signUpTradie(email).then((res) => {
+            if (!res.ok) {
+              throw res;
+            }
+            return res.json();
+          });
+        })
+        .catch((error) => {
+          if (error.status === 409) {
+            this.setState({
+              error: "Email Existed",
+            });
+            return;
+          }
+
+          this.setState({
+            error: "Something unexpect happen, try again later",
+          });
+          throw error;
+        });
+    } else {
+      signUpUser(data)
+        .then((res) => {
+          this.setState({
+            loading: false,
+          });
+          if (!res.ok) {
+            throw res;
+          }
+          return res.json();
+        })
+        .then((user) => {
+          onClose();
+          onSignUpSuccess(user);
+          signUpCustomer(email).then((res) => {
+            if (!res.ok) {
+              throw res;
+            }
+            // return res.json();
+          });
+          signUpTradie(email).then((res) => {
+            if (!res.ok) {
+              throw res;
+            }
+            // return res.json();
+          });
+        })
+        .catch((error) => {
+          if (error.status === 409) {
+            this.setState({
+              error: "Email Existed",
+            });
+            return;
+          }
+
+          this.setState({
+            error: "Something unexpect happen, try again later",
+          });
+          throw error;
+        });
+    }
   }
 
   isFormValid() {
@@ -132,13 +228,15 @@ class SignUpModal extends React.Component {
 
     return !errorMessages.length;
   }
-
+  handleChange(event) {
+    this.setState({ userType: { value: event.target.value } });
+  }
   componentDidMount() {
     this.nameInput.focus();
   }
 
   render() {
-    const { formData, error, loading } = this.state;
+    const { formData, error, loading, userType } = this.state;
     const { onClose, onSignIn } = this.props;
     return (
       <Modal onClose={onClose}>
@@ -177,6 +275,16 @@ class SignUpModal extends React.Component {
                 </FormItem>
               );
             })}
+            <FormItem>
+              <label>
+                Who You Wanna To Be:
+                <select value={userType.value} onChange={this.handleChange}>
+                  <option value="customer">Customer</option>
+                  <option value="tradie">Tradie</option>
+                  <option value="both">Both</option>
+                </select>
+              </label>
+            </FormItem>
             <FormItem>
               <Button
                 disabled={!this.isFormValid() || loading}

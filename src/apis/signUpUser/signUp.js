@@ -1,4 +1,4 @@
-const signUp = ({ email, password, confirmPassword }) =>
+const signUpUser = ({ email, password, confirmPassword }) =>
   fetch("http://localhost:3000/api/users", {
     method: "POST",
     body: JSON.stringify({
@@ -10,4 +10,4 @@ const signUp = ({ email, password, confirmPassword }) =>
       "content-type": "application/json",
     },
   });
-export default signUp;
+export default signUpUser;
