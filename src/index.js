@@ -7,6 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import JoinUsPage from "./component/JoinUs";
+import ContactUsPage from "./component/ContactUs";
 
 const rootElement = document.getElementById("root");
 
@@ -15,6 +16,7 @@ ReactDOM.render(
     <Switch>
       <Route exact path="/" component={App} />
       <Route path="/join-us" component={JoinUsPage} />
+      <Route path="/contact" component={ContactUsPage} />
     </Switch>
   </BrowserRouter>,
   rootElement
