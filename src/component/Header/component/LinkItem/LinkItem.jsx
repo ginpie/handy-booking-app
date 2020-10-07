@@ -41,6 +41,7 @@ const LinkItem = styled.a`
 
       text: css`
         width: 80px;
+        cursor: pointer;
         &:hover {
           color: #ffffff;
         }
