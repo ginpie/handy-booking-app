@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import NakedButton from "../../../NakedButton";
+import NakedButton from "../Private/components/NakedButton";
 
 const Overlay = styled.div`
   position: fixed;
@@ -36,14 +36,21 @@ const Header = styled.div`
 
 const Close = styled(NakedButton)`
   position: absolute;
-  padding: 16px 24px 0 0;
+  padding: 10px 20px 0 0;
   display: flex;
   align-items: center;
-  top: 0;
+  top: -20px;
   right: 0;
+  font-size: 50px;
+  font-weight: 300;
+
   &:active {
     outline: 0;
     border: 0;
+  }
+
+  &:hover {
+    color: #888;
   }
 `;
 const Body = styled.div`
@@ -58,7 +65,7 @@ const Modal = ({ onClose, children }) => (
   <Overlay onClick={onClose}>
     <StyledModal onClick={(event) => event.stopPropagation()}>
       {children}
-      <Close onClick={onClose}>X</Close>
+      <Close onClick={onClose}>⨯</Close>
     </StyledModal>
   </Overlay>
 );

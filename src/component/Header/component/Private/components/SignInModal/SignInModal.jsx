@@ -2,7 +2,7 @@ import React from "react";
 import Alert from "../../../Alert";
 import PropTypes from "prop-types";
 import Modal from "../../../Modal";
-import NakedButton from "../../../../../NakedButton";
+import NakedButton from "../NakedButton";
 import styled from "styled-components";
 import Button from "../../../../../Button";
 import FormItem from "../../../../../FormItem";

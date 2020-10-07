@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import NakedButton from "../NakedButton";
+import NakedButton from "../Header/component/Private/components/NakedButton";
 
 const Button = styled(NakedButton)`
   border-radius: 200px;
