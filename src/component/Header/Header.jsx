@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "./component/Logo";
-import Public from "./component/Public";
-import Private from "./component/Private";
+import Logo from "./components/Logo";
+import Public from "./components/Public";
+import Private from "./components/Private";
 
 const Container = styled.div`
   background-color: rgb(253, 219, 58);
@@ -11,6 +11,7 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 100;
 `;
 
 const Wrapper = styled.div`

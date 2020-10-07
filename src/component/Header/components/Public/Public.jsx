@@ -1,7 +1,7 @@
 import React from "react";
 import LinkItem from "../LinkItem";
 import Layout from "../Layout";
-import CategoriesDropdown from "./component/CategoriesDropdown";
+import CategoriesDropdown from "./components/CategoriesDropdown";
 
 const Public = () => (
   <Layout>
