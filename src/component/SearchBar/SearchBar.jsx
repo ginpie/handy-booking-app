@@ -5,6 +5,7 @@ import Text from "./components/Text";
 
 const Container = styled.section`
   margin: auto;
+  margin-top: 70px;
   padding: 50px 0;
   width: 100%;
   height: 300px;

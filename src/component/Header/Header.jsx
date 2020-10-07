@@ -6,9 +6,21 @@ import Private from "./component/Private";
 
 const Container = styled.div`
   background-color: rgb(253, 219, 58);
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 70px;
+  max-width: 1200px;
+  margin: auto;
+  background-color: rgb(253, 219, 58);
   display: flex;
   align-items: center;
-  height: 70px;
   flex-flow: row;
 `;
 
@@ -20,13 +32,14 @@ const Layout = styled.div`
 
 const Header = ({ hovered }) => (
   <Container>
-    <Logo />
-    <Layout>
-      <Public />
-      <Private />
-    </Layout>
+    <Wrapper>
+      <Logo />
+      <Layout>
+        <Public />
+        <Private />
+      </Layout>
+    </Wrapper>
   </Container>
 );
 
 export default Header;
-
