@@ -1,22 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import TradieCard from "../TradieCard";
-
+import { tradieData } from "./tradieData";
 import "./react-tabs.css";
-
-const p4 =
-  "https://res.cloudinary.com/dr99oorie/image/upload/v1601461565/p4_mqsmvq.jpg";
-
-const p5 =
-  "https://res.cloudinary.com/dr99oorie/image/upload/v1601461559/p1_yheyhg.jpg";
-
-const p6 =
-  "https://res.cloudinary.com/dr99oorie/image/upload/v1601461559/p6_llhv2d.jpg";
-
-const p7 =
-  "https://res.cloudinary.com/dr99oorie/image/upload/v1601461558/p2_ukti3b.jpg";
 
 export default () => (
   <Tabs>
@@ -29,38 +16,38 @@ export default () => (
 
     <TabPanel>
       <TradieCard
-        title="Alice"
-        num={5}
-        img={p4}
-        content="A sparky by trade, Alice jumped onboard when he went back to studying. Here's how Handyman fit in with her busy lifestyle..."
-        service="handyman, electrician, delivery"
+        title={tradieData.tradie1.title}
+        num={tradieData.tradie1.num}
+        img={tradieData.tradie1.img}
+        content={tradieData.tradie1.content}
+        service={tradieData.tradie1.service}
       ></TradieCard>
     </TabPanel>
     <TabPanel>
       <TradieCard
-        title="Benedict"
-        num={5}
-        img={p5}
-        content="In-between jobs, Benedict was looking for a way to earn some extra cash... Maybe even using his clown school skills!"
-        service="handyman, electrician, delivery"
+        title={tradieData.tradie2.title}
+        num={tradieData.tradie2.num}
+        img={tradieData.tradie2.img}
+        content={tradieData.tradie2.content}
+        service={tradieData.tradie2.service}
       ></TradieCard>
     </TabPanel>
     <TabPanel>
       <TradieCard
-        title="Catherine"
-        num={5}
-        img={p6}
-        content="Returning to the workforce as a single mum, Catherine had to find something that could be flexible and cover the cost of childcare."
-        service="handyman, electrician, delivery"
+        title={tradieData.tradie3.title}
+        num={tradieData.tradie3.num}
+        img={tradieData.tradie3.img}
+        content={tradieData.tradie3.content}
+        service={tradieData.tradie3.service}
       ></TradieCard>
     </TabPanel>
     <TabPanel>
       <TradieCard
-        title="Dennis"
-        num={5}
-        img={p7}
-        content="In-between jobs, Dennis was looking for a way to earn some extra cash... Maybe even using his clown school skills!"
-        service="handyman, electrician, delivery"
+        title={tradieData.tradie4.title}
+        num={tradieData.tradie4.num}
+        img={tradieData.tradie4.img}
+        content={tradieData.tradie4.content}
+        service={tradieData.tradie4.service}
       ></TradieCard>
     </TabPanel>
   </Tabs>
