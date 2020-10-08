@@ -20,7 +20,7 @@ const Container = styled.section`
   font-weight: bold;
 `;
 
-const Button = styled.button`
+const Link = styled.a`
   margin: 0 auto 0 0;
   background-color: #ffda44;
   border: none;
@@ -28,11 +28,17 @@ const Button = styled.button`
   height: 40px;
   font-family: "Roboto Condensed", sans-serif;
   font-size: medium;
-  outline: none;
+  font-weight: 400;
+  color: #000;
   cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
 `;
 
-const StartButton = styled(Button)`
+const GetStart = styled(Link)`
   margin: 0 auto 0 10%;
   width: 150px;
 `;
@@ -78,10 +84,10 @@ const SearchBar = () => (
           placeholder="Enter postcode"
         ></Search>
       </SearchWrapper2>
-      <Button /*onClick={  search function here }*/>Go</Button>
+      <Link /*onClick={  search function here }*/>Go</Link>
     </SearchBox>
 
-    <StartButton>GET STARTED</StartButton>
+    <GetStart href="/service">GET STARTED</GetStart>
   </Container>
 );
 
