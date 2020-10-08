@@ -42,11 +42,9 @@ const Footer = () => (
   <Container>
     <Wrapper>
       <Title>Our Advantage</Title>
-      <Link href="www.google.com" contet="WHY CHOOSE US?">
-        WHY CHOOSE US?
-      </Link>
-      <Link href="www.google.com">Compare Trading Accounts</Link>
-      <Link href="www.google.com">24 Support</Link>
+      <Link href="/join-us">WHY CHOOSE US?</Link>
+      <Link href="/service">Compare Trading Accounts</Link>
+      <Link href="/contact">24 Support</Link>
     </Wrapper>
 
     <Wrapper>
@@ -57,7 +55,7 @@ const Footer = () => (
       </Box>
       <Box>
         <Text>Email us</Text>
-        <Link href="mailto:info@mysite.com">info@mysite.com</Link>
+        <Link href="mailto:info@1handyhandy.com">info@1handyhandy.com</Link>
       </Box>
     </Wrapper>
 

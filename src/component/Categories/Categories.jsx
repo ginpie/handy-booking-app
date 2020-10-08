@@ -29,23 +29,27 @@ const Categories = () => (
     <CarouselGallery className="carousel" data-flickity='{ "autoPlay": true }'>
       <Carousel
         icon="fas fa-hand-sparkles"
-        href=" "
+        href="/cleaning"
         description="Home Cleaning"
       ></Carousel>
       <Carousel
         icon="fas fa-truck"
-        href=" "
+        href="/moving"
         description="Full House Removal"
       ></Carousel>
-      <Carousel icon="fas fa-tools" href=" " description="Handy Man"></Carousel>
+      <Carousel
+        icon="fas fa-tools"
+        href="/handyman"
+        description="Handy Man"
+      ></Carousel>
       <Carousel
         icon="fas fa-couch"
-        href=" "
+        href="/assembly"
         description="Furniture Assembly"
       ></Carousel>
       <Carousel
         icon="fas fa-hammer"
-        href=" "
+        href="/installation"
         description="Installation"
       ></Carousel>
     </CarouselGallery>

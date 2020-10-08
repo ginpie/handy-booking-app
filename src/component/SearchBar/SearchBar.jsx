@@ -20,7 +20,7 @@ const Container = styled.section`
   font-weight: bold;
 `;
 
-const Button = styled.button`
+const Link = styled.a`
   margin: 0 auto 0 0;
   background-color: #ffda44;
   border: none;
@@ -28,16 +28,22 @@ const Button = styled.button`
   height: 40px;
   font-family: "Roboto Condensed", sans-serif;
   font-size: medium;
-  outline: none;
+  font-weight: 400;
+  color: #000;
   cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
 `;
 
-const StartButton = styled(Button)`
+const GetStart = styled(Link)`
   margin: 0 auto 0 10%;
   width: 150px;
 `;
 
-const SearchWrapper = styled.div`
+const SearchBox = styled.div`
   margin: 0 auto 0 10%;
   width: 60%;
   min-width: 500px;
@@ -49,11 +55,14 @@ const SearchWrapper = styled.div`
   text-align: center;
 `;
 
-const LongSearch = styled(Search)`
-  width: 200px;
+const SearchWrapper1 = styled.div`
+  width: 60%;
+  margin: 0 1px;
 `;
-const ShortSearch = styled(Search)`
+
+const SearchWrapper2 = styled.div`
   width: 40%;
+  margin: 0 1px;
 `;
 
 const SearchBar = () => (
@@ -62,19 +71,23 @@ const SearchBar = () => (
       title="NEED A HAND?"
       subtitle="The #1 tradie service in Australia"
     ></Text>
-    <SearchWrapper>
-      <Search
-        icon="fas fa-search"
-        placeholder="Search by trade or business name"
-      ></Search>
-      <Search
-        icon="fas fa-map-marker-alt"
-        placeholder="Enter postcode"
-      ></Search>
-      <Button /*onClick={  search function here }*/>Go</Button>
-    </SearchWrapper>
+    <SearchBox>
+      <SearchWrapper1>
+        <Search
+          icon="fas fa-search"
+          placeholder="Search by trade or business name"
+        ></Search>
+      </SearchWrapper1>
+      <SearchWrapper2>
+        <Search
+          icon="fas fa-map-marker-alt"
+          placeholder="Enter postcode"
+        ></Search>
+      </SearchWrapper2>
+      <Link /*onClick={  search function here }*/>Go</Link>
+    </SearchBox>
 
-    <StartButton>GET STARTED</StartButton>
+    <GetStart href="/service">GET STARTED</GetStart>
   </Container>
 );
 

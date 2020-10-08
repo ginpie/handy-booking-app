@@ -12,16 +12,16 @@ const Container = styled.section`
   align-items: center;
   background-image: url(https://res.cloudinary.com/dr99oorie/image/upload/v1601449701/wood_background_ke6set.jpg);
   background-size: cover;
-  font-family: $font;
+  font-family: "Roboto Condensed", sans-serif;
 `;
 
 const Title = styled.h3`
   text-align: center;
   font-size: 28px;
-  font-family: "Roboto Condensed";
+  font-family: "Roboto Condensed", sans-serif;
 `;
 
-const Button = styled.button`
+const GetStart = styled.a`
   margin: 20px auto;
   background-color: #ffda44;
   border: none;
@@ -30,21 +30,20 @@ const Button = styled.button`
   height: 40px;
   font-family: "Roboto Condensed";
   font-size: medium;
+  color: #000;
   cursor: pointer;
-  outline: none;
-`;
-
-const ReviewTasks = styled.div`
-  height: 320px;
-  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
 `;
 
 const Reviews = () => (
   <Container>
     <Title>See what the others are getting done</Title>
     <Tabs></Tabs>
-    <ReviewTasks></ReviewTasks>
-    <Button className="get-started">Get started now</Button>
+    <GetStart href="/service">Get started now</GetStart>
   </Container>
 );
 

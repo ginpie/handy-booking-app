@@ -8,7 +8,9 @@ import App from "./component/App";
 import JoinUsPage from "./component/JoinUs";
 import ContactUsPage from "./component/ContactUs";
 import ServiceDetail from "./component/ServiceDetail";
+
 import UserProfile from "./component/UserProfile";
+
 
 const rootElement = document.getElementById("root");
 
@@ -19,7 +21,9 @@ ReactDOM.render(
       <Route path="/join-us" component={JoinUsPage} />
       <Route path="/contact" component={ContactUsPage} />
       <Route path="/service" component={ServiceDetail} />
+
       <Route path="/user-profile" component={UserProfile} />
+
     </Switch>
   </BrowserRouter>,
   rootElement

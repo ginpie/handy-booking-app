@@ -1,8 +1,9 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Container = styled.div`
   height: 40px;
+  width: 100%;
   border: none;
   padding: 0;
   margin: 0 1px;

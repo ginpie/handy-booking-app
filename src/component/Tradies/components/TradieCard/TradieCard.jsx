@@ -3,8 +3,9 @@ import styled from "styled-components";
 import ReactStars from "react-rating-stars-component";
 
 const Container = styled.div`
-  width: 70%;
+  width: 100%;
   max-width: 600px;
+  height: 300px;
   display: flex;
   flex-direction: row;
   background-color: #f5f5f5;
@@ -34,10 +35,6 @@ const RatingBox = styled.div`
   align-items: center;
 `;
 
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
-
 const Rating = ({ num }) => (
   <RatingBox>
     <ReactStars count={num} onChange={null} size={24} activeColor="#ffda44" />
@@ -60,10 +57,16 @@ const Image = styled.img`
   height: 100%;
 `;
 
-const TradieCard = ({ title, num, img, content }) => (
+const Service = styled.p`
+  margin: 0 0 10px 0;
+  font-style: italic;
+`;
+
+const TradieCard = ({ title, num, img, content, service }) => (
   <Container>
     <Details>
       <Title>{title}</Title>
+      <Service>Specialty: {service}</Service>
       <Rating num={num}></Rating>
       <Description>{content}</Description>
     </Details>
