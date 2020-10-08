@@ -35,7 +35,6 @@ const Text = styled.p`
 const Icon = styled.i`
   font-size: 25px;
   margin-right: 10px;
-
   color: ${(props) => props.color};
 `;
 

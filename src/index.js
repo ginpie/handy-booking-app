@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./component/App";
-import "normalize.css";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import App from "./component/App";
 import JoinUsPage from "./component/JoinUs";
 import ContactUsPage from "./component/ContactUs";
 import ServiceDetail from "./component/ServiceDetail";
+
+import UserProfile from "./component/UserProfile";
+
 
 const rootElement = document.getElementById("root");
 
@@ -19,6 +21,9 @@ ReactDOM.render(
       <Route path="/join-us" component={JoinUsPage} />
       <Route path="/contact" component={ContactUsPage} />
       <Route path="/service" component={ServiceDetail} />
+
+      <Route path="/user-profile" component={UserProfile} />
+
     </Switch>
   </BrowserRouter>,
   rootElement
