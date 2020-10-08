@@ -48,7 +48,7 @@ const Button = styled(NakedButton)`
       `,
 
       success: css`
-        background: #7db343;
+        background: #0270c2;
         color: white;
       `,
     }[props.variant];
