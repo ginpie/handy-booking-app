@@ -10,7 +10,7 @@ import Tradies from "../Tradies/Tradies";
 function HomePage() {
   return (
     <div>
-      <Header />
+      <Header scrollAnime={true} />
       <SearchBar />
       <Categories />
       <Reviews />

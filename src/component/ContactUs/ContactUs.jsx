@@ -39,7 +39,7 @@ const Content = styled.p`
 
 const ContactUs = () => (
   <Container>
-    <Header />
+    <Header scrollAnime={false} />
     <TextBox>
       <Sidebar />
       <TextWrapper>

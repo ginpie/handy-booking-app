@@ -19,7 +19,7 @@ const Overlay = styled.div`
 `;
 
 const StyledModal = styled.div`
-  width: 500px;
+  width: 350px;
   background: white;
   position: relative;
 `;

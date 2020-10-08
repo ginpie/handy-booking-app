@@ -13,7 +13,7 @@ const Container = styled.div``;
 
 const ServiceDetail = () => (
   <Container>
-    <Header />
+    <Header scrollAnime={false} />
     <Layout>
       <ServiceFilter />
       <ServiceContent title="Cleaning" />

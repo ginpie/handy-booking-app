@@ -30,7 +30,7 @@ const Layout = styled.div`
   width: 80%;
 `;
 
-function Header() {
+function Header({ scrollAnime }) {
   const [header, setHeader] = useState(false);
 
   const showHeader = () => {
@@ -45,7 +45,9 @@ function Header() {
   window.addEventListener("scroll", showHeader);
 
   return (
-    <Container className={header ? "header-solid" : "header-glass"}>
+    <Container
+      className={header || !scrollAnime ? "header-solid" : "header-glass"}
+    >
       <Wrapper>
         <Logo />
         <Layout>
