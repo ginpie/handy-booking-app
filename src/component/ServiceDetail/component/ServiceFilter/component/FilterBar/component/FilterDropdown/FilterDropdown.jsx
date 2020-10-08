@@ -29,7 +29,7 @@ class FilterDropdown extends React.Component {
         <FilterButton clickMethod={clickMethod} title={title}>
           {children}
         </FilterButton>
-        {title == active && (
+        {title === active && (
           <Dropdown content={content} type={type} clickTicket={clickTicket} />
         )}
       </Wrapper>
