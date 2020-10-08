@@ -1,22 +1,23 @@
 import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Header from "../Header";
-import Footer from "../Footer";
-import Categories from "../Categories/Categories";
-import SearchBar from "../SearchBar/SearchBar";
-import Reviews from "../Reviews/Reviews";
-import Tradies from "../Tradies/Tradies";
+import HomePage from "../HomePage";
+import JoinUsPage from "../JoinUs";
+import ContactUsPage from "../ContactUs";
+import ServiceDetailPage from "../ServiceDetail";
+import UserProfilePage from "../UserProfile";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <SearchBar />
-      <Categories />
-      <Reviews />
-      <Tradies />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/join-us" component={JoinUsPage} />
+        <Route path="/contact" component={ContactUsPage} />
+        <Route path="/service" component={ServiceDetailPage} />
+        <Route path="/user-profile" component={UserProfilePage} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
