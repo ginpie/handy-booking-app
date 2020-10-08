@@ -5,11 +5,10 @@ import Text from "./components/Text";
 
 const Container = styled.section`
   margin: auto;
-  margin-top: 70px;
-  padding: 50px 0;
+  padding: 120px 0 50px 0;
   width: 100%;
-  height: 300px;
-  background-image: url(https://res.cloudinary.com/dr99oorie/image/upload/v1601281233/background_f4alqf.jpg);
+  height: 400px;
+  background-image: url(https://res.cloudinary.com/dr99oorie/image/upload/v1602135049/samantha-gades-BlIhVfXbi9s-unsplash_v4cxij.jpg);
   background-size: cover;
   background-position: center;
   display: flex;
