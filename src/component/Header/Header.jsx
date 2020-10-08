@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "./components/Logo";
 import Public from "./components/Public";
 import Private from "./components/Private";
 
 const Container = styled.div`
-  background-color: rgb(253, 219, 58);
   height: 70px;
   width: 100%;
   position: fixed;
@@ -20,7 +19,6 @@ const Wrapper = styled.div`
   height: 70px;
   max-width: 1200px;
   margin: auto;
-  background-color: rgb(253, 219, 58);
   display: flex;
   align-items: center;
   flex-flow: row;
@@ -32,16 +30,31 @@ const Layout = styled.div`
   width: 80%;
 `;
 
-const Header = ({ hovered }) => (
-  <Container>
-    <Wrapper>
-      <Logo />
-      <Layout>
-        <Public />
-        <Private />
-      </Layout>
-    </Wrapper>
-  </Container>
-);
+function Header() {
+  const [header, setHeader] = useState(false);
+
+  const showHeader = () => {
+    console.log(window.scrollY);
+    if (window.scrollY > 100) {
+      setHeader(true);
+    } else {
+      setHeader(false);
+    }
+  };
+
+  window.addEventListener("scroll", showHeader);
+
+  return (
+    <Container className={header ? "header-solid" : "header-glass"}>
+      <Wrapper>
+        <Logo />
+        <Layout>
+          <Public />
+          <Private />
+        </Layout>
+      </Wrapper>
+    </Container>
+  );
+}
 
 export default Header;

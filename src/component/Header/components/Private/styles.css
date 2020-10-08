@@ -7,3 +7,13 @@
   opacity: 1;
   transition: opacity 300ms linear;
 }
+
+.header-solid {
+  background-color: rgba(255, 217, 67, 1);
+  transition: background-color 300ms linear;
+}
+
+.header-glass {
+  background-color: rgba(160, 160, 160, 0.6);
+  transition: background-color 300ms linear;
+}

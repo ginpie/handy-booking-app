@@ -28,7 +28,7 @@ const LinkItem = styled.a`
         display: flex;
         align-items: center;
         border: 2px solid #ffffff;
-        background-color: rgb(253, 219, 58);
+        background-color: rgba(253, 219, 58, 0.1);
         color: #ffffff;
         box-sizing: border-box;
         border-radius: 6px;
