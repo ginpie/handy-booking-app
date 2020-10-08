@@ -11,6 +11,7 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  box-shadow: #888 0 1px 5px;
   z-index: 100;
 `;
 
