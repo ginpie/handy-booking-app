@@ -4,6 +4,8 @@ import ReactStars from "react-rating-stars-component";
 
 const LinkContainer = styled.a`
   width: 280px;
+  min-width: 270px;
+  max-width: 290px;
   height: 140px;
   padding: 5px 10px;
   margin: 10px 10px;
@@ -84,21 +86,6 @@ const RatingBox = styled.div`
 const Stars = styled(ReactStars)`
   box-shadow: #efefef 1px 2px 2px;
 `;
-
-// function stars(num) {
-//   let a = [];
-//   for (let i = 1; i <= num; i++) {
-//     a.push(<BrightStar className="fas fas-star"></BrightStar>);
-//   }
-//   for (let i = 1; i <= 5 - num; i++) {
-//     a.push(<GrayStar>B</GrayStar>);
-//   }
-//   return a;
-// }
-
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
 
 const Rating = ({ num }) => (
   <RatingBox>
