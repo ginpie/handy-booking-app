@@ -130,14 +130,11 @@ class SignUpModal extends React.Component {
             });
             return;
           }
-
           this.setState({
             error: "Something unexpect happen, try again later",
           });
           throw error;
         });
-
-      // alert("Type: " + this.state.userType.value);
     } else if (userType.value === "tradie") {
       signUpUser(data)
         .then((res) => {
