@@ -2,10 +2,11 @@ import React from "react";
 
 import Header from "../Header";
 import Footer from "../Footer";
-import Categories from "../Categories/Categories";
-import SearchBar from "../SearchBar/SearchBar";
-import Reviews from "../Reviews/Reviews";
-import Tradies from "../Tradies/Tradies";
+// import Categories from "../Categories";
+import Categories from "./components/Categories";
+import SearchBar from "./components/SearchBar";
+import Reviews from "./components/Reviews";
+import Tradies from "./components/Tradies";
 
 function HomePage() {
   return (
