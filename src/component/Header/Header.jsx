@@ -34,7 +34,6 @@ function Header({ scrollAnime }) {
   const [header, setHeader] = useState(false);
 
   const showHeader = () => {
-    console.log(window.scrollY);
     if (window.scrollY > 100) {
       setHeader(true);
     } else {
