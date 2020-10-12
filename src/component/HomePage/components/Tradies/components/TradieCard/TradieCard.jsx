@@ -20,6 +20,7 @@ const Details = styled.div`
   height: 100%;
   margin: 0;
   padding: 25px;
+  transition: opacity 200ms ease-in;
 `;
 
 const Title = styled.p`
@@ -50,6 +51,10 @@ const Display = styled.div`
   width: 40%;
   height: 100%;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 200ms ease-in;
 `;
 
 const Image = styled.img`
@@ -57,23 +62,42 @@ const Image = styled.img`
   height: 100%;
 `;
 
+const LoadingImage = styled.img``;
+
 const Service = styled.p`
   margin: 0 0 10px 0;
   font-style: italic;
 `;
 
-const TradieCard = ({ title, num, img, content, service }) => (
-  <Container>
-    <Details>
-      <Title>{title}</Title>
-      <Service>Specialty: {service}</Service>
-      <Rating num={num}></Rating>
-      <Description>{content}</Description>
-    </Details>
-    <Display>
-      <Image src={img} alt="image of tradies" />
-    </Display>
-  </Container>
-);
+class TradieCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { imageLoaded: false };
+  }
+
+  render() {
+    return (
+      <Container>
+        <Details
+          style={this.state.imageLoaded ? { opacity: 1 } : { opacity: 0 }}
+        >
+          <Title>{this.props.title}</Title>
+          <Service>Specialty: {this.props.service}</Service>
+          <Rating num={this.props.num}></Rating>
+          <Description>{this.props.content}</Description>
+        </Details>
+        <Display
+          style={this.state.imageLoaded ? { opacity: 1 } : { opacity: 0 }}
+        >
+          <Image
+            src={this.props.img}
+            alt="image of tradies"
+            onLoad={() => this.setState({ imageLoaded: true })}
+          />
+        </Display>
+      </Container>
+    );
+  }
+}
 
 export default TradieCard;
