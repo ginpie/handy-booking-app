@@ -7,15 +7,25 @@ import Button from "../../../../../Button";
 import Input from "../../../../../Input";
 import styled from "styled-components";
 import form from "./form";
-import signUpUser,{ error as Error } from "../../../../../../apis/signUpUser";
-import withFetch from '../../../../../withFetch'
-import withForm from '../../../../../withForm'
+import signUpUser, { error as Error } from "../../../../../../apis/signUpUser";
+import withFetch from "../../../../../withFetch";
+import withForm from "../../../../../withForm";
 import signUpCustomer from "../../../../../../apis/signUpCustomer";
 import signUpTradie from "../../../../../../apis/signUpTradie";
 import Alert from "../../../Alert";
-import compose from '../../../../../../utils/compose'
+import compose from "../../../../../../utils/compose";
+
 const Form = styled.form`
   padding: 16px 0;
+`;
+
+const Label = styled.label`
+  font-size: 18px;
+`;
+
+const Select = styled.select`
+  margin-left: 5px;
+  height: 25px;
 `;
 
 class SignUpModal extends React.Component {
@@ -35,7 +45,14 @@ class SignUpModal extends React.Component {
 
   handleFormSubmit(event) {
     const { userType } = this.state;
-    const { onClose, onSignUpSuccess,formData,isFormValid,getData,fetch } = this.props;
+    const {
+      onClose,
+      onSignUpSuccess,
+      formData,
+      isFormValid,
+      getData,
+      fetch,
+    } = this.props;
     event.preventDefault();
 
     if (!isFormValid()) {
@@ -45,27 +62,24 @@ class SignUpModal extends React.Component {
     const email = formData.email.value;
 
     if (userType.value === "customer") {
-      fetch(()=> signUpUser(data),Error)
-        .then((user) => {
-          onClose();
-          onSignUpSuccess(user);
-          signUpCustomer(email);
-        })
+      fetch(() => signUpUser(data), Error).then((user) => {
+        onClose();
+        onSignUpSuccess(user);
+        signUpCustomer(email);
+      });
     } else if (userType.value === "tradie") {
-      fetch(()=> signUpUser(data),Error)
-        .then((user) => {
-          onClose();
-          onSignUpSuccess(user);
-          signUpTradie(email)
-        })
+      fetch(() => signUpUser(data), Error).then((user) => {
+        onClose();
+        onSignUpSuccess(user);
+        signUpTradie(email);
+      });
     } else {
-      fetch(()=> signUpUser(data),Error)
-        .then((user) => {
-          onClose();
-          onSignUpSuccess(user);
-          signUpCustomer(email)
-          signUpTradie(email)
-        })
+      fetch(() => signUpUser(data), Error).then((user) => {
+        onClose();
+        onSignUpSuccess(user);
+        signUpCustomer(email);
+        signUpTradie(email);
+      });
     }
   }
 
@@ -77,8 +91,17 @@ class SignUpModal extends React.Component {
   }
 
   render() {
-    const {  userType } = this.state;
-    const { onClose, onSignIn,formData,getErrorMessage,handleFormDataChange,isFormValid, error, loading,} = this.props;
+    const { userType } = this.state;
+    const {
+      onClose,
+      onSignIn,
+      formData,
+      getErrorMessage,
+      handleFormDataChange,
+      isFormValid,
+      error,
+      loading,
+    } = this.props;
     return (
       <Modal onClose={onClose}>
         <Modal.Header>Sign Up</Modal.Header>
@@ -117,14 +140,14 @@ class SignUpModal extends React.Component {
               );
             })}
             <FormItem>
-              <label>
-                Who You Wanna To Be:
-                <select value={userType.value} onChange={this.handleChange}>
+              <Label>
+                Sign up as:
+                <Select value={userType.value} onChange={this.handleChange}>
                   <option value="customer">Customer</option>
                   <option value="tradie">Tradie</option>
                   <option value="both">Both</option>
-                </select>
-              </label>
+                </Select>
+              </Label>
             </FormItem>
             <FormItem>
               <Button
@@ -154,10 +177,12 @@ SignUpModal.defaultProps = {
 SignUpModal.propType = {
   onClose: PropTypes.func.isRequired,
   onSignIn: PropTypes.func.isRequired,
-  formData: PropTypes.objectOf(PropTypes.shape({
-    value: PropTypes.string,
-    touched: PropTypes.bool,
-  })).isRequired,
+  formData: PropTypes.objectOf(
+    PropTypes.shape({
+      value: PropTypes.string,
+      touched: PropTypes.bool,
+    })
+  ).isRequired,
   getData: PropTypes.func.isRequired,
   getErrorMessage: PropTypes.func.isRequired,
   handleFormDataChange: PropTypes.func.isRequired,
@@ -168,9 +193,6 @@ SignUpModal.propType = {
   }),
   loading: PropTypes.bool,
 };
-const EnhancedSignUpModal = compose(
-  withForm(form),
-  withFetch,
-)(SignUpModal);
+const EnhancedSignUpModal = compose(withForm(form), withFetch)(SignUpModal);
 
-export default EnhancedSignUpModal ;
+export default EnhancedSignUpModal;

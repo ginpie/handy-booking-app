@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { CSSTransition } from "react-transition-group";
+import SignInModal from "../Private/components/SignInModal";
+import SignUpModal from "../Private/components/SignUpModal";
 
 import LinkItem from "../LinkItem";
-import Private from "../Private";
 import "./style.css";
 
 const iconcolor = "#000";
@@ -74,12 +76,24 @@ const List = styled.div`
   }
 `;
 
+const MODAL = {
+  signIn: "SIGN_IN",
+  signUp: "SIGN_UP",
+  empty: "",
+};
+
 class BurgerMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { toggle: false };
+    this.state = {
+      showModal: MODAL.empty,
+      user: null,
+      toggle: false,
+    };
 
     this.handleClick = this.handleClick.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.setUser = this.setUser.bind(this);
   }
 
   handleClick() {
@@ -88,7 +102,25 @@ class BurgerMenu extends React.Component {
     }));
   }
 
+  setUser(target) {
+    this.setState({ user: target });
+  }
+
+  showModal(target) {
+    return (event) => {
+      if (event) {
+        event.preventDefault();
+      }
+
+      this.setState({
+        showModal: target,
+      });
+    };
+  }
+
   render() {
+    const { showModal, user } = this.state;
+
     return (
       <Container>
         <Burger onClick={this.handleClick}>
@@ -97,15 +129,43 @@ class BurgerMenu extends React.Component {
         {this.state.toggle ? (
           <Menu>
             <List>
-              <LinkItem linkType={"nav"} href="/">
+              <LinkItem linkType={"nav"} href="/service">
                 Service
               </LinkItem>
-              <LinkItem linkType={"nav"} href="/">
+              <LinkItem linkType={"nav"} href="/contact">
                 Contact
               </LinkItem>
-              <LinkItem linkType={"nav"} href="/">
+              <LinkItem linkType={"nav"} onClick={this.showModal(MODAL.signIn)}>
                 Sign in
               </LinkItem>
+              {showModal === MODAL.signIn && (
+                <CSSTransition
+                  in={!(showModal === MODAL.empty)}
+                  appear={true}
+                  timeout={1000}
+                  classNames="model"
+                >
+                  <SignInModal
+                    onClose={this.showModal(MODAL.empty)}
+                    onSignUp={this.showModal(MODAL.signUp)}
+                    onSignInSuccess={this.setUser}
+                  />
+                </CSSTransition>
+              )}
+              {showModal === MODAL.signUp && (
+                <CSSTransition
+                  in={!(showModal === MODAL.empty)}
+                  appear={true}
+                  timeout={1000}
+                  classNames="model"
+                >
+                  <SignUpModal
+                    onClose={this.showModal(MODAL.empty)}
+                    onSignIn={this.showModal(MODAL.signIn)}
+                    onSignUpSuccess={this.setUser}
+                  />
+                </CSSTransition>
+              )}
             </List>
           </Menu>
         ) : (

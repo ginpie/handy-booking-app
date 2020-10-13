@@ -47,13 +47,13 @@ class Private extends React.Component {
       });
     };
   }
+
   render() {
     const { showModal, user } = this.state;
 
     return (
       <>
         <Layout>
-
           {user ? (
             <>
             <LinkItem href="/dashBoard" linkType={"text"} >DashBoard</LinkItem>
