@@ -6,6 +6,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 600px;
   height: 300px;
+  margin: auto;
   display: flex;
   flex-direction: row;
   background-color: #f5f5f5;
@@ -13,6 +14,12 @@ const Container = styled.div`
   overflow: hidden;
   box-shadow: #999999 1px 4px 5px 1px;
   font-family: sans-serif;
+
+  @media screen and (max-width: 900px) {
+    width: 90%;
+    height: auto;
+    flex-direction: column-reverse;
+  }
 `;
 
 const Details = styled.div`
@@ -21,6 +28,12 @@ const Details = styled.div`
   margin: 0;
   padding: 25px;
   transition: opacity 200ms ease-in;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const Title = styled.p`
@@ -55,14 +68,18 @@ const Display = styled.div`
   align-items: center;
   justify-content: center;
   transition: opacity 200ms ease-in;
+  overflow: hidden;
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    max-height: 300px;
+  }
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
 `;
-
-const LoadingImage = styled.img``;
 
 const Service = styled.p`
   margin: 0 0 10px 0;
