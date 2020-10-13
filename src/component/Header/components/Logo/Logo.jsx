@@ -5,7 +5,7 @@ const LogoContainer = styled.a`
   width: 150px;
   height: auto;
   margin-left: auto;
-  margin-right: 30px;
+  margin-right: auto;
 `;
 
 const Img = styled.img`

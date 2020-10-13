@@ -23,8 +23,11 @@ const LinkItem = styled.a`
       `,
 
       button: css`
-        min-width: 140px;
+        min-width: 30px;
         height: 40px;
+        width: auto;
+        padding: 6px 4px;
+        margin: 0 20px;
         display: flex;
         align-items: center;
         border: 2px solid #ffffff;
@@ -32,7 +35,7 @@ const LinkItem = styled.a`
         color: #ffffff;
         box-sizing: border-box;
         border-radius: 6px;
-        padding: 6px 4px;
+
         &:hover {
           color: #000000;
           border-color: #000000;
