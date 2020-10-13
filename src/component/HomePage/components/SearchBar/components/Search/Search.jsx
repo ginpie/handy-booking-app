@@ -6,7 +6,7 @@ const Container = styled.div`
   width: 100%;
   border: none;
   padding: 0;
-  margin: 0 1px;
+  margin: 0;
   display: flex;
   background-color: white;
 `;

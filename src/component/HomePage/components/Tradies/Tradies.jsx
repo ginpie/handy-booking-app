@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Tabs from "./components/Tabs";
 
 const Container = styled.div`
-  height: 600px;
+  min-height: 600px;
   width: auto;
   display: flex;
   flex-direction: column;
