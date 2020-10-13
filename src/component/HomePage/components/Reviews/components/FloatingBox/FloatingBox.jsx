@@ -63,6 +63,7 @@ const FloatingBox = ({ images, prices, titles, descriptions, hrefs, nums }) => (
       {Object.keys(images).map((i) => {
         return (
           <Card
+            key={i}
             img={images[i]}
             price={prices[i]}
             title={titles[i]}
@@ -78,6 +79,7 @@ const FloatingBox = ({ images, prices, titles, descriptions, hrefs, nums }) => (
       {Object.keys(images).map((i) => {
         return (
           <Card
+            key={i}
             img={images[i]}
             price={prices[i]}
             title={titles[i]}
