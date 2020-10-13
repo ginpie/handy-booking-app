@@ -13,6 +13,12 @@ const Label = styled.label`
   font-size: 14px;
   color: #292b32;
   margin-bottom: 8px;
+
+  @media screen and (max-width: 900px) {
+    margin-bottom: 0;
+    text-align: left;
+  }
+
   ${(props) =>
     props.error &&
     css`
