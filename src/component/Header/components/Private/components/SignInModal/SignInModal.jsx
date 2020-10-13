@@ -8,8 +8,10 @@ import Button from "../../../../../Button";
 import FormItem from "../../../../../FormItem";
 import Input from "../../../../../Input";
 import signIn, { error as Error } from "../../../../../../apis/signIn";
+import withFetch from '../../../../../withFetch'
+import withForm from '../../../../../withForm'
 import form from "./form";
-
+import compose from '../../../../../../utils/compose'
 const Form = styled.form`
   padding: 16px 0;
 `;
@@ -17,120 +19,21 @@ const Form = styled.form`
 class SignInModal extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      error: null,
-      loading: false,
-      formData: {
-        email: {
-          value: "",
-          touched: false,
-        },
-        password: {
-          value: "",
-          touched: false,
-        },
-      },
-    };
-
-    this.handleFormDataChange = this.handleFormDataChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  getData() {
-    const { formData } = this.state;
-    const data = Object.keys(formData).reduce(
-      (obj, key) => ({
-        ...obj,
-        [key]: formData[key].value,
-      }),
-      {}
-    );
-    return data;
-  }
-  getErrorMessage(target) {
-    // const { formData } = this.state;
-    // const { getErrorMessage } = form[target];
-    // const { value } = formData[target];
-    // const data = this.getData();
-    // const errorMessage = getErrorMessage(data, value);
-    // return errorMessage;
-    const { formData } = this.state;
-    const data = this.getData();
-
-    return form[target].getErrorMessage(formData[target].value, data);
-  }
-
-  handleFormDataChange(target) {
-    return (event) => {
-      event.preventDefault();
-      const { value } = event.target;
-
-      this.setState((prevState) => ({
-        formData: {
-          ...prevState.formData,
-          [target]: {
-            value,
-            touched: true,
-          },
-        },
-      }));
-    };
-  }
-
   handleFormSubmit(event) {
-    const { onClose, onSignInSuccess } = this.props;
+    const { onClose, onSignInSuccess,isFormValid,getData,fetch, } = this.props;
     event.preventDefault();
-
-    this.setState({
-      error: null,
-      loading: true,
-    });
-
-    if (!this.isFormValid()) {
-      console.log("There are validation errors");
-
+    if (!isFormValid()) {
       return;
     }
-    const data = this.getData();
-
-    signIn(data)
-      .then((res) => {
-        this.setState({
-          loading: false,
-        });
-        if (!res.ok) {
-          throw res;
-        }
-        return res.json();
-      })
+    const data = getData();
+    fetch(()=>signIn(data),Error)
       .then((user) => {
         onClose();
         onSignInSuccess(user);
       })
-      .catch((error) => {
-        if (Error[error.status]) {
-          this.setState({
-            error: Error[error.status],
-          });
-          return;
-        }
-        throw error;
-      });
-  }
-
-  isFormValid() {
-    const { formData } = this.state;
-
-    const errorMessages = Object.keys(formData)
-      .map((key) => {
-        const errorMessage = this.getErrorMessage(key);
-
-        return errorMessage;
-      })
-      .filter((v) => !!v);
-
-    return !errorMessages.length;
   }
 
   componentDidMount() {
@@ -138,9 +41,17 @@ class SignInModal extends React.Component {
   }
 
   render() {
-    const { onClose, onSignUp } = this.props;
-    const { formData, error, loading } = this.state;
-
+    const { onClose, 
+      onSignUp,
+      formData,
+      getErrorMessage,
+      handleFormDataChange,
+      isFormValid, 
+      error, 
+      loading,
+    
+    } = this.props;
+   
     return (
       <Modal onClose={onClose}>
         <Modal.Header>Sign In</Modal.Header>
@@ -156,7 +67,7 @@ class SignInModal extends React.Component {
 
               const { value, touched } = formData[key];
 
-              const errorMessage = touched ? this.getErrorMessage(key) : "";
+              const errorMessage = touched ? getErrorMessage(key) : "";
 
               return (
                 <FormItem
@@ -170,7 +81,7 @@ class SignInModal extends React.Component {
                     type={type}
                     error={errorMessage}
                     value={value}
-                    onChange={this.handleFormDataChange(key)}
+                    onChange={handleFormDataChange(key)}
                     ref={(input) => {
                       if (form[key] === form.email) this.nameInput = input;
                     }}
@@ -180,7 +91,7 @@ class SignInModal extends React.Component {
             })}
             <FormItem>
               <Button
-                disabled={!this.isFormValid() || loading}
+                disabled={!isFormValid() || loading}
                 width="100%"
                 variant="success"
               >
@@ -199,9 +110,32 @@ class SignInModal extends React.Component {
     );
   }
 }
+SignInModal.defaultProps = {
+  error: undefined,
+  loading: false,
+};
 
 SignInModal.propType = {
   onClose: PropTypes.func.isRequired,
   onSignUp: PropTypes.func.isRequired,
+  formData: PropTypes.objectOf(PropTypes.shape({
+    value: PropTypes.string,
+    touched: PropTypes.bool,
+  })).isRequired,
+  getData: PropTypes.func.isRequired,
+  getErrorMessage: PropTypes.func.isRequired,
+  handleFormDataChange: PropTypes.func.isRequired,
+  isFormValid: PropTypes.func.isRequired,
+  fetch: PropTypes.func.isRequired,
+  error: PropTypes.shape({
+    status: PropTypes.number,
+  }),
+  loading: PropTypes.bool,
 };
-export default SignInModal;
+
+const EnhancedSignInModal = compose(
+  withForm(form),
+  withFetch,
+)(SignInModal);
+
+export default EnhancedSignInModal;
