@@ -1,9 +1,0 @@
-.model-appear {
-  opacity: 0;
-
-}
-
-.model-appear.model-appear-active {
-  opacity: 1;
-  transition: opacity 300ms linear;
-}

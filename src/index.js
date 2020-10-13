@@ -1,22 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./component/App";
-import "normalize.css";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import JoinUsPage from "./component/JoinUs";
+import App from "./component/App";
 
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={App} />
-      <Route path="/join-us" component={JoinUsPage} />
-    </Switch>
-  </BrowserRouter>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
   rootElement
 );
 

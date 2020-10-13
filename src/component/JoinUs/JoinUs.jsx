@@ -9,7 +9,7 @@ const Container = styled.div``;
 
 const JoinUs = () => (
   <Container>
-    <Header />
+    <Header scrollAnime={false} />
     <Banner />
     <FAQ />
     <Footer />
