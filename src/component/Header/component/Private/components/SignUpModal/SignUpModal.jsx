@@ -7,12 +7,13 @@ import Button from "../../../../../Button";
 import Input from "../../../../../Input";
 import styled from "styled-components";
 import form from "./form";
-import signUpUser from "../../../../../../apis/signUpUser";
-
+import signUpUser,{ error as Error } from "../../../../../../apis/signUpUser";
+import withFetch from '../../../../../withFetch'
+import withForm from '../../../../../withForm'
 import signUpCustomer from "../../../../../../apis/signUpCustomer";
 import signUpTradie from "../../../../../../apis/signUpTradie";
 import Alert from "../../../Alert";
-
+import compose from '../../../../../../utils/compose'
 const Form = styled.form`
   padding: 16px 0;
 `;
@@ -20,7 +21,6 @@ const Form = styled.form`
 class SignUpModal extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       error: null,
       loading: false,
@@ -28,203 +28,47 @@ class SignUpModal extends React.Component {
         value: "customer",
         touched: false,
       },
-      formData: {
-        email: {
-          value: "",
-          touched: false,
-        },
-        password: {
-          value: "",
-          touched: false,
-        },
-        confirmPassword: {
-          value: "",
-          touched: false,
-        },
-      },
     };
-
-    this.handleFormDataChange = this.handleFormDataChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  getData() {
-    const { formData } = this.state;
-    const data = Object.keys(formData).reduce(
-      (obj, key) => ({
-        ...obj,
-        [key]: formData[key].value,
-      }),
-      {}
-    );
-    return data;
-  }
-
-  getErrorMessage(target) {
-    const { formData } = this.state;
-    const data = this.getData();
-
-    return form[target].getErrorMessage(formData[target].value, data);
-  }
-
-  handleFormDataChange(target) {
-    return (event) => {
-      event.preventDefault();
-      const { value } = event.target;
-
-      this.setState((prevState) => ({
-        formData: {
-          ...prevState.formData,
-          [target]: {
-            value,
-            touched: true,
-          },
-        },
-      }));
-    };
-  }
 
   handleFormSubmit(event) {
-    const { userType, formData } = this.state;
-    const { onClose, onSignUpSuccess } = this.props;
+    const { userType } = this.state;
+    const { onClose, onSignUpSuccess,formData,isFormValid,getData,fetch } = this.props;
     event.preventDefault();
 
-    this.setState({
-      error: null,
-      loading: true,
-    });
-
-    if (!this.isFormValid()) {
-      console.log("There are validation errors");
-
+    if (!isFormValid()) {
       return;
     }
-    const data = this.getData();
+    const data = getData();
     const email = formData.email.value;
 
     if (userType.value === "customer") {
-      signUpUser(data)
-        .then((res) => {
-          this.setState({
-            loading: false,
-          });
-          if (!res.ok) {
-            throw res;
-          }
-          return res.json();
-        })
+      fetch(()=> signUpUser(data),Error)
         .then((user) => {
           onClose();
           onSignUpSuccess(user);
-          signUpCustomer(email).then((res) => {
-            if (!res.ok) {
-              throw res;
-            }
-            return res.json();
-          });
+          signUpCustomer(email);
         })
-        .catch((error) => {
-          if (error.status === 409) {
-            this.setState({
-              error: "Email Existed",
-            });
-            return;
-          }
-          this.setState({
-            error: "Something unexpect happen, try again later",
-          });
-          throw error;
-        });
     } else if (userType.value === "tradie") {
-      signUpUser(data)
-        .then((res) => {
-          this.setState({
-            loading: false,
-          });
-          if (!res.ok) {
-            throw res;
-          }
-          return res.json();
-        })
+      fetch(()=> signUpUser(data),Error)
         .then((user) => {
           onClose();
           onSignUpSuccess(user);
-          signUpTradie(email).then((res) => {
-            if (!res.ok) {
-              throw res;
-            }
-            return res.json();
-          });
+          signUpTradie(email)
         })
-        .catch((error) => {
-          if (error.status === 409) {
-            this.setState({
-              error: "Email Existed",
-            });
-            return;
-          }
-
-          this.setState({
-            error: "Something unexpect happen, try again later",
-          });
-          throw error;
-        });
     } else {
-      signUpUser(data)
-        .then((res) => {
-          this.setState({
-            loading: false,
-          });
-          if (!res.ok) {
-            throw res;
-          }
-          return res.json();
-        })
+      fetch(()=> signUpUser(data),Error)
         .then((user) => {
           onClose();
           onSignUpSuccess(user);
-          signUpCustomer(email).then((res) => {
-            if (!res.ok) {
-              throw res;
-            }
-            // return res.json();
-          });
-          signUpTradie(email).then((res) => {
-            if (!res.ok) {
-              throw res;
-            }
-            // return res.json();
-          });
+          signUpCustomer(email)
+          signUpTradie(email)
         })
-        .catch((error) => {
-          if (error.status === 409) {
-            this.setState({
-              error: "Email Existed",
-            });
-            return;
-          }
-
-          this.setState({
-            error: "Something unexpect happen, try again later",
-          });
-          throw error;
-        });
     }
   }
 
-  isFormValid() {
-    const { formData } = this.state;
-
-    const errorMessages = Object.keys(formData)
-      .map((key) => {
-        const errorMessage = this.getErrorMessage(key);
-
-        return errorMessage;
-      })
-      .filter((v) => !!v);
-
-    return !errorMessages.length;
-  }
   handleChange(event) {
     this.setState({ userType: { value: event.target.value } });
   }
@@ -233,8 +77,8 @@ class SignUpModal extends React.Component {
   }
 
   render() {
-    const { formData, error, loading, userType } = this.state;
-    const { onClose, onSignIn } = this.props;
+    const {  userType } = this.state;
+    const { onClose, onSignIn,formData,getErrorMessage,handleFormDataChange,isFormValid, error, loading,} = this.props;
     return (
       <Modal onClose={onClose}>
         <Modal.Header>Sign Up</Modal.Header>
@@ -250,7 +94,7 @@ class SignUpModal extends React.Component {
 
               const { value, touched } = formData[key];
 
-              const errorMessage = touched ? this.getErrorMessage(key) : "";
+              const errorMessage = touched ? getErrorMessage(key) : "";
 
               return (
                 <FormItem
@@ -264,7 +108,7 @@ class SignUpModal extends React.Component {
                     type={type}
                     error={errorMessage}
                     value={value}
-                    onChange={this.handleFormDataChange(key)}
+                    onChange={handleFormDataChange(key)}
                     ref={(input) => {
                       if (form[key] === form.email) this.nameInput = input;
                     }}
@@ -284,7 +128,7 @@ class SignUpModal extends React.Component {
             </FormItem>
             <FormItem>
               <Button
-                disabled={!this.isFormValid() || loading}
+                disabled={!isFormValid() || loading}
                 width="100%"
                 variant="success"
               >
@@ -303,9 +147,30 @@ class SignUpModal extends React.Component {
     );
   }
 }
-
+SignUpModal.defaultProps = {
+  error: undefined,
+  loading: false,
+};
 SignUpModal.propType = {
   onClose: PropTypes.func.isRequired,
   onSignIn: PropTypes.func.isRequired,
+  formData: PropTypes.objectOf(PropTypes.shape({
+    value: PropTypes.string,
+    touched: PropTypes.bool,
+  })).isRequired,
+  getData: PropTypes.func.isRequired,
+  getErrorMessage: PropTypes.func.isRequired,
+  handleFormDataChange: PropTypes.func.isRequired,
+  isFormValid: PropTypes.func.isRequired,
+  fetch: PropTypes.func.isRequired,
+  error: PropTypes.shape({
+    status: PropTypes.number,
+  }),
+  loading: PropTypes.bool,
 };
-export default SignUpModal;
+const EnhancedSignUpModal = compose(
+  withForm(form),
+  withFetch,
+)(SignUpModal);
+
+export default EnhancedSignUpModal ;
