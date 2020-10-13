@@ -4,6 +4,8 @@ import LinkItem from "../LinkItem";
 import SignInModal from "./components/SignInModal";
 import SignUpModal from "./components/SignUpModal";
 import { CSSTransition } from "react-transition-group";
+import getAuth from '../../../../apis/getAuth'
+import withFetch from '../../../withFetch'
 import "./styles.css";
 
 const MODAL = {
@@ -15,15 +17,21 @@ const MODAL = {
 class Private extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showModal: MODAL.empty,
-      user: null,
+      user:null,
     };
     this.showModal = this.showModal.bind(this);
     this.setUser = this.setUser.bind(this);
   }
-
+  componentDidMount(){
+    this.getAuth();
+  }
+  getAuth(){
+    const {fetch} = this.props;
+    fetch(()=>getAuth())
+      .then(this.setUser)
+  }
   setUser(target) {
     this.setState({ user: target });
   }
@@ -47,7 +55,20 @@ class Private extends React.Component {
         <Layout>
 
           {user ? (
-            <LinkItem href="/dashBoard">DashBoard</LinkItem>
+            <>
+            <LinkItem href="/dashBoard" linkType={"text"} >DashBoard</LinkItem>
+            <LinkItem
+                linkType={"text"}
+                onClick={(event)=>{
+                  event.preventDefault();
+                  localStorage.removeItem('token');
+                  this.setUser();
+                  //TO DO router.push('/');
+                }}
+              >
+                Log Out
+              </LinkItem>
+              </>
           ) : (
             <>
               <LinkItem
@@ -101,5 +122,5 @@ class Private extends React.Component {
     );
   }
 }
-
-export default Private;
+const WithFetchPrivate = withFetch(Private);
+export default WithFetchPrivate;

@@ -27,16 +27,22 @@ const withFetch = (Component) => {
           if(!res.ok){
             throw res;
           }
+
+          const token = res.headers.get('X-Auth-Token');
+          if (token) {
+            localStorage.setItem('token', token);
+          }
           return res.json();
         })
         .catch((error) => {
-          if(errorMessage[error.status]){
+          if (errorMessage && errorMessage[error.status]) {
             this.setState({
-              error:errorMessage[error.status]
-          });
-        }
+              error: errorMessage[error.status],
+            });
+          }
+
           throw error;
-      });
+        });
     }
 
     render() {
