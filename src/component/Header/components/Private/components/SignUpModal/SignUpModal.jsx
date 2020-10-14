@@ -7,7 +7,7 @@ import Button from "../../../../../Button";
 import Input from "../../../../../Input";
 import styled from "styled-components";
 import form from "./form";
-import signUpUser, { error as Error } from "../../../../../../apis/signUpUser";
+import signUpUser from "../../../../../../apis/signUpUser";
 import withFetch from "../../../../../withFetch";
 import withForm from "../../../../../withForm";
 import signUpCustomer from "../../../../../../apis/signUpCustomer";
@@ -28,12 +28,18 @@ const Select = styled.select`
   height: 25px;
 `;
 
+const ERROR = {
+  409: "Email Existed",
+  400: "Please dont Hack ",
+  500: "Something unexpect happen, try again later",
+};
+
+
+
 class SignUpModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
-      loading: false,
       userType: {
         value: "customer",
         touched: false,
@@ -109,7 +115,7 @@ class SignUpModal extends React.Component {
           <Form onSubmit={this.handleFormSubmit}>
             {error && (
               <FormItem>
-                <Alert>{error}</Alert>
+                <Alert>{ERROR[error.status]}</Alert>
               </FormItem>
             )}
             {Object.keys(form).map((key) => {

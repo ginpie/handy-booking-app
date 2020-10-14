@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Button from "../../../../../Button";
 import FormItem from "../../../../../FormItem";
 import Input from "../../../../../Input";
-import signIn, { error as Error } from "../../../../../../apis/signIn";
+import signIn from "../../../../../../apis/signIn";
 import withFetch from '../../../../../withFetch'
 import withForm from '../../../../../withForm'
 import form from "./form";
@@ -15,6 +15,14 @@ import compose from '../../../../../../utils/compose'
 const Form = styled.form`
   padding: 16px 0;
 `;
+
+const ERROR ={
+    401: "Invalid Email or Password",
+    409: "Invalid Email or Password",
+    500: "Something unexpect happen, try again later",
+}
+
+
 
 class SignInModal extends React.Component {
   constructor(props) {
@@ -59,7 +67,7 @@ class SignInModal extends React.Component {
           <Form onSubmit={this.handleFormSubmit}>
             {error && (
               <FormItem>
-                <Alert>{error}</Alert>
+                <Alert>{ERROR[error.status]}</Alert>
               </FormItem>
             )}
             {Object.keys(form).map((key) => {
