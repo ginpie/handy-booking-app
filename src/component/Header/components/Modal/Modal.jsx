@@ -19,7 +19,9 @@ const Overlay = styled.div`
 `;
 
 const StyledModal = styled.div`
-  width: 350px;
+  max-width: 360px;
+  width: 95%;
+  max-height: 100vh;
   background: white;
   position: relative;
 `;
@@ -27,12 +29,10 @@ const StyledModal = styled.div`
 const Header = styled.div`
   padding: 16px 24px;
   text-align: center;
-  /* position: relative; */
+  @media screen and (max-width: 900px) {
+    padding: 5px 12px;
+  }
 `;
-
-// const Title = styled.div`
-//   font-size: 18px;
-// `;
 
 const Close = styled(NakedButton)`
   position: absolute;
@@ -55,6 +55,9 @@ const Close = styled(NakedButton)`
 `;
 const Body = styled.div`
   padding: 16px 24px;
+  @media screen and (max-width: 900px) {
+    padding: 5px 12px;
+  }
 `;
 
 const Footer = styled.div`
@@ -77,4 +80,5 @@ Modal.propTypes = {
 Modal.Header = Header;
 Modal.Body = Body;
 Modal.Footer = Footer;
+
 export default Modal;
