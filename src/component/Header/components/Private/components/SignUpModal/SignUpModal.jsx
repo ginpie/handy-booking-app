@@ -14,7 +14,7 @@ import signUpCustomer from "../../../../../../apis/signUpCustomer";
 import signUpTradie from "../../../../../../apis/signUpTradie";
 import Alert from "../../../Alert";
 import compose from "../../../../../../utils/compose";
-
+import withAuthentication from '../../../../../withAuthentication';
 const Form = styled.form`
   padding: 16px 0;
 `;
@@ -53,11 +53,11 @@ class SignUpModal extends React.Component {
     const { userType } = this.state;
     const {
       onClose,
-      onSignUpSuccess,
       formData,
       isFormValid,
       getData,
       fetch,
+      authentication,
     } = this.props;
     event.preventDefault();
 
@@ -68,23 +68,28 @@ class SignUpModal extends React.Component {
     const email = formData.email.value;
 
     if (userType.value === "customer") {
-      fetch(() => signUpUser(data), Error).then((user) => {
+      fetch(() => signUpUser(data)).then((user) => {
         onClose();
-        onSignUpSuccess(user);
+        authentication.setUser(user);
+        
         signUpCustomer(email);
+
       });
     } else if (userType.value === "tradie") {
-      fetch(() => signUpUser(data), Error).then((user) => {
+      fetch(() => signUpUser(data)).then((user) => {
         onClose();
-        onSignUpSuccess(user);
+        authentication.setUser(user);
         signUpTradie(email);
+
       });
     } else {
-      fetch(() => signUpUser(data), Error).then((user) => {
+      fetch(() => signUpUser(data)).then((user) => {
         onClose();
-        onSignUpSuccess(user);
+        authentication.setUser(user);
         signUpCustomer(email);
         signUpTradie(email);
+
+
       });
     }
   }
@@ -194,11 +199,19 @@ SignUpModal.propType = {
   handleFormDataChange: PropTypes.func.isRequired,
   isFormValid: PropTypes.func.isRequired,
   fetch: PropTypes.func.isRequired,
+  authentication: PropTypes.shape({
+    setUser: PropTypes.func,
+  }).isRequired,
   error: PropTypes.shape({
     status: PropTypes.number,
   }),
   loading: PropTypes.bool,
 };
-const EnhancedSignUpModal = compose(withForm(form), withFetch)(SignUpModal);
+const EnhancedSignUpModal = compose(
+  withForm(form),
+  withFetch,
+  withAuthentication,
+)(SignUpModal);
+
 
 export default EnhancedSignUpModal;

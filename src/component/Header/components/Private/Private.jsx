@@ -4,8 +4,9 @@ import LinkItem from "../LinkItem";
 import SignInModal from "./components/SignInModal";
 import SignUpModal from "./components/SignUpModal";
 import { CSSTransition } from "react-transition-group";
-import getAuth from '../../../../apis/getAuth'
 import withFetch from '../../../withFetch'
+import  { AuthenticationContext } from '../../../withAuthentication'
+import Logout from './components/Logout'
 import "./styles.css";
 
 const MODAL = {
@@ -19,23 +20,9 @@ class Private extends React.Component {
     super(props);
     this.state = {
       showModal: MODAL.empty,
-      user:null,
     };
     this.showModal = this.showModal.bind(this);
-    this.setUser = this.setUser.bind(this);
   }
-  componentDidMount(){
-    this.getAuth();
-  }
-  getAuth(){
-    const {fetch} = this.props;
-    fetch(()=>getAuth())
-      .then(this.setUser)
-  }
-  setUser(target) {
-    this.setState({ user: target });
-  }
-
   showModal(target) {
     return (event) => {
       if (event) {
@@ -49,25 +36,15 @@ class Private extends React.Component {
   }
 
   render() {
-    const { showModal, user } = this.state;
-
+    const { showModal } = this.state;
     return (
       <>
         <Layout>
-          {user ? (
+          <AuthenticationContext.Consumer>
+          {(Authentication)=>Authentication.user?(
             <>
             <LinkItem href="/dashBoard" linkType={"text"} >DashBoard</LinkItem>
-            <LinkItem
-                linkType={"text"}
-                onClick={(event)=>{
-                  event.preventDefault();
-                  localStorage.removeItem('token');
-                  this.setUser();
-                  //TO DO router.push('/');
-                }}
-              >
-                Log Out
-              </LinkItem>
+            <Logout />
               </>
           ) : (
             <>
@@ -114,6 +91,7 @@ class Private extends React.Component {
               )}
             </>
           )}
+          </AuthenticationContext.Consumer>
           <LinkItem linkType={"button"} href="/join-us">
             Become a Tradie
           </LinkItem>

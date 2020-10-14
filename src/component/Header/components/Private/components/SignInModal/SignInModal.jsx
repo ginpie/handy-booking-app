@@ -12,6 +12,7 @@ import withFetch from '../../../../../withFetch'
 import withForm from '../../../../../withForm'
 import form from "./form";
 import compose from '../../../../../../utils/compose'
+import withAuthentication from '../../../../../withAuthentication';
 const Form = styled.form`
   padding: 16px 0;
 `;
@@ -31,16 +32,16 @@ class SignInModal extends React.Component {
   }
 
   handleFormSubmit(event) {
-    const { onClose, onSignInSuccess,isFormValid,getData,fetch, } = this.props;
+    const { onClose,isFormValid,getData,fetch, authentication,} = this.props;
     event.preventDefault();
     if (!isFormValid()) {
       return;
     }
     const data = getData();
-    fetch(()=>signIn(data),Error)
+    fetch(()=>signIn(data))
       .then((user) => {
         onClose();
-        onSignInSuccess(user);
+        authentication.setUser(user);
       })
   }
 
@@ -57,7 +58,7 @@ class SignInModal extends React.Component {
       isFormValid, 
       error, 
       loading,
-    
+      
     } = this.props;
    
     return (
@@ -139,11 +140,15 @@ SignInModal.propType = {
     status: PropTypes.number,
   }),
   loading: PropTypes.bool,
+  authentication: PropTypes.shape({
+    setUser: PropTypes.func,
+  }).isRequired,
 };
 
 const EnhancedSignInModal = compose(
   withForm(form),
   withFetch,
+  withAuthentication,
 )(SignInModal);
 
 export default EnhancedSignInModal;
