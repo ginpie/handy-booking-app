@@ -31,14 +31,37 @@ const Input = styled.input`
   }
 `;
 
-const StyledInput = ({ placeholder }) => (
-  <Input type="text" placeholder={placeholder}></Input>
+const StyledInput = ({ placeholder, onChange, value, id, onBlur, onFocus }) => (
+  <Input
+    type="text"
+    placeholder={placeholder}
+    onChange={onChange}
+    value={value}
+    id={id}
+    onBlur={onBlur}
+    onFocus={onFocus}
+  ></Input>
 );
 
-const Search = ({ icon, placeholder }) => (
+const Search = ({
+  icon,
+  placeholder,
+  onChange,
+  value,
+  id,
+  onBlur,
+  onFocus,
+}) => (
   <Container>
     <StyledIcon className={icon}></StyledIcon>
-    <StyledInput placeholder={placeholder}></StyledInput>
+    <StyledInput
+      placeholder={placeholder}
+      onChange={onChange}
+      value={value}
+      id={id}
+      onBlur={onBlur}
+      onFocus={onFocus}
+    ></StyledInput>
   </Container>
 );
 

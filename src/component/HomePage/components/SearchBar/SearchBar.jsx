@@ -4,6 +4,7 @@ import { useMediaQuery } from "react-responsive";
 
 import Search from "./components/Search";
 import Text from "./components/Text";
+import ZipSearch from "./components/ZipSearch";
 
 const Container = styled.section`
   margin: auto;
@@ -109,10 +110,7 @@ const SearchBar = () => {
               ></Search>
             </SearchWrapper1>
             <SearchWrapper2>
-              <Search
-                icon="fas fa-map-marker-alt"
-                placeholder="Enter postcode"
-              ></Search>
+              <ZipSearch />
             </SearchWrapper2>
             <SearchWrapper3>
               <Link /*onClick={  search function here }*/>Go</Link>
