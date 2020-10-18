@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 import Search from "../Search";
+import services from "../services";
 
 const DropList = styled.ul`
-  width: 350px;
+  width: 370px;
   margin: 0 auto;
   padding: 0;
   max-height: 390px;
@@ -50,8 +51,11 @@ class ZipSearch extends React.Component {
     const value = e.target.value;
     let suggestions = [];
     if (value.length > 0) {
-      const regex = new RegExp(`^${value}`, "i");
-      suggestions = zipcode.sort().filter((v) => regex.test(v));
+      const regex = new RegExp(`${value}`, "i"); // case insensitive matching
+      suggestions = services
+        .sort()
+        .filter((v) => regex.test(v))
+        .slice(0, 5);
     }
 
     this.setState(() => ({ suggestions, text: value }));
@@ -80,7 +84,7 @@ class ZipSearch extends React.Component {
     return (
       <DropList>
         {suggestions.map((item, index) => (
-          <List key={index} onClick={() => this.selectedText(item)}>
+          <List key={index} onMouseDown={() => this.selectedText(item)}>
             {item}
           </List>
         ))}
@@ -94,8 +98,8 @@ class ZipSearch extends React.Component {
     return (
       <div>
         <Search
-          placeholder="Enter postcode"
-          icon="fas fa-map-marker-alt"
+          icon="fas fa-search"
+          placeholder="Search by trade or business name"
           onChange={this.onInputChange}
           value={text}
           id={"zipsearch"}

@@ -52,7 +52,10 @@ class ZipSearch extends React.Component {
     let suggestions = [];
     if (value.length > 0) {
       const regex = new RegExp(`^${value}`, "i");
-      suggestions = zipcode.sort().filter((v) => regex.test(v));
+      suggestions = zipcode
+        .sort()
+        .filter((v) => regex.test(v))
+        .slice(0, 7);
     }
 
     this.setState(() => ({ suggestions, text: value }));
@@ -71,6 +74,7 @@ class ZipSearch extends React.Component {
       text: value,
       suggestions: [],
     }));
+    console.log("selected");
   }
 
   renderSuggestions = () => {
@@ -81,7 +85,7 @@ class ZipSearch extends React.Component {
     return (
       <DropList>
         {suggestions.map((item, index) => (
-          <List key={index} onClick={() => this.selectedText(item)}>
+          <List key={index} onMouseDown={() => this.selectedText(item)}>
             {item}
           </List>
         ))}

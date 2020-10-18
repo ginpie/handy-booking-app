@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 40px;
+  height: 60px;
   width: 100%;
   border: none;
   padding: 0;
@@ -20,7 +20,7 @@ const StyledIcon = styled(Icon)`
 `;
 
 const Input = styled.input`
-  height: 40px;
+  height: auto;
   width: 100%;
   border: none;
   padding: 0 0 0 5px;
