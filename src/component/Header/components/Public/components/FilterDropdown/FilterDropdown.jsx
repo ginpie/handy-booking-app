@@ -34,7 +34,7 @@ const DropCalendar = styled.input``;
 const DropSet = (type, content, click) => {
   return {
     link:
-      content != ""
+      content !== ""
         ? content.map((item) => {
             return (
               <DropdownItem>
@@ -47,7 +47,7 @@ const DropSet = (type, content, click) => {
         : null,
     calendar: <DropCalendar type="date" />,
     nav:
-      content != ""
+      content !== ""
         ? content.map((item) => {
             return (
               <DropdownItem>

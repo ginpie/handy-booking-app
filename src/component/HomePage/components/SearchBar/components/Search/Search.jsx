@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 40px;
+  height: 60px;
   width: 100%;
   border: none;
   padding: 0;
@@ -20,7 +20,7 @@ const StyledIcon = styled(Icon)`
 `;
 
 const Input = styled.input`
-  height: 40px;
+  height: auto;
   width: 100%;
   border: none;
   padding: 0 0 0 5px;
@@ -31,14 +31,37 @@ const Input = styled.input`
   }
 `;
 
-const StyledInput = ({ placeholder }) => (
-  <Input type="text" placeholder={placeholder}></Input>
+const StyledInput = ({ placeholder, onChange, value, id, onBlur, onFocus }) => (
+  <Input
+    type="text"
+    placeholder={placeholder}
+    onChange={onChange}
+    value={value}
+    id={id}
+    onBlur={onBlur}
+    onFocus={onFocus}
+  ></Input>
 );
 
-const Search = ({ icon, placeholder }) => (
+const Search = ({
+  icon,
+  placeholder,
+  onChange,
+  value,
+  id,
+  onBlur,
+  onFocus,
+}) => (
   <Container>
     <StyledIcon className={icon}></StyledIcon>
-    <StyledInput placeholder={placeholder}></StyledInput>
+    <StyledInput
+      placeholder={placeholder}
+      onChange={onChange}
+      value={value}
+      id={id}
+      onBlur={onBlur}
+      onFocus={onFocus}
+    ></StyledInput>
   </Container>
 );
 
