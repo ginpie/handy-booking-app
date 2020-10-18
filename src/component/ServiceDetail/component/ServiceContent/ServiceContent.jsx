@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import CardWrapper from './component/CardWrapper';
 import OrderLayout from './component/OrderLayout';
+import { getTradies } from '../../../../apis/getTradies/getTradies';
 
 const Wrapper = styled.div`
 `;
@@ -61,6 +62,7 @@ class ServiceContent extends React.Component {
         const current = this.state.current;
         const isClicked = this.state.isClicked;
         const handleClick = this.handleClick;
+        getTradies().then(res => console.log(res));
 
         return (
             <Wrapper>

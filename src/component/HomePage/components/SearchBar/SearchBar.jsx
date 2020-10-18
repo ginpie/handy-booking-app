@@ -4,6 +4,8 @@ import { useMediaQuery } from "react-responsive";
 
 import Search from "./components/Search";
 import Text from "./components/Text";
+import ZipSearch from "./components/ZipSearch";
+import ServiceSearch from "./components/ServiceSearch";
 
 const Container = styled.section`
   margin: auto;
@@ -50,7 +52,7 @@ const SearchBox = styled.div`
   width: 60%;
   min-width: 500px;
   max-width: 700px;
-  height: 60px;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,7 +70,7 @@ const SearchWrapper2 = styled.div`
 `;
 const SearchWrapper3 = styled.div`
   width: 100px;
-  height: 40px;
+  height: 60px;
 `;
 
 const SearchBoxMobile = styled.div`
@@ -103,16 +105,10 @@ const SearchBar = () => {
         <>
           <SearchBox>
             <SearchWrapper1>
-              <Search
-                icon="fas fa-search"
-                placeholder="Search by trade or business name"
-              ></Search>
+              <ServiceSearch />
             </SearchWrapper1>
             <SearchWrapper2>
-              <Search
-                icon="fas fa-map-marker-alt"
-                placeholder="Enter postcode"
-              ></Search>
+              <ZipSearch />
             </SearchWrapper2>
             <SearchWrapper3>
               <Link /*onClick={  search function here }*/>Go</Link>
