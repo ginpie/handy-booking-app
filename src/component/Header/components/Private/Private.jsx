@@ -1,96 +1,75 @@
 import React from "react";
 import Layout from "../Layout";
 import LinkItem from "../LinkItem";
-import SignInModal from "./components/SignInModal";
-import SignUpModal from "./components/SignUpModal";
 import { CSSTransition } from "react-transition-group";
 import withFetch from '../../../withFetch'
 import  { AuthenticationContext } from '../../../withAuthentication'
 import Logout from './components/Logout'
+import AuthenticationModals from '../AuthenticationModals';
 import "./styles.css";
 
-const MODAL = {
-  signIn: "SIGN_IN",
-  signUp: "SIGN_UP",
-  empty: "",
-};
+
 
 class Private extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: MODAL.empty,
+      authenticationModal: null,
     };
-    this.showModal = this.showModal.bind(this);
+    this.setAuthenticationModal = this.setAuthenticationModal.bind(this);
   }
-  showModal(target) {
+  setAuthenticationModal(target) {
     return (event) => {
       if (event) {
         event.preventDefault();
       }
 
       this.setState({
-        showModal: target,
+        authenticationModal: target,
       });
     };
   }
 
   render() {
-    const { showModal } = this.state;
+    const { authenticationModal } = this.state;
     return (
       <>
         <Layout>
           <AuthenticationContext.Consumer>
           {(Authentication)=>Authentication.user?(
             <>
-            <LinkItem href="/dashBoard" linkType={"text"} >DashBoard</LinkItem>
+            <LinkItem href="/user-profile" linkType={"text"} >DashBoard</LinkItem>
             <Logout />
               </>
           ) : (
             <>
               <LinkItem
                 linkType={"text"}
-                onClick={this.showModal(MODAL.signUp)}
-              >
+                onClick={this.setAuthenticationModal('signUp')}>
                 Sign Up
               </LinkItem>
 
               <LinkItem
                 linkType={"text"}
-                onClick={this.showModal(MODAL.signIn)}
-              >
+                onClick={this.setAuthenticationModal('signIn')}>
                 Sign In
               </LinkItem>
-              {showModal === MODAL.signIn && (
+              {authenticationModal && (
                 <CSSTransition
-                  in={!(showModal === MODAL.empty)}
+                  in={!(authenticationModal === null)}
                   appear={true}
                   timeout={1000}
                   classNames="model"
                 >
-                  <SignInModal
-                    onClose={this.showModal(MODAL.empty)}
-                    onSignUp={this.showModal(MODAL.signUp)}
-                    onSignInSuccess={this.setUser}
+                  <AuthenticationModals
+                    initialModal={authenticationModal}
+                    onClose={this.setAuthenticationModal()}
                   />
-                </CSSTransition>
-              )}
-              {showModal === MODAL.signUp && (
-                <CSSTransition
-                  in={!(showModal === MODAL.empty)}
-                  appear={true}
-                  timeout={1000}
-                  classNames="model"
-                >
-                  <SignUpModal
-                    onClose={this.showModal(MODAL.empty)}
-                    onSignIn={this.showModal(MODAL.signIn)}
-                    onSignUpSuccess={this.setUser}
-                  />
-                </CSSTransition>
+                    </CSSTransition>
               )}
             </>
           )}
+
           </AuthenticationContext.Consumer>
           <LinkItem linkType={"button"} href="/join-us">
             Become a Tradie
