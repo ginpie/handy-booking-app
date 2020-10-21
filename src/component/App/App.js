@@ -6,9 +6,10 @@ import JoinUsPage from "../JoinUs";
 import ContactUsPage from "../ContactUs";
 import ServiceDetailPage from "../ServiceDetail";
 import UserProfilePage from "../UserProfile";
-
+import {Authentication} from '../withAuthentication'
 function App() {
   return (
+    <Authentication>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -18,6 +19,7 @@ function App() {
         <Route path="/user-profile" component={UserProfilePage} />
       </Switch>
     </BrowserRouter>
+    </Authentication>
   );
 }
 
