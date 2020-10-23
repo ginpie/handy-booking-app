@@ -13,9 +13,9 @@ const Layout = styled.div`
     border-radius: 5px;
 `;
 
-const OrderLayout = () => (
+const OrderLayout = (props) => (
     <Layout>
-        <TradiesDetail />
+        <TradiesDetail data={props.currentTradie}/>
         <OrderForm />
         <Reviews />
     </Layout>

@@ -20,7 +20,7 @@ const tradiesData = [
 const Reviews = () => (
         <Layout>
             <Header>Reviews:</Header>
-            <CardWrapper data={tradiesData} />
+            <CardWrapper tradiesData={tradiesData} />
         </Layout>
 );
 
