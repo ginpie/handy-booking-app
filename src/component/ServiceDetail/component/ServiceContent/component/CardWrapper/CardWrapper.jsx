@@ -15,14 +15,14 @@ const Wrapper = styled.div`
 
 const CardWrapper = ({
     current,
-    data,
     handleClick,
     isClicked,
+    tradiesData
 }) => {
     return (
     <Wrapper isClicked={isClicked}>
-        {data.map(({name, label, rating, comment}) => {
-            return <PersonalCard action={handleClick} name={name} label={label} rating={rating} current={(current===name)?true:false} comment={comment} />
+        {tradiesData.map((item) => {
+                return <PersonalCard action={handleClick} data={item} current={(current===item.tradieId)?true:false} comment={null} />
         })}
     </Wrapper>
     )

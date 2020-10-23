@@ -69,29 +69,35 @@ const Comment = styled.div`
     font-size: 0.7rem;
 `;
 
+const getAvgRating = (orders) => {
+
+    return orders.length > 0 ? Math.round(orders.reduce((acc, val) => acc + val, 0) / orders.length) : 0;
+}
+
 const PersonalCard = ({
-    name,
-    label,
-    rating,
+    data,
     current,
     action,
     comment,
-}) => (
-    <Card onClick={action?action.bind(this, name):null}>
-        <Title>{name}</Title>
-        <Info>
-            <Avatar src={photo} alt="Avatar" />
-            {label?(<LabelSets>
-                {label.map((item) => {
-                    return <Label>{item}</Label>
-                })}
-            </LabelSets>):<Comment>{comment}</Comment>}
-        </Info>
-        <Stars>
-            {RatingRender(rating, false)}
-        </Stars>
-        {current && <ChooseBar />}
-    </Card>
-);
+}) => {
+    const rating = data.rating || getAvgRating(data.orders);
+    const name = data.name || data.users[0].firstName + data.users[0].lastName;
+    return (
+        <Card onClick={action?action.bind(this, data):null}>
+            <Title>{name}</Title>
+            <Info>
+                <Avatar src={photo} alt="Avatar" />
+                {data.jobs?(<LabelSets>
+                    {data.jobs.map((item) => {
+                        return <Label>{item}</Label>
+                    })}
+                </LabelSets>):<Comment>{data.comment}</Comment>}
+            </Info>
+            <Stars>
+                {RatingRender(rating, false)}
+            </Stars>
+            {current && <ChooseBar />}
+        </Card>
+)};
 
 export default PersonalCard;

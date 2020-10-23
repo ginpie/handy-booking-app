@@ -22,11 +22,10 @@ const Content = styled.div`
 
     ${props => props.isClicked && css`
         width: 260px;
-
     `}
 `;
 
-const tradiesData = [
+const data = [
     {name: "Ian Yin", label: ["Cleaning", "Furniture Assembly", "House Moving", "Installation"], rating: 3},
     {name: "David", label: ["Cleaning", "Furniture Assembly", "House Moving"], rating: 5},
     {name: "Jinpei", label: ["Cleaning", "Furniture Assembly", "House Moving"], rating: 4},
@@ -43,18 +42,30 @@ class ServiceContent extends React.Component {
         this.state = {
             current: "",
             isClicked: false,
+            loaded: false,
+            tradiesData: null,
         }
 
         this.handleClick = this.handleClick.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
-    handleClick(name, event) {
+    handleClick(data, event) {
         event.preventDefault();
         this.setState({
-            current: name,
+            current: data,
             isClicked: true,
         });
-        console.log(name);
+    }
+
+    componentDidMount() {
+        getTradies().then(res => {
+            this.setState({
+                tradiesData: res,
+                loaded: true,
+            });
+        })
+        // .then(getTradieAllInfo(this.state.tradiesData[0]));
     }
 
     render() {
@@ -62,16 +73,16 @@ class ServiceContent extends React.Component {
         const current = this.state.current;
         const isClicked = this.state.isClicked;
         const handleClick = this.handleClick;
-        getTradies().then(res => console.log(res));
+        const tradiesData = this.state.tradiesData;
 
         return (
             <Wrapper>
                 <Layout>
                     <Header>{` ${title} Recommendations:`}</Header>
-                    <Content isClicked={isClicked}>
-                        <CardWrapper current={current} data={tradiesData} handleClick={handleClick} isClicked={isClicked} />
-                        {isClicked && <OrderLayout />}
-                    </Content>
+                    {this.state.loaded ? (<Content isClicked={isClicked}>
+                        <CardWrapper current={current.tradieId} data={data} handleClick={handleClick} isClicked={isClicked} tradiesData={tradiesData}/>
+                        {isClicked && <OrderLayout currentTradie={current} />}
+                    </Content>) : <p>Loading</p>}
                 </Layout>
             </Wrapper>
 

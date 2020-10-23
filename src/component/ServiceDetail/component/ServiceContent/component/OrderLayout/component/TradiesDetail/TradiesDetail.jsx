@@ -53,10 +53,6 @@ const Address = styled.p`
     line-height: 1.4em;
 `;
 
-const IconWrapper = styled.div`
-    margin: 0 5px;
-`;
-
 const person = {
     name: "Ian Yin",
     language: "English, Mandarin",
@@ -67,27 +63,29 @@ const person = {
     register_date: "12th Mar 2018",
 }
 
-const TradiesDetail = () => (
-    <Layout>   
-        <Left>
-            <Avatar src={samplePhoto} />
-            <Rating>
-                <RatingText>Rating:</RatingText>
+const TradiesDetail = (props) => {
+    console.log(props);
+    return (
+        <Layout>   
+            <Left>
+                <Avatar src={samplePhoto} />
+                <Rating>
+                    <RatingText>Rating:</RatingText>
 
-                {RatingRender(person.rating, true)}
-            </Rating>
-            <AddressWrapper>
-                <FontAwesomeIcon icon={faMapMarkerAlt} size="sm" />
-                <Address>
-                    {`${person.address},`} <br/>
-                    Australia<br/>
-                    Member since<br/>
-                    {person.register_date}
-                </Address>
-            </AddressWrapper>
-        </Left>
-        <Right><TradiesInfo data={person}/></Right>
-    </Layout>
-);
+                    {RatingRender(person.rating, true)}
+                </Rating>
+                <AddressWrapper>
+                    <FontAwesomeIcon icon={faMapMarkerAlt} size="sm" />
+                    <Address>
+                        {`${person.address},`} <br/>
+                        Australia<br/>
+                        Member since<br/>
+                        {props.data.createdAt}
+                    </Address>
+                </AddressWrapper>
+            </Left>
+            <Right><TradiesInfo data={props.data}/></Right>
+        </Layout>
+)};
 
 export default TradiesDetail;

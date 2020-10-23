@@ -27,8 +27,14 @@ const About = styled.p`
     margin: 0 auto;
 `;
 
+const getAvgRating = (orders) => {
+
+    return orders.length > 0 ? Math.round(orders.reduce((acc, val) => acc + val, 0) / orders.length) : 0;
+}
+
 const TableRows = (data) => {
     const validKeys = ["name", "language", "skills", "about"];
+    console.log(data);
     let content = [];
     for (let key in data) {
         if (validKeys.includes(key)) {
@@ -43,15 +49,28 @@ const TableRows = (data) => {
     return content;
 }
 
-const TradiesInfo = (props) => (
-    <Layout>
-        <Table>
-            {TableRows(props.data)}
-        </Table>
-        <About>
-            {props.data.about}
-        </About>
-    </Layout>
-);
+const TradiesInfo = (props) => {
+    const name = (props.data.users[0].firstName + props.data.users[0].lastName) || 'Default Name';
+    const rating = getAvgRating(props.data.orders);
+    const about = props.data.description;
+    const data = {
+        name,
+        language: 'English',
+        rating,
+        about,
+    }
+    console.log(props);
+
+    return (
+        <Layout>
+            <Table>
+                {TableRows(data)}
+            </Table>
+            <About>
+                {props.data.description}
+            </About>
+        </Layout>
+    )
+};
 
 export default TradiesInfo;
