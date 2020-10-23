@@ -7,14 +7,14 @@ import Button from "../../../../../Button";
 import Input from "../../../../../Input";
 import styled from "styled-components";
 import form from "./form";
-import signUpUser, { error as Error } from "../../../../../../apis/signUpUser";
+import signUpUser from "../../../../../../apis/signUpUser";
 import withFetch from "../../../../../withFetch";
 import withForm from "../../../../../withForm";
 import signUpCustomer from "../../../../../../apis/signUpCustomer";
 import signUpTradie from "../../../../../../apis/signUpTradie";
 import Alert from "../../../Alert";
 import compose from "../../../../../../utils/compose";
-
+import withAuthentication from '../../../../../withAuthentication';
 const Form = styled.form`
   padding: 16px 0;
 `;
@@ -28,12 +28,19 @@ const Select = styled.select`
   height: 25px;
 `;
 
+const ERROR = {
+  409: "Email Existed",
+  400: "Please dont Hack ",
+  404: "Something unexpect happen, try again later",
+  500: "Something unexpect happen, try again later",
+};
+
+
+
 class SignUpModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
-      loading: false,
       userType: {
         value: "customer",
         touched: false,
@@ -47,11 +54,11 @@ class SignUpModal extends React.Component {
     const { userType } = this.state;
     const {
       onClose,
-      onSignUpSuccess,
       formData,
       isFormValid,
       getData,
       fetch,
+      authentication,
     } = this.props;
     event.preventDefault();
 
@@ -62,23 +69,28 @@ class SignUpModal extends React.Component {
     const email = formData.email.value;
 
     if (userType.value === "customer") {
-      fetch(() => signUpUser(data), Error).then((user) => {
+      fetch(() => signUpUser(data)).then((user) => {
         onClose();
-        onSignUpSuccess(user);
+        authentication.setUser(user);
+        
         signUpCustomer(email);
+
       });
     } else if (userType.value === "tradie") {
-      fetch(() => signUpUser(data), Error).then((user) => {
+      fetch(() => signUpUser(data)).then((user) => {
         onClose();
-        onSignUpSuccess(user);
+        authentication.setUser(user);
         signUpTradie(email);
+
       });
     } else {
-      fetch(() => signUpUser(data), Error).then((user) => {
+      fetch(() => signUpUser(data)).then((user) => {
         onClose();
-        onSignUpSuccess(user);
+        authentication.setUser(user);
         signUpCustomer(email);
         signUpTradie(email);
+
+
       });
     }
   }
@@ -109,7 +121,7 @@ class SignUpModal extends React.Component {
           <Form onSubmit={this.handleFormSubmit}>
             {error && (
               <FormItem>
-                <Alert>{error}</Alert>
+                <Alert>{ERROR[error.status]}</Alert>
               </FormItem>
             )}
             {Object.keys(form).map((key) => {
@@ -188,11 +200,19 @@ SignUpModal.propType = {
   handleFormDataChange: PropTypes.func.isRequired,
   isFormValid: PropTypes.func.isRequired,
   fetch: PropTypes.func.isRequired,
+  authentication: PropTypes.shape({
+    setUser: PropTypes.func,
+  }).isRequired,
   error: PropTypes.shape({
     status: PropTypes.number,
   }),
   loading: PropTypes.bool,
 };
-const EnhancedSignUpModal = compose(withForm(form), withFetch)(SignUpModal);
+const EnhancedSignUpModal = compose(
+  withForm(form),
+  withFetch,
+  withAuthentication,
+)(SignUpModal);
+
 
 export default EnhancedSignUpModal;

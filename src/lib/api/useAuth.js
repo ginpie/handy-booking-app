@@ -6,7 +6,6 @@ const extractAuthTokenFromResponse = (response) => {
   if (authToken) {
     localStorage.setItem(AUTH_TOKEN, authToken);
   }
-
   return response;
 };
 
@@ -19,7 +18,6 @@ const appendAuthTokenToRequest = (config) => {
       'X-Auth-Token': localStorage.getItem(AUTH_TOKEN),
     };
   }
-
   return config;
 };
 
