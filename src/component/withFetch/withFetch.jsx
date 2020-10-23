@@ -13,7 +13,7 @@ const withFetch = (Component) => {
       this.fetch = this.fetch.bind(this);
     }
 
-    fetch(fetcher,errorMessage) {
+    fetch(fetcher) {
       this.setState({
         error: null,
         loading: false,
@@ -24,19 +24,16 @@ const withFetch = (Component) => {
           this.setState({
             loading: false,
           });
-          if(!res.ok){
-            throw res;
-          }
-          return res.json();
+          console.log("0: ", res.data)
+          return res.data;
         })
         .catch((error) => {
-          if(errorMessage[error.status]){
-            this.setState({
-              error:errorMessage[error.status]
-          });
-        }
+          this.setState({
+            loading:false,
+            error:error.response,
+          })
           throw error;
-      });
+        });
     }
 
     render() {

@@ -15,7 +15,6 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "flickity": "^2.2.1",
-    "formik": "^2.1.5",
     "install": "^0.13.0",
     "joi": "^17.2.1",
     "mongoose": "^5.10.4",

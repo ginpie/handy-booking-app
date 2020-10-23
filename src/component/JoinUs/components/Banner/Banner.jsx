@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import SignUpModal from "../../../Header/components/Private/components/SignUpModal";
-import SignInModal from "../../../Header/components/Private/components/SignInModal";
+
 import { CSSTransition } from "react-transition-group";
 import "../../../Header/components/Private/styles.css";
 import LinkItem from "../../../Header/components/LinkItem";
 import Layout from "../../../Header/components/Layout";
-
+import AuthenticationModals from '../../../Header/components/AuthenticationModals';
 const Container = styled.div`
   margin-top: 70px;
   height: 600px;
@@ -43,21 +42,17 @@ const Remark = styled.p`
   color: #eee;
 `;
 
-const MODAL = {
-  signIn: "SIGN_IN",
-  signUp: "SIGN_UP",
-  empty: "",
-};
+
 
 class Banner extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showModal: false,
+      authenticationModal: null,
       user: null,
     };
-    this.showModal = this.showModal.bind(this);
+    this.setAuthenticationModal = this.setAuthenticationModal.bind(this);
     this.setUser = this.setUser.bind(this);
   }
 
@@ -65,20 +60,20 @@ class Banner extends React.Component {
     this.setState({ user: target });
   }
 
-  showModal(target) {
+  setAuthenticationModal(target) {
     return (event) => {
       if (event) {
         event.preventDefault();
       }
 
       this.setState({
-        showModal: target,
+        authenticationModal: target,
       });
     };
   }
 
   render() {
-    const { showModal, user } = this.state;
+    const { authenticationModal, user } = this.state;
 
     return (
       <Layout>
@@ -87,35 +82,20 @@ class Banner extends React.Component {
         ) : (
           <Container>
             <Title>Earn up to $5,000 a month on HandyMan* </Title>
-            <Button onClick={this.showModal(MODAL.signUp)}>Join Tradie</Button>
-            {showModal === MODAL.signUp && (
-              <CSSTransition
-                in={!(showModal === MODAL.empty)}
-                appear={true}
-                timeout={1000}
-                classNames="model"
-              >
-                <SignUpModal
-                  onClose={this.showModal(MODAL.empty)}
-                  onSignIn={this.showModal(MODAL.signIn)}
-                  onSignUpSuccess={this.setUser}
-                />
-              </CSSTransition>
-            )}
-            {showModal === MODAL.signIn && (
-              <CSSTransition
-                in={!(showModal === MODAL.empty)}
-                appear={true}
-                timeout={1000}
-                classNames="model"
-              >
-                <SignInModal
-                  onClose={this.showModal(MODAL.empty)}
-                  onSignUp={this.showModal(MODAL.signUp)}
-                  onSignInSuccess={this.setUser}
-                />
-              </CSSTransition>
-            )}
+            <Button onClick={this.setAuthenticationModal('signUp')}>Join Tradie</Button>
+            {authenticationModal && (
+                <CSSTransition
+                  in={!(authenticationModal === null)}
+                  appear={true}
+                  timeout={1000}
+                  classNames="model"
+                >
+                  <AuthenticationModals
+                    initialModal={authenticationModal}
+                    onClose={this.setAuthenticationModal()}
+                  />
+                    </CSSTransition>
+              )}
             <Remark>
               *Based on the median top 50 Tradie's monthly earnings.
             </Remark>
