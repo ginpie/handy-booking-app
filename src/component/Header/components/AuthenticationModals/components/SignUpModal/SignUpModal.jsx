@@ -12,6 +12,7 @@ import withFetch from "../../../../../withFetch";
 import withForm from "../../../../../withForm";
 import signUpCustomer from "../../../../../../apis/signUpCustomer";
 import signUpTradie from "../../../../../../apis/signUpTradie";
+import connectUserToCustomer from "../../../../../../apis/connectUserToCustomer";
 import Alert from "../../../Alert";
 import compose from "../../../../../../utils/compose";
 import withAuthentication from '../../../../../withAuthentication';
@@ -72,8 +73,8 @@ class SignUpModal extends React.Component {
       fetch(() => signUpUser(data)).then((user) => {
         onClose();
         authentication.setUser(user);
-        
         signUpCustomer(email);
+        connectUserToCustomer(email)
 
       });
     } else if (userType.value === "tradie") {
