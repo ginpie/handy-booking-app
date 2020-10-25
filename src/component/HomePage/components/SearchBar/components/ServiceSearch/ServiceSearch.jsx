@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import Search from "../Search";
-import services from "../services";
 
 const DropList = styled.ul`
   width: 370px;
@@ -37,22 +36,44 @@ const List = styled.li`
   }
 `;
 
-class ZipSearch extends React.Component {
+class ServiceSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       suggestions: [],
       text: "",
       focused: false,
+      allServices: [],
     };
+    this.ref = React.createRef();
+  }
+
+  // get all services when search bar is mounted
+  componentDidMount() {
+    fetch("http://localhost:3001/api/services").then((res) => {
+      if (res.status !== 200) {
+        console.log(
+          "Looks like there was a problem. status code: " + res.status
+        );
+        return;
+      }
+      res.json().then((data) => {
+        let s = [];
+        data.forEach((i) => {
+          s.push(i.serviceName);
+        });
+        this.setState(() => ({ allServices: s }));
+      });
+    });
   }
 
   onInputChange = (e) => {
+    let { allServices } = this.state;
     const value = e.target.value;
     let suggestions = [];
     if (value.length > 0) {
       const regex = new RegExp(`${value}`, "i"); // case insensitive matching
-      suggestions = services
+      suggestions = allServices
         .sort()
         .filter((v) => regex.test(v))
         .slice(0, 5);
@@ -102,9 +123,10 @@ class ZipSearch extends React.Component {
           placeholder="Search by trade or business name"
           onChange={this.onInputChange}
           value={text}
-          id={"zipsearch"}
+          id="servicesearch"
           onBlur={this.onBlured}
           onFocus={this.onFocused}
+          ref={this.ref}
         ></Search>
         {this.renderSuggestions()}
       </div>
@@ -112,4 +134,4 @@ class ZipSearch extends React.Component {
   }
 }
 
-export default ZipSearch;
+export default ServiceSearch;

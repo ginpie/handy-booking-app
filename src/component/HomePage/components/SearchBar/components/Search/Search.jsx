@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 60px;
+  height: 50px;
   width: 100%;
   border: none;
   padding: 0;
@@ -43,26 +43,27 @@ const StyledInput = ({ placeholder, onChange, value, id, onBlur, onFocus }) => (
   ></Input>
 );
 
-const Search = ({
-  icon,
-  placeholder,
-  onChange,
-  value,
-  id,
-  onBlur,
-  onFocus,
-}) => (
-  <Container>
-    <StyledIcon className={icon}></StyledIcon>
-    <StyledInput
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-      id={id}
-      onBlur={onBlur}
-      onFocus={onFocus}
-    ></StyledInput>
-  </Container>
-);
+class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.ref = React.createRef();
+  }
+
+  render() {
+    return (
+      <Container>
+        <StyledIcon className={this.props.icon}></StyledIcon>
+        <StyledInput
+          placeholder={this.props.placeholder}
+          onChange={this.props.onChange}
+          value={this.props.value}
+          id={this.props.id}
+          onBlur={this.props.onBlur}
+          onFocus={this.props.onFocus}
+        ></StyledInput>
+      </Container>
+    );
+  }
+}
 
 export default Search;

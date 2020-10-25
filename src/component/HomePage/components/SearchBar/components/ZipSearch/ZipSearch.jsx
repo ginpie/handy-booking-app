@@ -103,7 +103,7 @@ class ZipSearch extends React.Component {
           icon="fas fa-map-marker-alt"
           onChange={this.onInputChange}
           value={text}
-          id={"zipsearch"}
+          id="zipsearch"
           onBlur={this.onBlured}
           onFocus={this.onFocused}
         ></Search>

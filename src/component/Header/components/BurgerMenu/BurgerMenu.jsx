@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
-import AuthenticationModals from '../AuthenticationModals';
+import AuthenticationModals from "../AuthenticationModals";
 import LinkItem from "../LinkItem";
 import "./style.css";
 
@@ -74,7 +74,6 @@ const List = styled.div`
   }
 `;
 
-
 class BurgerMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -128,7 +127,10 @@ class BurgerMenu extends React.Component {
               <LinkItem linkType={"nav"} href="/contact">
                 Contact
               </LinkItem>
-              <LinkItem linkType={"nav"}  onClick={this.setAuthenticationModal('signIn')}>
+              <LinkItem
+                linkType={"nav"}
+                onClick={this.setAuthenticationModal("signIn")}
+              >
                 Sign in
               </LinkItem>
               {authenticationModal && (
@@ -142,7 +144,7 @@ class BurgerMenu extends React.Component {
                     initialModal={authenticationModal}
                     onClose={this.setAuthenticationModal()}
                   />
-                    </CSSTransition>
+                </CSSTransition>
               )}
             </List>
           </Menu>
