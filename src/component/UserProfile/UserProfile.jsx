@@ -6,7 +6,6 @@ import PromoCode from "./promoCode/components/promoCode";
 import Settings from "./settings/components/settings";
 import placeOrderIcon from "./icons/placeOrder.png";
 import myOrdersIcon from "./icons/myOrders.png";
-import myMessagesIcon from "./icons/myMessages.png";
 import myPromoCodesIcon from "./icons/myPromoCodes.png";
 import settingsIcon from "./icons/settings.png";
 import helpCentreIcon from "./icons/helpCentre.png";

@@ -9,10 +9,6 @@ const Wrapper = styled.div`
 `;
 
 class FilterDropdown extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       content,
