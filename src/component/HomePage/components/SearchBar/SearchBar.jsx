@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useMediaQuery } from "react-responsive";
+import MediaQuery from "react-responsive";
+import { withRouter } from "react-router-dom";
 
 import Search from "./components/Search";
 import Text from "./components/Text";
@@ -44,7 +45,7 @@ const Link = styled.a`
 const GetStart = styled(Link)`
   margin: 0 auto 0 10%;
   width: 150px;
-  height: 40px;
+  height: 50px;
 `;
 
 const SearchBox = styled.div`
@@ -70,13 +71,13 @@ const SearchWrapper2 = styled.div`
 `;
 const SearchWrapper3 = styled.div`
   width: 100px;
-  height: 60px;
+  height: 50px;
 `;
 
 const SearchBoxMobile = styled.div`
   margin: 0 auto;
   width: 90%;
-  height: 60px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,58 +87,61 @@ const SearchBoxMobile = styled.div`
 
 const SearchWrapperMobile = styled.div`
   width: 100%;
-  height: 40px;
+  height: 50px;
   margin: 3px auto;
 `;
 
-const SearchBar = () => {
-  // Responsive layout
-  const isBigScreen = useMediaQuery({ query: "(min-width:900px" });
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 900px)" });
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.searchRef = React.createRef();
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-  return (
-    <Container>
-      <Text
-        title="NEED A HAND?"
-        subtitle="The #1 tradie service in Australia"
-      ></Text>
-      {isBigScreen && (
-        <>
+  handleClick = () => {
+    // get search input element
+    const inputValue = this.searchRef.current.ref.current.props.value;
+    this.props.history.push("/" + inputValue.toLowerCase().replace(/\s/g, ""));
+  };
+
+  render() {
+    return (
+      <Container>
+        <Text
+          title="NEED A HAND?"
+          subtitle="The #1 tradie service in Australia"
+        ></Text>
+
+        <MediaQuery minWidth={900}>
           <SearchBox>
             <SearchWrapper1>
-              <ServiceSearch />
+              <ServiceSearch ref={this.searchRef} />
             </SearchWrapper1>
             <SearchWrapper2>
               <ZipSearch />
             </SearchWrapper2>
             <SearchWrapper3>
-              <Link /*onClick={  search function here }*/>Go</Link>
+              <Link onClick={this.handleClick}>Go</Link>
             </SearchWrapper3>
           </SearchBox>
           <GetStart href="/service">GET STARTED</GetStart>
-        </>
-      )}
-      {isSmallScreen && (
-        <SearchBoxMobile>
-          <SearchWrapperMobile>
-            <Search
-              icon="fas fa-search"
-              placeholder="Search by trade or business name"
-            ></Search>
-          </SearchWrapperMobile>
-          <SearchWrapperMobile>
-            <Search
-              icon="fas fa-map-marker-alt"
-              placeholder="Enter postcode"
-            ></Search>
-          </SearchWrapperMobile>
-          <SearchWrapperMobile>
-            <Link /*onClick={  search function here }*/>Go</Link>
-          </SearchWrapperMobile>
-        </SearchBoxMobile>
-      )}
-    </Container>
-  );
-};
+        </MediaQuery>
+        <MediaQuery maxWidth={900}>
+          <SearchBoxMobile>
+            <SearchWrapperMobile>
+              <ServiceSearch ref={this.searchRef} />
+            </SearchWrapperMobile>
+            <SearchWrapperMobile>
+              <ZipSearch />
+            </SearchWrapperMobile>
+            <SearchWrapperMobile>
+              <Link onClick={this.handleClick}>Go</Link>
+            </SearchWrapperMobile>
+          </SearchBoxMobile>
+        </MediaQuery>
+      </Container>
+    );
+  }
+}
 
-export default SearchBar;
+export default withRouter(SearchBar);
