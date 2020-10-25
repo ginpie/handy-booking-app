@@ -119,7 +119,7 @@ class BurgerMenu extends React.Component {
   }
 
   render() {
-    const { showModal, user } = this.state;
+    const { showModal } = this.state;
 
     return (
       <Container>
