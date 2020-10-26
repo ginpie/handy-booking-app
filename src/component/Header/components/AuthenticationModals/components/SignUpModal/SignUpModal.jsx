@@ -18,7 +18,7 @@ import Alert from "../../../Alert";
 import compose from "../../../../../../utils/compose";
 import withAuthentication from '../../../../../withAuthentication';
 
-const AUTH_TOKEN = 'AUTH_TOKEN';
+
 const Form = styled.form`
   padding: 16px 0;
 `;
