@@ -1,16 +1,13 @@
 import api from '../../lib/api';
-// const connectUserToCustomer = ({ email }) =>
-//   fetch("http://localhost:3000/api/customers/", {
-//     method: "POST",
-//     body: JSON.stringify({
-//       email,
-//     }),
-//     headers: {
-//       "content-type": "application/json",
-//     },
-//   });
-//先得到token ，token 转换成id， id放入users后面， customers后面放入email
-
-// const id = token
-const connectUserToCustomer = ({ config, email }) =>api.post('/users',{config},'/customers/',{email});
+const connectUserToCustomer = ( email ) =>{
+    api.get('/auth')
+    .then((response) => {
+        const id = response.data.id
+        console.log(response.data.id)    
+        console.log(email)
+        api.post(`/users/${id}/customers/${email}`)
+    })
+}
 export default connectUserToCustomer;
+
+
