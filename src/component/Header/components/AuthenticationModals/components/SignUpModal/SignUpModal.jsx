@@ -12,9 +12,13 @@ import withFetch from "../../../../../withFetch";
 import withForm from "../../../../../withForm";
 import signUpCustomer from "../../../../../../apis/signUpCustomer";
 import signUpTradie from "../../../../../../apis/signUpTradie";
+import connectUserToCustomer from "../../../../../../apis/connectUserToCustomer";
+import connectUserToTradie from "../../../../../../apis/connectUserToTradie";
 import Alert from "../../../Alert";
 import compose from "../../../../../../utils/compose";
 import withAuthentication from '../../../../../withAuthentication';
+
+
 const Form = styled.form`
   padding: 16px 0;
 `;
@@ -72,8 +76,8 @@ class SignUpModal extends React.Component {
       fetch(() => signUpUser(data)).then((user) => {
         onClose();
         authentication.setUser(user);
-        
         signUpCustomer(email);
+        connectUserToCustomer(email)
 
       });
     } else if (userType.value === "tradie") {
@@ -81,6 +85,7 @@ class SignUpModal extends React.Component {
         onClose();
         authentication.setUser(user);
         signUpTradie(email);
+        connectUserToTradie(email)
 
       });
     } else {
@@ -89,7 +94,8 @@ class SignUpModal extends React.Component {
         authentication.setUser(user);
         signUpCustomer(email);
         signUpTradie(email);
-
+        connectUserToCustomer(email)
+        connectUserToTradie(email)
 
       });
     }

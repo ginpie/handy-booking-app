@@ -1,11 +1,13 @@
-const connectUserToCustomer = ({ email, password, confirmPassword }) =>
-  fetch("http://localhost:3000/api/customers/", {
-    method: "POST",
-    body: JSON.stringify({
-      email,
-    }),
-    headers: {
-      "content-type": "application/json",
-    },
-  });
+import api from '../../lib/api';
+const connectUserToCustomer = ( email ) =>{
+    api.get('/auth')
+    .then((response) => {
+        const id = response.data.id
+        console.log(response.data.id)    
+        console.log(email)
+        api.post(`/users/${id}/customers/${email}`)
+    })
+}
 export default connectUserToCustomer;
+
+
