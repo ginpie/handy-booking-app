@@ -1,71 +1,67 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { useMediaQuery } from "react-responsive";
+import MediaQuery from "react-responsive";
 import "./react-tabs.css";
 import FloatingBox from "../FloatingBox/FloatingBox";
-import { cardData } from "./cardData";
+import getReviews from "../../../../../../apis/getReviews";
 
-export default () => {
-  // Responsive layout
-  const isBigScreen = useMediaQuery({ query: "(min-width:900px" });
+class Tab_s extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: [],
+    };
+  }
 
-  return (
-    <Tabs>
-      <TabList>
-        <Tab>Cleaning</Tab>
-        <Tab>Moving</Tab>
-        {isBigScreen && (
-          <>
+  componentDidMount() {
+    getReviews().then((data) => {
+      let cards = [];
+      data.forEach((i) => {
+        let a = {};
+        a.price = i.totalPrice;
+        a.title = i.name;
+        a.comment = i.comment;
+        a.rating = i.rating;
+        a.avatar = i.avatar;
+
+        cards.push(a);
+      });
+
+      this.setState({
+        cards: cards,
+      });
+    });
+  }
+
+  render() {
+    return (
+      <Tabs>
+        <TabList>
+          <Tab>Cleaning</Tab>
+          <Tab>Moving</Tab>
+          <MediaQuery minWidth={900}>
             <Tab>Furniture Assembly</Tab>
             <Tab>Installation</Tab>
-          </>
-        )}
-      </TabList>
+          </MediaQuery>
+        </TabList>
 
-      <TabPanel>
-        <FloatingBox
-          images={cardData.tab1.row1.images}
-          prices={cardData.tab1.row1.prices}
-          titles={cardData.tab1.row1.titles}
-          descriptions={cardData.tab1.row1.descriptions}
-          hrefs={cardData.tab1.row1.hrefs}
-          nums={cardData.tab1.row1.nums}
-        />
-      </TabPanel>
-      <TabPanel>
-        <FloatingBox
-          images={cardData.tab2.row1.images}
-          prices={cardData.tab2.row1.prices}
-          titles={cardData.tab2.row1.titles}
-          descriptions={cardData.tab2.row1.descriptions}
-          hrefs={cardData.tab2.row1.hrefs}
-          nums={cardData.tab2.row1.nums}
-        />
-      </TabPanel>
-      {isBigScreen && (
-        <>
+        <TabPanel>
+          <FloatingBox cards={this.state.cards} hrefs="/orders" />
+        </TabPanel>
+        <TabPanel>
+          <FloatingBox cards={this.state.cards} hrefs="/orders" />
+        </TabPanel>
+        <MediaQuery minWidth={900}>
           <TabPanel>
-            <FloatingBox
-              images={cardData.tab3.row1.images}
-              prices={cardData.tab3.row1.prices}
-              titles={cardData.tab3.row1.titles}
-              descriptions={cardData.tab3.row1.descriptions}
-              hrefs={cardData.tab3.row1.hrefs}
-              nums={cardData.tab3.row1.nums}
-            />
+            <FloatingBox cards={this.state.cards} hrefs="/orders" />
           </TabPanel>
           <TabPanel>
-            <FloatingBox
-              images={cardData.tab4.row1.images}
-              prices={cardData.tab4.row1.prices}
-              titles={cardData.tab4.row1.titles}
-              descriptions={cardData.tab4.row1.descriptions}
-              hrefs={cardData.tab4.row1.hrefs}
-              nums={cardData.tab4.row1.nums}
-            />
+            <FloatingBox cards={this.state.cards} hrefs="/orders" />
           </TabPanel>
-        </>
-      )}
-    </Tabs>
-  );
-};
+        </MediaQuery>
+      </Tabs>
+    );
+  }
+}
+
+export default Tab_s;
