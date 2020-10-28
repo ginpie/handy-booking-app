@@ -89,34 +89,6 @@ class UserProfile extends Component {
     }));
   };
 
-  render() {
-    const navItems = [
-      {
-        key: "MYINQUIRY",
-        value: "My Inquiry",
-        icon: placeOrderIcon,
-        content: <MyInquiry />,
-      },
-      {
-        key: "MYORDERS",
-        value: "My orders",
-        icon: myOrdersIcon,
-        content: <MyOrders />,
-      },
-      {
-        key: "SETTING",
-        value: "Settings",
-        icon: settingsIcon,
-        content: <Settings fakeUserData={this.state.fakeUserData} />,
-      },
-      {
-        key: "HELPCENTRE",
-        value: "Help Centre",
-        icon: helpCentreIcon,
-        content: <div />,
-      },
-    ];
-
     render() {
         const navItems = [
             {key: 'MYINQUIRY', value: 'My Inquiry', icon:placeOrderIcon, content:(<MyInquiry />)},
@@ -161,7 +133,7 @@ class UserProfile extends Component {
                     </div>
                 </Container>
          );
-    }
+  }
 }
 
 export default UserProfile;
