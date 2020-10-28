@@ -10,6 +10,7 @@ import placeOrderIcon from './components/icons/placeOrder.png';
 import myOrdersIcon from './components/icons/myOrders.png';
 import settingsIcon from './components/icons/settings.png';
 import helpCentreIcon from './components/icons/helpCentre.png';
+import getCurrentUser from '../../apis/getCurrentUser';
 
 const Container = styled.div`
     width: 100%;
@@ -50,26 +51,24 @@ const SidebarMenu = styled.button`
 class UserProfile extends Component {
 
     state = { 
-        fakeUserData:{},
-        fakeUserInquiries:{},
+        userData:{},
         currentPage:'',
         displaySidebar: false
      }
 
-    componentDidMount() {
+     async componentDidMount() {
+        const user = await getCurrentUser()
+        console.log(user)
         this.setState(
-            {fakeUserData:
+            {userData:
                 {
-                    firstName: "Mingxin",
-                    lastName: "Dong",
-                    DOB: "DD-MM-YY",
-                    email: {address: "xxxxx@gmail.com", status:"Verified"},
-                    address: {
-                        address:"fake st",
-                        address2: "",
-                        suburb:"southport",
-                        state: "QLD",
-                    }
+                    firstName: user.firstName || "",
+                    lastName: user.lastName || "",
+                    DOB: user.DOB || "",
+                    email: user.email || "",
+                    phone: user.phoneNumber || "",
+                    address: user.address || "",
+                    _id: user._id
                 }, 
                 currentPage:'My Inquiry'
             })
@@ -91,11 +90,11 @@ class UserProfile extends Component {
         const navItems = [
             {key: 'MYINQUIRY', value: 'My Inquiry', icon:placeOrderIcon, content:(<MyInquiry />)},
             {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders/>)},
-            {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.fakeUserData}/>)},
+            {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.userData}/>)},
             {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div/>))},
         ]
 
-        const { fakeUserData, currentPage, displaySidebar} = this.state
+        const { userData, currentPage, displaySidebar} = this.state
 
         return (
                 <Container>
@@ -106,7 +105,7 @@ class UserProfile extends Component {
                         >Menu
                         </SidebarMenu>
                         <SideBar 
-                            fakeUserData={fakeUserData}
+                            fakeUserData={userData}
                             navItems={navItems}
                             currentPage={currentPage}
                             onPageChange={this.handleNavItemChange}

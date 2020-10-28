@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import BoxContainer from '../../../BoxContainer';
-import CustomEmptyContent from '../../../CustomEmptyContent';
-import addressIcon from '../../../icons/address.png';
+import updateAccount from '../../../../../../apis/updateAccount';
 
 const Container = styled.div`
     display: flex;
@@ -90,6 +89,7 @@ const General = ({fakeUserData}) => {
     const [firstName, setFirstName] = useState(fakeUserData.firstName)
     const [lastName, setlastName] = useState(fakeUserData.lastName)
     const [dateOfBirth, setDateOfBirth] = useState(fakeUserData.DOB)
+    const [phone, setPhone] = useState(fakeUserData.phone)
     const [address, setAddress] = useState({
         address: fakeUserData.address.address,
         address2: fakeUserData.address.address2,
@@ -101,10 +101,23 @@ const General = ({fakeUserData}) => {
         {key:"FIRSTNAME" ,title: "First Name", value:firstName, handleChange:setFirstName},
         {key:"LASTNAME" ,title: "Last Name", value:lastName, handleChange:setlastName},
         {key:"DATEOFBIRTH" ,title: "Date of birth", value:dateOfBirth, handleChange:setDateOfBirth},
+        {key:"PHONE" ,title: "phone", value:phone, handleChange: setPhone},
     ]
 
     const handleAddressChange = (event) => {
         setAddress({...address, [event.target.name]: event.target.value})
+    }
+
+    const handleUpdateAccount = async(event) => {
+        event.preventDefault();
+
+        const data = {
+            "DOB" : dateOfBirth,
+            "firstName" : firstName,
+            "lastName" : lastName,
+            "phoneNumber" : phone
+        }
+        await updateAccount(fakeUserData._id, data)        
     }
 
     return (
@@ -125,7 +138,7 @@ const General = ({fakeUserData}) => {
                             </AccountItem>
                         ))}
                     </Account>
-                    <Button>Save</Button>
+                    <Button onClick={handleUpdateAccount}>Save</Button>
                 </BoxContainer>
             </AccountWrapper>
             <AddressWrapper>

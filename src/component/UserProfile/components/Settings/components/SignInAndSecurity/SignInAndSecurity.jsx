@@ -92,13 +92,13 @@ const SignInAndSecurity = ({fakeUserData}) => {
                             </Title>
                             <Input
                                 type="text"
-                                value={email.address}
+                                value={email}
                                 readOnly
                             >
                             </Input>
                         </Login>
                         <EmailStatusButton>
-                            {email.status}
+                            Verified
                         </EmailStatusButton>
                     </Row>
                     <Row>
