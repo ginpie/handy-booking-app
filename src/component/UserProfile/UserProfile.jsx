@@ -80,7 +80,11 @@ class UserProfile extends Component {
                 currentPage:'My Inquiry'
             })
     }
-
+  
+  handleNavItemChange = (value) => {
+    const currentPage = value
+    this.setState({currentPage});
+  }
 
   toggleSidebar = (event) => {
     event.preventDefault();
@@ -89,33 +93,31 @@ class UserProfile extends Component {
     }));
   };
 
-    render() {
-        const navItems = [
-            {key: 'MYINQUIRY', value: 'My Inquiry', icon:placeOrderIcon, content:(<MyInquiry />)},
-            {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders/>)},
-            {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.userData}/>)},
-            {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div/>))},
-        ]
-
-        const { userData, currentPage, displaySidebar} = this.state
-
-        return (
-                <Container>
-                    <Header scrollAnime={true}/>
-                    <ContentContainer>
-                        <SidebarMenu
-                            onClick={this.toggleSidebar}
-                        >Menu
-                        </SidebarMenu>
-                        <SideBar 
-                            fakeUserData={userData}
-                            navItems={navItems}
-                            currentPage={currentPage}
-                            onPageChange={this.handleNavItemChange}
-                            displaySidebar={displaySidebar}
-                            onCloseSidebar={this.toggleSidebar}
-                        />
-                        <Content>
+  render() {
+      const navItems = [
+          {key: 'MYINQUIRY', value: 'My Inquiry', icon:placeOrderIcon, content:(<MyInquiry />)},
+          {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders/>)},
+          {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.userData}/>)},
+          {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div/>))},
+      ]
+      const { userData, currentPage, displaySidebar} = this.state
+      return (
+              <Container>
+                  <Header scrollAnime={true}/>
+                  <ContentContainer>
+                      <SidebarMenu
+                          onClick={this.toggleSidebar}
+                      >Menu
+                      </SidebarMenu>
+                      <SideBar 
+                          fakeUserData={userData}
+                          navItems={navItems}
+                          currentPage={currentPage}
+                          onPageChange={this.handleNavItemChange}
+                          displaySidebar={displaySidebar}
+                          onCloseSidebar={this.toggleSidebar}
+                      />
+                      <Content>
                             {navItems.map((item)=>{
                                 if(currentPage!==item.value) {
                                     return null
@@ -127,11 +129,11 @@ class UserProfile extends Component {
                                 )
                             })}
                         </Content>
-                    </ContentContainer>
-                    <div style={{width:"100%"}}>
-                        <Footer/>
-                    </div>
-                </Container>
+                  </ContentContainer>
+                  <div style={{width:"100%"}}>
+                      <Footer/>
+                  </div>
+              </Container>
          );
   }
 }
