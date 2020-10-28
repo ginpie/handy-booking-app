@@ -15,7 +15,7 @@ const appendAuthTokenToRequest = (config) => {
   if (authToken) {
     config.headers = {
       ...config.headers,
-      'X-Auth-Token': localStorage.getItem(AUTH_TOKEN),
+      'Authorization': `Bearer ${localStorage.getItem(AUTH_TOKEN)}`,
     };
   }
   return config;
