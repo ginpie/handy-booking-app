@@ -48,8 +48,8 @@ function Header({ scrollAnime }) {
   window.addEventListener("scroll", showHeader);
 
   // Responsive layout
-  const isBigScreen = useMediaQuery({ query: "(min-width:900px" });
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 900px)" });
+  const isBigScreen = useMediaQuery({ query: "(min-width:990px" });
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 990px)" });
 
   return (
     <Container

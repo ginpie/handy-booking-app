@@ -24,7 +24,7 @@ const withFetch = (Component) => {
           this.setState({
             loading: false,
           });
-          console.log("0: ", res.data)
+          // console.log("0: ", res.data)
           return res.data;
         })
         .catch((error) => {

@@ -1,17 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
+import { REACT_APP_URL } from "../apiURL";
 
 const instance = axios.create({
-    // baseURL: 'https://handy-booking-app-jp.herokuapp.com/api'
-    baseURL: 'http://localhost:8000/api'
-
+  // baseURL: 'https://handy-booking-app-jp.herokuapp.com/api'
+  baseURL: REACT_APP_URL,
 });
 
 function getTradies() {
-    return instance.get('/tradies')
-        .then(res => res.data)
-        .catch(err => {
-            console.log(err);
-        });
+  return instance
+    .get("/tradies")
+    .then((res) => res.data)
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 // function getTradieAllInfo(id) {
