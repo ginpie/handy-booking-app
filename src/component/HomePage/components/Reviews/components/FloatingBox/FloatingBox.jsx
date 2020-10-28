@@ -56,36 +56,36 @@ const FloatingRow2 = styled.div`
   }
 `;
 
-const FloatingBox = ({ images, prices, titles, descriptions, hrefs, nums }) => (
+const FloatingBox = ({ cards, hrefs }) => (
   <FloatingContainer>
     {/* This is the 1st row */}
     <FloatingRow1>
-      {Object.keys(images).map((i) => {
+      {cards.slice(0, 10).map((i, e) => {
         return (
           <Card
-            key={i}
-            img={images[i]}
-            price={prices[i]}
-            title={titles[i]}
-            description={descriptions[i]}
-            href={hrefs[i]}
-            num={nums[i]}
+            key={e}
+            img={i.avatar}
+            price={i.price}
+            title={i.title}
+            description={i.comment}
+            href={hrefs}
+            rating={i.rating}
           ></Card>
         );
       })}
     </FloatingRow1>
     {/* This is the 2nd row */}
     <FloatingRow2>
-      {Object.keys(images).map((i) => {
+      {cards.slice(10, 20).map((i, e) => {
         return (
           <Card
-            key={i}
-            img={images[i]}
-            price={prices[i]}
-            title={titles[i]}
-            description={descriptions[i]}
-            href={hrefs[i]}
-            num={nums[i]}
+            key={e}
+            img={i.avatar}
+            price={i.price}
+            title={i.title}
+            description={i.comment}
+            href={hrefs}
+            rating={i.rating}
           ></Card>
         );
       })}

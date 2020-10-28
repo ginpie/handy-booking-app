@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ReactStars from "react-rating-stars-component";
 
 const LinkContainer = styled.a`
   width: 280px;
@@ -68,6 +67,7 @@ const Description = styled.div`
   width: 70%;
   margin-left: 10px;
   padding: 10px;
+  font-size: 17px;
 `;
 
 const CardBody = ({ img, description }) => (
@@ -83,21 +83,34 @@ const RatingBox = styled.div`
   align-items: center;
 `;
 
-const Stars = styled(ReactStars)`
-  box-shadow: #efefef 1px 2px 2px;
+const StarChecked = styled.i`
+  color: #ffd943;
+  font-size: 16px;
 `;
 
-const Rating = ({ num }) => (
-  <RatingBox>
-    <Stars count={5} onChange={null} size={24} activeColor="#ffda44" />
-  </RatingBox>
-);
+const StarUnchecked = styled.i`
+  color: #aaa;
+  font-size: 16px;
+`;
 
-const Card = ({ img, price, title, description, href, num }) => (
+const Rating = (rating) => {
+  return (
+    <RatingBox>
+      {[...Array(rating.rating)].map((e, i) => (
+        <StarChecked className="fa fa-star" key={i} />
+      ))}
+      {[...Array(5 - rating.rating)].map((e, i) => (
+        <StarUnchecked className="fa fa-star" key={i} />
+      ))}
+    </RatingBox>
+  );
+};
+
+const Card = ({ img, price, title, description, href, rating }) => (
   <LinkContainer href={href} target="_blank">
     <CardHeader title={title} price={price}></CardHeader>
     <CardBody img={img} description={description}></CardBody>
-    <Rating num={num}></Rating>
+    <Rating rating={rating}></Rating>
   </LinkContainer>
 );
 
