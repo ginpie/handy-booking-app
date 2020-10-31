@@ -1,8 +1,8 @@
 const AUTH_TOKEN = 'AUTH_TOKEN';
 
 const extractAuthTokenFromResponse = (response) => {
-  const authToken = response.headers['x-auth-token'];
-
+  const authToken = response.headers['authorization'];
+  // console.log(authToken)
   if (authToken) {
     localStorage.setItem(AUTH_TOKEN, authToken);
   }
@@ -11,11 +11,11 @@ const extractAuthTokenFromResponse = (response) => {
 
 const appendAuthTokenToRequest = (config) => {
   const authToken = localStorage.getItem(AUTH_TOKEN);
-
+  // console.log(authToken)
   if (authToken) {
     config.headers = {
       ...config.headers,
-      'Authorization': `Bearer ${localStorage.getItem(AUTH_TOKEN)}`,
+      'Authorization': localStorage.getItem(AUTH_TOKEN),
     };
   }
   return config;
