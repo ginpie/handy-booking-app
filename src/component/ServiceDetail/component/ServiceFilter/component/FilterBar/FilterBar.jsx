@@ -53,7 +53,6 @@ class FilterBar extends React.Component {
             content: newContent,
             active: "",
         });
-        // console.log(this.state.content[currentOpen]);
     }
 
     render() {
