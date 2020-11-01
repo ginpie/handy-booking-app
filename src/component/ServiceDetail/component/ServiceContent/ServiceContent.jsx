@@ -65,7 +65,6 @@ class ServiceContent extends React.Component {
                 loaded: true,
             });
         })
-        // .then(getTradieAllInfo(this.state.tradiesData[0]));
     }
 
     render() {

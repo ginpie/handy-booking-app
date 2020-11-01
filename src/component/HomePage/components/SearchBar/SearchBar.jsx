@@ -3,7 +3,6 @@ import styled from "styled-components";
 import MediaQuery from "react-responsive";
 import { withRouter } from "react-router-dom";
 
-import Search from "./components/Search";
 import Text from "./components/Text";
 import ZipSearch from "./components/ZipSearch";
 import ServiceSearch from "./components/ServiceSearch";

@@ -68,7 +68,7 @@ const OrderForm = () => (
             <OrderInput name="state" type="text">State:</OrderInput>
             <OrderInput name="postcode" type="text">Postcode:</OrderInput>
         </InputRow>
-        <Label for="addition">Additional Details</Label>
+        <Label htmlFor="addition">Additional Details</Label>
         <TextArea name="addition" />
         <SubmitWrapper>
             <SubmitBtn type="submit" value="GET PRICE NOW" />

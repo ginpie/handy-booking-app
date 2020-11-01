@@ -65,7 +65,6 @@ const person = {
 };
 
 const TradiesDetail = (props) => {
-  console.log(props);
   return (
     <Layout>
       <Left>

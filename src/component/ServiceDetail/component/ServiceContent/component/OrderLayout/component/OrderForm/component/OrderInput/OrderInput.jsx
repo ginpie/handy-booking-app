@@ -31,7 +31,7 @@ const Input = styled.input`
 
 const OrderInput = (props) => (
     <Container>
-        <Label for={props.name}>{props.children}</Label>
+        <Label htmlFor={props.name}>{props.children}</Label>
         <Input name={props.name} type={props.type} />
     </Container>
 );
