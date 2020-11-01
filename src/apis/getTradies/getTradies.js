@@ -6,9 +6,9 @@ const instance = axios.create({
   baseURL: REACT_APP_URL,
 });
 
-function getTradies() {
+async function getTradies() {
   return instance
-    .get("/tradies")
+    .get("/api/tradies")
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

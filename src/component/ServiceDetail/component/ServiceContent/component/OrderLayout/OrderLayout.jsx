@@ -17,7 +17,7 @@ const OrderLayout = (props) => (
     <Layout>
         <TradiesDetail data={props.currentTradie}/>
         <OrderForm />
-        <Reviews />
+        {/* <Reviews /> */}
     </Layout>
 );
 

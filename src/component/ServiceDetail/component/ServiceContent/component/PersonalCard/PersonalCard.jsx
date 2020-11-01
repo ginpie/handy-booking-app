@@ -71,7 +71,7 @@ const Comment = styled.div`
 
 const getAvgRating = (orders) => {
 
-    return orders.length > 0 ? Math.round(orders.reduce((acc, val) => acc + val, 0) / orders.length) : 0;
+    return orders && orders.length > 0 ? Math.round(orders.reduce((acc, val) => acc + val, 0) / orders.length) : 0;
 }
 
 const PersonalCard = ({
@@ -80,8 +80,8 @@ const PersonalCard = ({
     action,
     comment,
 }) => {
-    const rating = data.rating || getAvgRating(data.orders);
-    const name = data.name || data.users[0].firstName + data.users[0].lastName;
+    const rating = getAvgRating(data.orders);
+    const name =`${data.first_name} ${data.last_name}`;
     return (
         <Card onClick={action?action.bind(this, data):null}>
             <Title>{name}</Title>
