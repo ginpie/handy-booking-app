@@ -74,7 +74,7 @@ const SetPassowrdButton = styled.button`
 
 const SignInAndSecurity = ({fakeUserData}) => {
     const [email] = useState(fakeUserData.email);
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState('')
     const [showModal, setShowModal] = useState(false)
     const [displayError, setDispalyError] = useState(false)
@@ -86,6 +86,10 @@ const SignInAndSecurity = ({fakeUserData}) => {
 
     const handleUpdatePassword = async(event) => {
         event.preventDefault(event);
+        if (password==="") {
+            setDispalyError(true)
+            return
+        }
         if (password!==confirmPassword) {
             setDispalyError(true)
             return
