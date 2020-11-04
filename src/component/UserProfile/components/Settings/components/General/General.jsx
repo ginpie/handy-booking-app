@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import BoxContainer from '../../../BoxContainer';
 import updateAccount from '../../../../../../apis/updateAccount';
+import updateCustomerAddress from '../../../../../../apis/updateCustomerAddress';
 
 const Container = styled.div`
     display: flex;
@@ -10,22 +11,40 @@ const Container = styled.div`
 `;
 
 const AccountWrapper = styled.div`
-    height: 200px;
+    height: 250px;
     width: 100%;
     position: relative;
+    @media screen and (min-width: 1700px) {
+        height: 200px;
+    }
+    @media screen and (max-width: 990px) {
+        height: 300px;
+    }
+    @media screen and (max-width: 700px) {
+        height: 500px;
+    }
 `;
 
 const Account = styled.div`
     width: 90%;
-    height: 148px;
+    height: 205px;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    @media screen and (min-width: 1700px) {
+        height: 155px;
+    }
+    @media screen and (max-width: 990px) {
+        height: 255px;
+    }
+    @media screen and (max-width: 700px) {
+        height: 455px;
+    }
 `;
 
 const AccountItem = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    padding: 15px 10px;
 `;
 
 const AccountTitle = styled.div`
@@ -85,16 +104,17 @@ const Button = styled.button`
     border-radius: 5px;
 `;
 
-const General = ({fakeUserData}) => {
+const General = ({fakeUserData, role}) => {
     const [firstName, setFirstName] = useState(fakeUserData.firstName)
     const [lastName, setlastName] = useState(fakeUserData.lastName)
     const [dateOfBirth, setDateOfBirth] = useState(fakeUserData.DOB)
     const [phone, setPhone] = useState(fakeUserData.phone)
+    const [postCode, setPostCode] = useState('4215')
     const [address, setAddress] = useState({
-        address: fakeUserData.address.address,
+        address1: fakeUserData.address.address1,
         address2: fakeUserData.address.address2,
         suburb: fakeUserData.address.suburb,
-        state: fakeUserData.address.state,
+        zipCode: fakeUserData.address.zipCode,
     })
 
     const accountItems = [
@@ -120,6 +140,19 @@ const General = ({fakeUserData}) => {
         await updateAccount(fakeUserData._id, data)        
     }
 
+    const handleUpdateAddress = async(event) => {
+        event.preventDefault(event);
+        const data = {
+            address: {
+                "address1" : address.address1,
+                "address2" : address.address2,
+                "suburb" : address.suburb,
+                "zipCode" : address.zipCode
+            }
+        }
+        await updateCustomerAddress(fakeUserData.email, data)
+    }
+
     return (
         <Container>
             <AccountWrapper>
@@ -137,45 +170,60 @@ const General = ({fakeUserData}) => {
                                 />
                             </AccountItem>
                         ))}
+                        {role.tradie && (
+                            <AccountItem>
+                            <AccountTitle>
+                                PostCode
+                            </AccountTitle>
+                            <AccountInput 
+                                type="text" 
+                                value={postCode}
+                                onChange={(event)=>setPostCode(event.currentTarget.value)}
+                            />
+                            </AccountItem>
+                        )}
                     </Account>
                     <Button onClick={handleUpdateAccount}>Save</Button>
                 </BoxContainer>
             </AccountWrapper>
-            <AddressWrapper>
-                <BoxContainer title="Address">
-                    <Address>
-                        <Left>
-                            <AddressTitle>Address</AddressTitle>
-                            <AddressInput 
-                                value={address.address}
-                                onChange={handleAddressChange}
-                                name="address"
-                            />
-                            <AddressTitle>Suburb</AddressTitle>
-                            <AddressInput
-                                value={address.suburb}
-                                onChange={handleAddressChange}
-                                name="suburb"
-                            />
-                        </Left>
-                        <Right>
-                            <AddressTitle>Address2</AddressTitle>
-                            <AddressInput 
-                                value={address.address2}
-                                onChange={handleAddressChange}
-                                name="address2"
-                            />
-                            <AddressTitle>State</AddressTitle>
-                            <AddressInput 
-                                value={address.state}
-                                onChange={handleAddressChange}
-                                name="state"
-                            />
-                        </Right>
-                    </Address>
-                    <Button>Save</Button>
-                </BoxContainer>
-            </AddressWrapper>
+            {role.customer && (
+                <AddressWrapper>
+                    <BoxContainer title="Address">
+                        <Address>
+                            <Left>
+                                <AddressTitle>Address</AddressTitle>
+                                <AddressInput 
+                                    value={address.address1}
+                                    onChange={handleAddressChange}
+                                    name="address1"
+                                />
+                                <AddressTitle>Suburb</AddressTitle>
+                                <AddressInput
+                                    value={address.suburb}
+                                    onChange={handleAddressChange}
+                                    name="suburb"
+                                />
+                            </Left>
+                            <Right>
+                                <AddressTitle>Address2</AddressTitle>
+                                <AddressInput 
+                                    value={address.address2}
+                                    onChange={handleAddressChange}
+                                    name="address2"
+                                />
+                                <AddressTitle>Zip Code</AddressTitle>
+                                <AddressInput 
+                                    value={address.zipCode}
+                                    onChange={handleAddressChange}
+                                    name="zipCode"
+                                />
+                            </Right>
+                        </Address>
+                        <Button onClick={handleUpdateAddress}>Save</Button>
+                    </BoxContainer>
+                </AddressWrapper>
+            )
+            }
         </Container>
      );
 }
