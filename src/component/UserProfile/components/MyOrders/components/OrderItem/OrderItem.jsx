@@ -224,7 +224,7 @@ const DisplayOrderItem = ({order}) => {
                         })}
                     </InfoRow>
                     <MessageBox
-                        value={comment}
+                        value={comment || ""}
                         onChange={(event) => setComment(event.target.value)}
                         cols="30" 
                         rows="5"

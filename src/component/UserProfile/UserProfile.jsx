@@ -52,6 +52,7 @@ class UserProfile extends Component {
   state = {
     fakeUserData: {},
     fakeUserInquiries: {},
+    role: { customer: "", tradie: "" },
     currentPage: "",
     displaySidebar: false,
   };
@@ -63,9 +64,18 @@ class UserProfile extends Component {
   };
 
   async componentDidMount() {
-    this.setState({ currentPage: "My Inquiry" });
     const user = await getCurrentUser();
     console.log(user);
+    if (user.customers.length >= 1) {
+      const role = { ...this.state.role };
+      role.customer = true;
+      this.setState({ role });
+    }
+    if (user.tradies.length >= 1) {
+      const role = { ...this.state.role };
+      role.tradie = true;
+      this.setState({ role });
+    }
     this.setState({
       userData: {
         firstName: user.firstName || "",
@@ -73,13 +83,17 @@ class UserProfile extends Component {
         DOB: user.DOB || "",
         email: user.email || "",
         phone: user.phoneNumber || "",
-        address: user.address || "",
+        address: user.customers[0].address || "",
         _id: user._id,
-        avatar: user.avatar || "",
       },
+      currentPage: "My Inquiry",
     });
-    console.log(this.state.currentPage);
   }
+
+  handleNavItemChange = (value) => {
+    const currentPage = value;
+    this.setState({ currentPage });
+  };
 
   handleNavItemChange = (value) => {
     const currentPage = value;
@@ -111,7 +125,9 @@ class UserProfile extends Component {
         key: "SETTING",
         value: "Settings",
         icon: settingsIcon,
-        content: <Settings fakeUserData={this.state.userData} />,
+        content: (
+          <Settings fakeUserData={this.state.userData} role={this.state.role} />
+        ),
       },
       {
         key: "HELPCENTRE",
@@ -123,7 +139,7 @@ class UserProfile extends Component {
     const { userData, currentPage, displaySidebar } = this.state;
     return (
       <Container>
-        <Header scrollAnime={false} />
+        <Header scrollAnime={true} />
         <ContentContainer>
           <SidebarMenu onClick={this.toggleSidebar}>Menu</SidebarMenu>
           <SideBar
