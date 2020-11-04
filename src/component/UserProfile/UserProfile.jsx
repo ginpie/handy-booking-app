@@ -85,7 +85,8 @@ class UserProfile extends Component {
                     email: user.email || "",
                     phone: user.phoneNumber || "",
                     address: user.customers[0].address || "",
-                    _id: user._id
+                    _id: user._id,
+                    postCode: user.tradies[0].PostCode || "",
                 }, 
                 currentPage:'My Inquiry'
             })

@@ -4,7 +4,7 @@ import OrderInput from './component/OrderInput';
 import withFetch from "../../../../../../../withFetch";
 import withForm from "../../../../../../../withForm";
 import compose from "../../../../../../../../utils/compose";
-import form from "./form";
+// import form from "./form";
 import createInquiry from '../../../../../../../../apis/createInquiry'
 const Form = styled.form`
     margin: 40px 0;

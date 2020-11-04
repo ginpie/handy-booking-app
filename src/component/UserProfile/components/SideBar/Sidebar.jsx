@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
-import Logo from '../Logo';
 import Avatar from '../Avatar';
 import NavItem from './components/NavItem';
 
@@ -20,14 +19,6 @@ const Wrapper = styled.div`
         overflow: hidden;
         transition: 0.5s;
         ${(props) => props.displaySidebar ? (css` width: 300px;`) : (css`width: 0px;`)}
-    }
-`;
-
-const LogoWrapper = styled.div`
-    width: 90%;
-    margin-top: 10px;
-    @media screen and (max-width: 768px) {
-        display: none;
     }
 `;
 
@@ -82,9 +73,6 @@ const SideBar = ({fakeUserData: { firstName, lastName }, navItems, currentPage, 
     return ( 
         <Wrapper displaySidebar={displaySidebar}>
             <CloseSidebarButton onClick={onCloseSidebar}>x</CloseSidebarButton>
-            <LogoWrapper>
-                <Logo />
-            </LogoWrapper>
             <AvatarWrapper>
                 <Avatar />
             </AvatarWrapper>
