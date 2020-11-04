@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Header from '../Header';
@@ -53,6 +52,7 @@ class UserProfile extends Component {
   state = {
     fakeUserData: {},
     fakeUserInquiries: {},
+    role: {customer:"" , tradie:""},
     currentPage: "",
     displaySidebar: false,
   };
@@ -66,6 +66,16 @@ class UserProfile extends Component {
      async componentDidMount() {
         const user = await getCurrentUser()
         console.log(user)
+        if(user.customers.length >= 1) {
+          const role = {...this.state.role}
+          role.customer = true
+          this.setState({role})
+        }
+        if(user.tradies.length >= 1) {
+          const role = {...this.state.role}
+          role.tradie = true
+          this.setState({role})
+        }
         this.setState(
             {userData:
                 {
@@ -74,7 +84,7 @@ class UserProfile extends Component {
                     DOB: user.DOB || "",
                     email: user.email || "",
                     phone: user.phoneNumber || "",
-                    address: user.address || "",
+                    address: user.customers[0].address || "",
                     _id: user._id
                 }, 
                 currentPage:'My Inquiry'
@@ -97,7 +107,7 @@ class UserProfile extends Component {
       const navItems = [
           {key: 'MYINQUIRY', value: 'My Inquiry', icon:placeOrderIcon, content:(<MyInquiry />)},
           {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders/>)},
-          {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.userData}/>)},
+          {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.userData} role={this.state.role}/>)},
           {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div/>))},
       ]
       const { userData, currentPage, displaySidebar} = this.state
