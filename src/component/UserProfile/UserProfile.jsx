@@ -84,9 +84,9 @@ class UserProfile extends Component {
                     DOB: user.DOB || "",
                     email: user.email || "",
                     phone: user.phoneNumber || "",
-                    address: user.customers[0].address || "",
+                    address: (user.customers.length > 0 ? user.customers[0].address || "" : ""),
                     _id: user._id,
-                    postCode: user.tradies[0].PostCode || "",
+                    postCode: (user.tradies.length > 0 ? user.tradies[0].PostCode || "" : ""),
                 }, 
                 currentPage:'My Inquiry'
             })
