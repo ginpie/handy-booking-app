@@ -6,7 +6,8 @@ import JoinUsPage from "../JoinUs";
 import ContactUsPage from "../ContactUs";
 import ServiceDetailPage from "../ServiceDetail";
 import UserProfilePage from "../UserProfile";
-import {Authentication} from '../withAuthentication'
+import {Authentication} from '../withAuthentication';
+import ProtectedRoute from '../protectedRoute';
 function App() {
   return (
     <Authentication>
@@ -16,7 +17,7 @@ function App() {
         <Route path="/join-us" component={JoinUsPage} />
         <Route path="/contact" component={ContactUsPage} />
         <Route path="/service" component={ServiceDetailPage} />
-        <Route path="/user-profile" component={UserProfilePage} />
+        <ProtectedRoute path="/user-profile" component={UserProfilePage} />
       </Switch>
     </BrowserRouter>
     </Authentication>
