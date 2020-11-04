@@ -23,11 +23,14 @@ const Wrapper = styled.div`
 `;
 
 const AvatarWrapper = styled.div`
-    width: 30%;
+    width: 40%;
     margin-top: 30px;
     @media screen and (max-width: 768px) {
         display: none;
-    }    
+    }
+    @media screen and (min-width: 1200px) {
+        width: 33%;
+    }     
 `;
 
 const Name = styled.div`

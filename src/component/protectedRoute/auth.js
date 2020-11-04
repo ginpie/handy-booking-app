@@ -16,7 +16,6 @@ const isLoggedIn = () => {
     
     if (isExpired) {
         localStorage.removeItem("token");
-        window.location.reload();
         return
     }
 
