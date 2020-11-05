@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CSSTransition } from "react-transition-group";
 import OrderInput from './component/OrderInput';
 import createInquiry from '../../../../../../../../apis/createInquiry';
-
+import  { AuthenticationContext } from '../../../../../../../withAuthentication';
+import AuthenticationModals from '../../../../../../../Header/components/AuthenticationModals';
 const Form = styled.form`
     margin: 40px 0;
 `;
@@ -62,11 +64,26 @@ class OrderForm extends React.Component{
                 state: "",
                 postcode: "",
                 message: "",
-            }
+            },
+            authenticationModal: null,
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.setAuthenticationModal = this.setAuthenticationModal.bind(this);
     }
+    
+    setAuthenticationModal(target) {
+        return (event) => {
+          if (event) {
+            event.preventDefault();
+          }
+    
+          this.setState({
+            authenticationModal: target,
+          });
+        };
+      }
+
     handleChange(event) {
         const target = event.target;
         const name = target.name;
@@ -115,6 +132,7 @@ class OrderForm extends React.Component{
         createInquiry(inquiryData);
     }
     render(){
+        const { authenticationModal } = this.state;
         return (
         <Form onSubmit={this.handleFormSubmit}>
         <FormHeader>Order Details</FormHeader>
@@ -142,7 +160,28 @@ class OrderForm extends React.Component{
         <Label htmlFor="message" >Additional Details</Label>
         <TextArea name="message"  value={this.state.inquiryForm.message} onChange={this.handleChange} />
         <SubmitWrapper>
-            <SubmitBtn type="submit" value="GET PRICE NOW" onClick={this.handleFormSubmit} />
+            <AuthenticationContext.Consumer>
+            {(Authentication)=>Authentication.user?(
+                 <SubmitBtn type="submit" value="GET PRICE NOW" onClick={this.handleFormSubmit} />
+             ):(
+                <>
+                    <SubmitBtn type="submit" value="Sign In" onClick={this.setAuthenticationModal('signIn')} />
+                    {authenticationModal && (
+                        <CSSTransition
+                            in={!(authenticationModal === null)}
+                            appear={true}
+                            timeout={1000}
+                            classNames="model"
+                        >
+                            <AuthenticationModals
+                                initialModal={authenticationModal}
+                                 onClose={this.setAuthenticationModal()}
+                            />
+                        </CSSTransition>
+                    )}
+                </>
+             )}  
+            </AuthenticationContext.Consumer>
         </SubmitWrapper>
     </Form>
         )
