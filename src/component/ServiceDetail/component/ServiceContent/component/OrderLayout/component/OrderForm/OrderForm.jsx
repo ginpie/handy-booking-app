@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import OrderInput from './component/OrderInput';
 import createInquiry from '../../../../../../../../apis/createInquiry';
-import customerSendInquiry from '../../../../../../../../apis/customerSendInquiry'
+
 const Form = styled.form`
     margin: 40px 0;
 `;
@@ -112,7 +112,6 @@ class OrderForm extends React.Component{
             message: `small furniture: ${smallFurniture} medium furniture: ${mediumFurniture} large furniture: ${largeFurniture} ${message}`,
             tradies: tradieId
         }
-        console.log(inquiryData)
         createInquiry(inquiryData);
     }
     render(){
