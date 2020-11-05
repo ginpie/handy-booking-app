@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import ProtectedRoute from "../protectedRoute";
 import HomePage from "../HomePage";
 import JoinUsPage from "../JoinUs";
 import ContactUsPage from "../ContactUs";
@@ -16,7 +17,7 @@ function App() {
           <Route path="/join-us" component={JoinUsPage} />
           <Route path="/contact" component={ContactUsPage} />
           <Route path="/service" component={ServiceDetailPage} />
-          <Route path="/user-profile" component={UserProfilePage} />
+          <ProtectedRoute path="/user-profile" component={UserProfilePage} />
           <Route
             path="/cleaning"
             render={(props) => (

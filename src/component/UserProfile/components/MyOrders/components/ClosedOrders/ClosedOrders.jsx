@@ -24,10 +24,6 @@ const Container = styled.div`
 
 `;
 
-const BoxWrapper = styled.div`
-    height: 600px;
-`;
-
 const ClosedOrders = () => {
     const [closedOrders, setClosedOrders] = useState([])
 
@@ -48,7 +44,6 @@ const ClosedOrders = () => {
     },[])
 
     return (
-        <BoxWrapper> 
         <BoxContainer 
             title="Closed orders"
             needSearchBar
@@ -70,7 +65,6 @@ const ClosedOrders = () => {
                 )}
             </Container>
         </BoxContainer>
-        </BoxWrapper> 
      );
 }
  

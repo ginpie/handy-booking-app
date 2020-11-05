@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import fakeAvatar from "../icons/users.png";
-
+import avatar from "../icons/man.png";
 const AvatarWrapper = styled.div`
   width: 100%;
   border-radius: 50%;
@@ -12,10 +11,10 @@ const Photo = styled.img`
   border-radius: 50%;
 `;
 
-const Avatar = ({ avatar }) => {
+const Avatar = () => {
   return (
     <AvatarWrapper>
-      <Photo src={avatar || fakeAvatar} alt="avatar" />
+      <Photo src={avatar} alt="avatar" />
     </AvatarWrapper>
   );
 };

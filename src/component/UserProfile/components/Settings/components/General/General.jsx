@@ -3,6 +3,7 @@ import styled from "styled-components";
 import BoxContainer from "../../../BoxContainer";
 import updateAccount from "../../../../../../apis/updateAccount";
 import updateCustomerAddress from "../../../../../../apis/updateCustomerAddress";
+import updateTradiePostCode from "../../../../../../apis/updateTradiePostCode";
 
 const Container = styled.div`
   display: flex;
@@ -108,7 +109,7 @@ const General = ({ fakeUserData, role }) => {
   const [lastName, setlastName] = useState(fakeUserData.lastName);
   const [dateOfBirth, setDateOfBirth] = useState(fakeUserData.DOB);
   const [phone, setPhone] = useState(fakeUserData.phone);
-  const [postCode, setPostCode] = useState("4215");
+  const [postCode, setPostCode] = useState(fakeUserData.postCode);
   const [address, setAddress] = useState({
     address1: fakeUserData.address.address1,
     address2: fakeUserData.address.address2,
@@ -152,6 +153,7 @@ const General = ({ fakeUserData, role }) => {
       phoneNumber: phone,
     };
     await updateAccount(fakeUserData._id, data);
+    window.location.reload();
   };
 
   const handleUpdateAddress = async (event) => {
@@ -165,6 +167,13 @@ const General = ({ fakeUserData, role }) => {
       },
     };
     await updateCustomerAddress(fakeUserData.email, data);
+    const newPostCode = {
+      PostCode: postCode,
+    };
+    if (role.tradie) {
+      await updateTradiePostCode(fakeUserData.email, newPostCode);
+    }
+    window.location.reload();
   };
 
   return (
@@ -205,13 +214,13 @@ const General = ({ fakeUserData, role }) => {
               <Left>
                 <AddressTitle>Address</AddressTitle>
                 <AddressInput
-                  value={address.address1}
+                  value={address.address1 || ""}
                   onChange={handleAddressChange}
                   name="address1"
                 />
                 <AddressTitle>Suburb</AddressTitle>
                 <AddressInput
-                  value={address.suburb}
+                  value={address.suburb || ""}
                   onChange={handleAddressChange}
                   name="suburb"
                 />
@@ -219,13 +228,13 @@ const General = ({ fakeUserData, role }) => {
               <Right>
                 <AddressTitle>Address2</AddressTitle>
                 <AddressInput
-                  value={address.address2}
+                  value={address.address2 || ""}
                   onChange={handleAddressChange}
                   name="address2"
                 />
                 <AddressTitle>Zip Code</AddressTitle>
                 <AddressInput
-                  value={address.zipCode}
+                  value={address.zipCode || ""}
                   onChange={handleAddressChange}
                   name="zipCode"
                 />

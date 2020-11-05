@@ -6,17 +6,19 @@ const Container = styled.div`
     width: 100%;
     background-color: #ffffff;
     border-bottom: 2px solid #c7c7c7;
+    font-size: 13px;
     display: flex;
     justify-content: center;
     position: relative;
     height: 300px;
     transition: 0.3s;
-    ${(props) => !props.showAll && css`
-        height: 80px;
-    `}
     @media screen and (max-width: 768px) {
-        height: 400px;
+        height: 300px;
+        font-size: 10px;
         ${(props) => !props.showAll && css`
+        height: 80px;
+    `}}
+    ${(props) => !props.showAll && css`
         height: 80px;
     `}
 `;
@@ -35,10 +37,7 @@ const InfoRow = styled.div`
     margin-top: 10px;
     display: flex;
     max-height: 50px;
-    @media screen and (max-width: 500px) {
-        display: flex;
-        flex-direction: column;
-    }
+    align-items:center;
 `;
 
 const MessageBox = styled.textarea`
@@ -77,8 +76,8 @@ const ArrowIcon = styled.img`
 `;
 
 const ServiceName = styled.div`
-    font: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: bold;
 `;
 
 const Right = styled.div`
@@ -125,6 +124,15 @@ const Price = styled.div`
     }
 `;
 
+const Title = styled.div`
+    font-weight: 500;
+`;
+
+const Info = styled.div`
+    margin-left: 5px;
+    text-decoration:underline;
+`;
+
 
 const ShowInquiery = ({inquiry}) => {
     const [showAll, setShowAll] = useState(false)
@@ -143,17 +151,23 @@ const ShowInquiery = ({inquiry}) => {
                         </ServiceName>
                     </InfoRow>
                     <InfoRow>
-                        Tradie Name: {inquiry.tradie}
+                        <Title>From:</Title>
+                        <Info>{inquiry.tradie}</Info>
                         &nbsp; &nbsp;
-                        Phone Number: {inquiry.phoneNumber}
+                        <Title>Phone:</Title>
+                        <Info>{inquiry.phoneNumber}</Info>
                     </InfoRow>
                     <InfoRow>
-                        Email Address: {inquiry.email}
+                        <Title>Email:</Title>
+                        <Info>{inquiry.email}</Info>
                         &nbsp; &nbsp;
-                        OrderId: {inquiry.inquiryId}
+                        <Title>OrderId:</Title>
+                        <Info>{inquiry.inquiryId}</Info>
                     </InfoRow>
                     <InfoRow>
-                        Message:
+                        <Title>
+                            Message:
+                        </Title>
                     </InfoRow>
                     <MessageBox
                         value={inquiry.message}
@@ -162,14 +176,16 @@ const ShowInquiery = ({inquiry}) => {
                         readOnly 
                     />
                     <InfoRow>
-                        Price offered: {inquiry.price}
+                        <Title>Price:</Title>
+                        <Info>{inquiry.price}</Info>
                     </InfoRow>
                     <InfoRow>
-                        Order Status:
+                        <Title>Order Status:</Title>
                         <StatusButton>{inquiry.status}</StatusButton>
                     </InfoRow>
                     <InfoRow>
-                        Order create date: {inquiry.createTime}
+                        <Title>Date:</Title>
+                        <Info>{inquiry.createTime}</Info>
                     </InfoRow>
                     <ArrowButton
                         onClick={handleShow}
@@ -192,7 +208,7 @@ const ShowInquiery = ({inquiry}) => {
                             <LeftBottomItem>{inquiry.tradie}</LeftBottomItem>
                             <LeftBottomItem>{inquiry.inquiryId}</LeftBottomItem>
                             <LeftBottomItem border="none">{inquiry.price}</LeftBottomItem>
-                            <Price>offer: {inquiry.price}</Price>
+                            <Price>Price: {inquiry.price}</Price>
                         </LeftBottom>
                     </Left>
                     <Right>

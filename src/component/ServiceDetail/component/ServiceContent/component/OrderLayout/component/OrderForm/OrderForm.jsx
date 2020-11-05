@@ -1,10 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import OrderInput from "./component/OrderInput";
-import withFetch from "../../../../../../../withFetch";
-import withForm from "../../../../../../../withForm";
-import compose from "../../../../../../../../utils/compose";
-// import form from "./form";
 import createInquiry from "../../../../../../../../apis/createInquiry";
 const Form = styled.form`
   margin: 40px 0;
@@ -53,15 +49,15 @@ class OrderForm extends React.Component {
     super(props);
     this.state = {
       inquiryForm: {
-        smallFurniture: "",
-        mediumFurniture: "",
-        largeFurniture: "",
+        smallFurniture: 0,
+        mediumFurniture: 0,
+        largeFurniture: 0,
         name: "",
         email: "",
         phone: "",
         address1: "",
         address2: "",
-        suburt: "",
+        suburb: "",
         state: "",
         postcode: "",
         message: "",
@@ -71,20 +67,8 @@ class OrderForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(event) {
-    // return (event)=>{
-    //     event.preventDefault();
-    //     const {value} = event.target;
-    //     this.setState((preState)=>({
-    //         inquiryForm:{
-    //             ...preState.inquiryForm,
-    //             [target]:value
-    //         }
-    //     }));
-    // }
     const target = event.target;
-
     const name = target.name;
-
     const value = target.value;
 
     this.setState((prevState) => ({
@@ -93,20 +77,42 @@ class OrderForm extends React.Component {
         [name]: value,
       },
     }));
-    // this.setState({ inquiryForm: { value: event.target.value } });
   }
+
   handleFormSubmit(event) {
-    const { inquiryForm } = this.state;
-    // const {
-    //     fetch,
-    //   } = this.props;
+    const {
+      smallFurniture,
+      mediumFurniture,
+      largeFurniture,
+      name,
+      email,
+      phone,
+      address1,
+      address2,
+      suburb,
+      state,
+      postcode,
+      message,
+    } = this.state.inquiryForm;
+    const tradieId = this.props.tradieId;
+
     event.preventDefault();
-    // const {address1, address2} =
-    // const email = formData.email.value;
-    // fetch(() => createInquiry(inquiryForm)).then((id) => {
-    //     // customerSendInquiry(id)
-    //   });
-    createInquiry(inquiryForm);
+
+    const inquiryData = {
+      address: {
+        address1,
+        address2,
+        suburb,
+        state,
+        zipCode: postcode,
+      },
+      contactNo: phone,
+      email,
+      name,
+      message: `small furniture: ${smallFurniture} medium furniture: ${mediumFurniture} large furniture: ${largeFurniture} ${message}`,
+      tradies: tradieId,
+    };
+    createInquiry(inquiryData);
   }
   render() {
     return (
@@ -184,9 +190,9 @@ class OrderForm extends React.Component {
             Address2:
           </OrderInput>
           <OrderInput
-            name="suburt"
+            name="suburb"
             type="text"
-            value={this.state.inquiryForm.suburt}
+            value={this.state.inquiryForm.suburb}
             onChange={this.handleChange}
           >
             Suburb:
@@ -210,25 +216,21 @@ class OrderForm extends React.Component {
             Postcode:
           </OrderInput>
         </InputRow>
-        <Label htmlFor="addition">Additional Details</Label>
+        <Label htmlFor="message">Additional Details</Label>
         <TextArea
-          name="addition"
-          value={this.state.inquiryForm.addition}
+          name="message"
+          value={this.state.inquiryForm.message}
           onChange={this.handleChange}
         />
         <SubmitWrapper>
-          <SubmitBtn type="submit" value="GET PRICE NOW" />
+          <SubmitBtn
+            type="submit"
+            value="GET PRICE NOW"
+            onClick={this.handleFormSubmit}
+          />
         </SubmitWrapper>
       </Form>
     );
   }
 }
-
-// const EnhancedOrderForm = compose(
-//     // withForm(form),
-//     withFetch,
-//   )(OrderForm);
-
-// export default EnhancedOrderForm;
-
 export default OrderForm;

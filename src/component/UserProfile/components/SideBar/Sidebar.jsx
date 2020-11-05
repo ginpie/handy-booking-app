@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Logo from "../Logo";
 import Avatar from "../Avatar";
 import NavItem from "./components/NavItem";
 
@@ -30,19 +29,14 @@ const Wrapper = styled.div`
   }
 `;
 
-const LogoWrapper = styled.div`
-  width: 90%;
-  margin-top: 10px;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
 const AvatarWrapper = styled.div`
-  width: 30%;
+  width: 40%;
   margin-top: 30px;
   @media screen and (max-width: 768px) {
     display: none;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 33%;
   }
 `;
 
@@ -86,7 +80,7 @@ const CloseSidebarButton = styled.button`
 `;
 
 const SideBar = ({
-  fakeUserData: { firstName, lastName, avatar },
+  fakeUserData: { firstName, lastName },
   navItems,
   currentPage,
   onPageChange,
@@ -96,11 +90,8 @@ const SideBar = ({
   return (
     <Wrapper displaySidebar={displaySidebar}>
       <CloseSidebarButton onClick={onCloseSidebar}>x</CloseSidebarButton>
-      {/* <LogoWrapper>
-                <Logo />
-            </LogoWrapper> */}
       <AvatarWrapper>
-        <Avatar avatar={avatar} />
+        <Avatar />
       </AvatarWrapper>
       <Name>
         {firstName}&nbsp;
