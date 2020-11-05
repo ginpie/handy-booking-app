@@ -25,8 +25,7 @@ const StyledModal = styled.div`
 const Header = styled.div`
     padding: 8px 16px;
     text-align: center;
-    font-size: 18px;
-    border-bottom: 1px solid #dadada;
+    font-size: 15px;
 `;
 
 
@@ -34,17 +33,23 @@ const Close = styled.button`
     position: absolute;
     top: 0;
     right: 0;
-    padding:16px 24px 0 0;
+    padding:10px 24px 0 0;
     display: flex;
     align-items: center;
     outline: 0;
     border: 0;
     background: transparent;
     cursor: pointer;
+    font-size: 25px;
+    font-weight: 600;
+    &:hover {
+        opacity: 0.6;
+    }
 `;
 
 const Body = styled.div`
     padding: 8px 16px;
+    margin-top: 10px;
 `;
 
 const Footer = styled.div`

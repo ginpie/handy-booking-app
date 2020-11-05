@@ -112,6 +112,7 @@ class OrderForm extends React.Component{
             tradies: tradieId
         }
         createInquiry(inquiryData);
+
     }
     render(){
         return (
@@ -146,14 +147,5 @@ class OrderForm extends React.Component{
     </Form>
         )
     }
-}
-
-// const EnhancedOrderForm = compose(
-//     // withForm(form),
-//     withFetch,
-//   )(OrderForm);
-  
-  
-// export default EnhancedOrderForm;
-  
+} 
 export default OrderForm;
