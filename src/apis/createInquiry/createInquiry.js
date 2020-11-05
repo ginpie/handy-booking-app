@@ -1,14 +1,11 @@
-import api from '../../lib/api';
-const createInquiry = ( data ) =>{
-    api.post('/inquiry',{data})
-    // .then((inquiryID)=>{
-    //     const code =inquiryID.data.id
-    //     api.get('/auth')
-    //     return code
-    // })
-    // .then((result)=>{
-    //     const email = result.data.email
-    //     api.post(`/customers/${email}/inquiry/${code}`)
-    // })gi
-}
+import axios from "axios";
+import { REACT_APP_URL } from "../apiURL";
+
+const instance = axios.create({
+  baseURL: REACT_APP_URL,
+});
+
+const createInquiry = (data) => {
+  instance.post("/api/inquiry", data);
+};
 export default createInquiry;

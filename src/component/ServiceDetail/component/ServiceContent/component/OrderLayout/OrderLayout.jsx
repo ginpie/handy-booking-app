@@ -16,7 +16,7 @@ const Layout = styled.div`
 const OrderLayout = (props) => (
     <Layout>
         <TradiesDetail data={props.currentTradie}/>
-        <OrderForm />
+        <OrderForm tradieId={props.currentTradie ? props.currentTradie.tradieId : ''} />
         <Reviews />
     </Layout>
 );

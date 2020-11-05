@@ -7,8 +7,8 @@
 //   });
 // export default getAuth;
 
-import api from '../../lib/api';
+import { instance as api } from "../../lib/api";
 
-const getAuth = () => api.get('/auth');
+const getAuth = () => api.get("/auth");
 
 export default getAuth;
