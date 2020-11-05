@@ -93,7 +93,7 @@ class OrderForm extends React.Component{
             postcode,
             message,
         } = this.state.inquiryForm;
-        const { tradieId } = this.props.tradieId;
+        const tradieId = this.props.tradieId;
 
         event.preventDefault();
 
@@ -109,6 +109,7 @@ class OrderForm extends React.Component{
             email,
             name,
             message: `small furniture: ${smallFurniture} medium furniture: ${mediumFurniture} large furniture: ${largeFurniture} ${message}`,
+            tradies: tradieId
         }
         createInquiry(inquiryData);
 
