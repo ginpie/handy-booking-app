@@ -38,7 +38,12 @@ const DropdownLink = styled.a`
   }
 `;
 
-const DropCalendar = styled.input``;
+const DropCalendar = styled.input`
+  width: 250px;
+  height: 50px;
+  font-size: 20px;
+  color: #626262;
+`;
 
 const DropSet = (type, content, click) => {
   return {
