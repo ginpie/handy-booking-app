@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import { CSSTransition } from "react-transition-group";
 import OrderInput from './component/OrderInput';
 import createInquiry from '../../../../../../../../apis/createInquiry';
-import  { AuthenticationContext } from '../../../../../../../withAuthentication';
+import  { AuthenticationContext} from '../../../../../../../withAuthentication';
 import AuthenticationModals from '../../../../../../../Header/components/AuthenticationModals';
-
+import withAuthentication from '../../../../../../../withAuthentication';
+import compose from "../../../../../../../../utils/compose";
 const Form = styled.form`
   margin: 40px 0;
 `;
@@ -90,23 +91,16 @@ class OrderForm extends React.Component{
         const target = event.target;
         const name = target.name;
         const value = target.value;
-        
+        const {authentication,} = this.props;
         this.setState((prevState)=>({
             inquiryForm:{
                 ...prevState.inquiryForm,
                 [name]: value}
         }));
+        // console.log(authentication.user.email)
+        // const tradieId = this.props.tradieId;
+        // console.log(tradieId)
     }
-
-
-    this.setState((prevState) => ({
-      inquiryForm: {
-        ...prevState.inquiryForm,
-        [name]: value,
-      },
-    }));
-  }
-
   handleFormSubmit(event) {
     const {
       smallFurniture,
@@ -122,8 +116,9 @@ class OrderForm extends React.Component{
       postcode,
       message,
     } = this.state.inquiryForm;
+    const {authentication,} = this.props;
     const tradieId = this.props.tradieId;
-
+    const customerId = authentication.user.email
 
         const inquiryData = {
             address: {
@@ -137,9 +132,12 @@ class OrderForm extends React.Component{
             email,
             name,
             message: `small furniture: ${smallFurniture} medium furniture: ${mediumFurniture} large furniture: ${largeFurniture} ${message}`,
-            tradies: tradieId
+            tradies: tradieId,
+            customers:customerId,
         }
-        createInquiry(inquiryData);
+        if(authentication.user){
+            createInquiry(inquiryData);
+        }
     }
     render(){
         const { authenticationModal } = this.state;
@@ -278,4 +276,9 @@ class OrderForm extends React.Component{
     );
   }
 }
-export default OrderForm;
+
+const EnhancedOrderForm = compose(
+    withAuthentication,
+  )(OrderForm);
+  
+export default EnhancedOrderForm;
