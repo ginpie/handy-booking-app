@@ -12,6 +12,7 @@ const Logout = ({
     onClick={(event) => {
       event.preventDefault();
       authentication.setUser();
+      window.location='/';
 
     }}
   >

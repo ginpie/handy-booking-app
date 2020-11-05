@@ -2,7 +2,7 @@ import axios from 'axios';
 import useAuth from './useAuth';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'http://localhost:3000/api',
 });
 
 useAuth(instance);

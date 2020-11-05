@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import BoxContainer from '../../../BoxContainer';
 import styled from 'styled-components';
 import SetPasswordModal from '../SetPasswordModal';
+import updateUserPassword from '../../../../../../apis//updateUserPassword';
 
 const Container = styled.div`
     width: 100%;
@@ -72,12 +73,31 @@ const SetPassowrdButton = styled.button`
 
 
 const SignInAndSecurity = ({fakeUserData}) => {
-    const [email, setEmail] = useState(fakeUserData.email);
-    const [password, setPassword] = useState('')
+    const [email] = useState(fakeUserData.email);
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [showModal, setShowModal] = useState(false)
+    const [displayError, setDispalyError] = useState(false)
 
     const handleShowModal = (event) => {
         event.preventDefault();
+        setShowModal(!showModal);
+    }
+
+    const handleUpdatePassword = async(event) => {
+        event.preventDefault(event);
+        if (password==="") {
+            setDispalyError(true)
+            return
+        }
+        if (password!==confirmPassword) {
+            setDispalyError(true)
+            return
+        }
+        const data = {
+            password: password
+        };
+        await updateUserPassword(fakeUserData._id, data);
         setShowModal(!showModal);
     }
 
@@ -119,7 +139,16 @@ const SignInAndSecurity = ({fakeUserData}) => {
                     </Row>
                 </BoxContainer>
             </AccountSecuirtyWrapper>
-            {showModal && <SetPasswordModal onClose={handleShowModal}/>}
+            {showModal && 
+            <SetPasswordModal 
+                onClose={handleShowModal}
+                handleUpdatePassword={handleUpdatePassword}
+                password={password}
+                confirmPassword={confirmPassword}
+                setPassword={setPassword}
+                setConfirmPassword={setConfirmPassword}
+                displayError={displayError}
+            />}
         </Container>
      );
 }
