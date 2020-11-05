@@ -107,7 +107,7 @@ class UserProfile extends Component {
   render() {
       const navItems = [
           {key: 'MYINQUIRY', value: 'My Inquiry', icon:placeOrderIcon, content:(<MyInquiry />)},
-          {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders/>)},
+          {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders role={this.state.role} userData={this.state.userData}/>)},
           {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.userData} role={this.state.role}/>)},
           {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div/>))},
       ]

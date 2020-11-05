@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment} from 'react';
+import React, {Fragment} from 'react';
 import styled from 'styled-components'; 
 import BoxContainer from '../../../BoxContainer';
 import OrderItem from '../OrderItem';
@@ -24,25 +24,32 @@ const Container = styled.div`
 
 `;
 
-const ClosedOrders = () => {
-    const [closedOrders, setClosedOrders] = useState([])
-
-    useEffect(()=>{
-        const fakeFetchClosedOrderData = async() => {
-            setClosedOrders([
-                {
-                    orderName: "Furniture Assembly",
-                    orderNumber: "Order1234",
-                    traderName: "Long Ge",
-                    otherInfo:"Lorem ipsum dolor sit",
-                    orderStatus: "Completed",
-                    orderPrice: "$200"
-                }
-            ]);
+const ClosedOrders = ({closedOrders, closedTradieOrders}) => {
+    const showOrders = () => {
+        if(closedOrders.length !== 0 && closedTradieOrders.length !== 0) {
+            return (
+                closedOrders.concat(closedTradieOrders).map((order=>(
+                    <Fragment key={order._id}>
+                        <OrderItem order={order} orderType="closed"/>
+                    </Fragment>
+                )))
+            )
+        } else if (closedOrders.length !== 0) {
+            return (
+                closedOrders.map((order=>(
+                    <Fragment key={order._id}>
+                        <OrderItem order={order} orderType="closed"/>
+                    </Fragment>
+                )))
+            )
+        } else if (closedTradieOrders.length !== 0) {
+            closedTradieOrders.map((order=>(
+                <Fragment key={order._id}>
+                    <OrderItem order={order} orderType="closed"/>
+                </Fragment>
+            )))
         }
-        fakeFetchClosedOrderData()
-    },[])
-
+    }
     return (
         <BoxContainer 
             title="Closed orders"
@@ -50,11 +57,7 @@ const ClosedOrders = () => {
         >
             <Container>
                 {(closedOrders.length !== 0)? (
-                    closedOrders.map((order=>(
-                        <Fragment key={order.orderNumber}>
-                            <OrderItem order={order}/>
-                        </Fragment>
-                    )))
+                    showOrders()
                 ):(
                     <CustomEmptyContent>
                         <CustomEmptyContent.Icon src={boxIcon}/>
