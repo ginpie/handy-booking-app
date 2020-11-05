@@ -96,15 +96,7 @@ class OrderForm extends React.Component{
       }
     handleFormSubmit(event){
         const { inquiryForm } = this.state;
-        // const {
-        //     fetch,
-        //   } = this.props;
         event.preventDefault();
-        // const {address1, address2} = 
-        // const email = formData.email.value;
-        // fetch(() => createInquiry(inquiryForm)).then((id) => {
-        //     // customerSendInquiry(id)
-        //   });
         createInquiry(inquiryForm)
     }
     render(){
@@ -140,14 +132,5 @@ class OrderForm extends React.Component{
     </Form>
         )
     }
-}
-
-// const EnhancedOrderForm = compose(
-//     // withForm(form),
-//     withFetch,
-//   )(OrderForm);
-  
-  
-// export default EnhancedOrderForm;
-  
+} 
 export default OrderForm;
