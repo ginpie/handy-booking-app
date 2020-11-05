@@ -11,12 +11,12 @@ const Layout = styled.div`
 
 const Container = styled.div``;
 
-const ServiceDetail = () => (
+const ServiceDetail = ({ serviceType }) => (
   <Container>
     <Header scrollAnime={false} />
     <Layout>
       <ServiceFilter />
-      <ServiceContent title="Cleaning" />
+      <ServiceContent title={serviceType.toUpperCase()} />
     </Layout>
     <Footer />
   </Container>
