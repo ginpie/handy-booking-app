@@ -1,7 +1,7 @@
-import api from '../../lib/api';
+import { instance as api } from "../../lib/api";
 
 const updateCustomerAddress = async (email, data) => {
-    await api.put(`/customers/${email}`, data)
-}
+  await api.put(`/customers/${email}`, data);
+};
 
 export default updateCustomerAddress;

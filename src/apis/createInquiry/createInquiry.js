@@ -2,7 +2,7 @@ import axios from "axios";
 import { REACT_APP_URL } from "../apiURL";
 import api from '../../lib/api';
 const instance = axios.create({
-    baseURL: REACT_APP_URL,
+  baseURL: REACT_APP_URL,
 });
 
 const createInquiry = ( data ) =>{

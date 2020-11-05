@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled, { css } from 'styled-components';
+import Moment from 'react-moment';
 import arrowIcon from '../../../icons/updownarrow.png';
 import StarIcon from '@material-ui/icons/Star';
 
@@ -13,14 +14,16 @@ const Container = styled.div`
     font-size: 13px;
     height: 500px;
     transition: 0.3s;
+    ${(props) => props.orderType === "current" && css`
+        height: 300px;
+    `}
     ${(props) => !props.showAll && css`
         height: 80px;
     `}
     @media screen and (max-width: 768px) {
-        height: 580px;
         ${(props) => !props.showAll && css`
         height: 80px;
-    `}
+        `}
     }
 `;
 
@@ -76,7 +79,7 @@ const Right = styled.div`
     display: flex;
     align-items: center;
     @media screen and (max-width: 768px) {
-        margin-right: 20%;
+        display: none;
     }
 `;
 
@@ -155,7 +158,7 @@ const SubmitButton = styled.button`
     border-radius: 5px;
 `;
 
-const DisplayOrderItem = ({order}) => {
+const DisplayOrderItem = ({order, orderType}) => {
     const [showAll, setShowAll] = useState(false);
     const [rating, setRating] = useState(null);
     const [hoverRating, setHoverRating] = useState(null);
@@ -167,27 +170,26 @@ const DisplayOrderItem = ({order}) => {
     }
 
     return (
-        <Container showAll={showAll}>
+        <Container showAll={showAll} orderType={orderType}>
             {showAll ? (
                 <ContentContainer>
                     <InfoRow>
                         <ServiceName>
-                            clean house
+                            {order._id}
+                            {order.tradie ? ("(tradie)") : ("(customer)")}
                         </ServiceName>
                     </InfoRow>
                     <InfoRow>
                         <Title>From:</Title>
-                        <Info>Mingxin Dong</Info>
+                        <Info>{order.name}</Info>
                         &nbsp; &nbsp;
                         <Title>Phone</Title>
-                        <Info>0468925504</Info>     
+                        <Info>{order.contactNo}</Info>     
                     </InfoRow>
                     <InfoRow>
                         <Title>Email:</Title>
-                        <Info>Ming@trade.com</Info>
+                        <Info>{order.email}</Info>
                         &nbsp; &nbsp;
-                        <Title>Id:</Title>
-                        <Info>order123456</Info>
                     </InfoRow>
                     <InfoRow>
                         <Title>
@@ -195,59 +197,70 @@ const DisplayOrderItem = ({order}) => {
                         </Title>
                     </InfoRow>
                     <MessageBox
-                        value="aaaaaaaaa"
+                        value={order.message}
                         cols="30" 
                         rows="5"
                         readOnly 
                     />
                     <InfoRow>
                         <Title>Price:</Title>
-                        <Info>600$</Info>
+                        <Info>{`${order.totalPrice}$`}</Info>
                     </InfoRow>
                     <InfoRow>
                         <Title>Order Status:</Title>
-                        <StatusButton>Completed</StatusButton>
+                        <StatusButton>{(orderType==="current") ? "in-process" : "Completed"}</StatusButton>
                     </InfoRow>
                     <InfoRow>
-                        <Title>date: </Title> 
-                        <Info>08/10/2020</Info>
+                        <Title>Date: </Title> 
+                        <Info>
+                            <Moment format="YYYY/MM/DD">
+                                {order.createTime}
+                            </Moment>
+                        </Info>
                     </InfoRow>
-                    <InfoRow>
-                        <Title>What do you think about the sevice</Title>
-                    </InfoRow>
-                    <InfoRow>
-                        Rating: &nbsp;
-                        {[...Array(5)].map((star, i) => {
-                            const ratingValue = i + 1;
-                            return (
-                                <StarLabel key={i}>
-                                    <input 
-                                        type="radio" 
-                                        name="rating" 
-                                        value={ratingValue}
-                                        onClick={()=>setRating(ratingValue)}
-                                    />
-                                    <Star 
-                                        ratingvalue={ratingValue} 
-                                        rating={rating} 
-                                        hoverrating={hoverRating}
-                                        onMouseEnter={() => setHoverRating(ratingValue)}
-                                        onMouseLeave={()=>setHoverRating(null)}
-                                    />
-                                </StarLabel>
-                            )
-                        })}
-                    </InfoRow>
-                    <MessageBox
-                        value={comment || ""}
-                        onChange={(event) => setComment(event.target.value)}
-                        cols="30" 
-                        rows="5"
-                        placeholder="Describe your experience.." 
-                    />
-                    <InfoRow>
-                        <SubmitButton>Submit</SubmitButton>
-                    </InfoRow>
+                    {(orderType==="closed") ? (
+                        <>
+                        <InfoRow>
+                            <Title>What do you think about the sevice</Title>
+                        </InfoRow>
+                        <InfoRow>
+                            Rating: &nbsp;
+                            {[...Array(5)].map((star, i) => {
+                                const ratingValue = i + 1;
+                                return (
+                                    <StarLabel key={i}>
+                                        <input 
+                                            type="radio" 
+                                            name="rating" 
+                                            value={ratingValue}
+                                            onClick={()=>setRating(ratingValue)}
+                                        />
+                                        <Star 
+                                            ratingvalue={ratingValue} 
+                                            rating={rating} 
+                                            hoverrating={hoverRating}
+                                            onMouseEnter={() => setHoverRating(ratingValue)}
+                                            onMouseLeave={()=>setHoverRating(null)}
+                                        />
+                                    </StarLabel>
+                                )
+                            })}
+                        </InfoRow>
+                        <MessageBox
+                            value={comment || ""}
+                            onChange={(event) => setComment(event.target.value)}
+                            cols="30" 
+                            rows="5"
+                            placeholder="Describe your experience.." 
+                        />
+                        <InfoRow>
+                            <SubmitButton>Submit</SubmitButton>
+                        </InfoRow>
+                        </>
+                    ) : (
+                        <></>
+                    )
+                    }
                     <ArrowButton
                         onClick={handleShow}
                     >
@@ -263,17 +276,26 @@ const DisplayOrderItem = ({order}) => {
                         </ArrowButton>
                         <Left>
                             <ServiceName>
-                                clean house
+                                {order._id}
+                                {order.tradie ? ("(tradie)") : ("(customer)")}
                             </ServiceName>
                             <LeftBottom>
-                                <LeftBottomItem>order123456</LeftBottomItem>
-                                <LeftBottomItem>Suzy Denial</LeftBottomItem>
-                                <LeftBottomItem border="none">08/10/2020</LeftBottomItem>
-                                <Date>08/10/2020</Date>
+                                <LeftBottomItem>{order.email}</LeftBottomItem>
+                                <LeftBottomItem>{order.name}</LeftBottomItem>
+                                <LeftBottomItem border="none">
+                                    <Moment format="YYYY/MM/DD">
+                                        {order.createTime}
+                                    </Moment>
+                                </LeftBottomItem>
+                                <Date>
+                                    <Moment format="YYYY/MM/DD">
+                                        {order.createTime}
+                                    </Moment>
+                                </Date>
                             </LeftBottom>
                         </Left>
                         <Right>
-                            <StatusButton>completed</StatusButton>
+                            <StatusButton>{(orderType==="current") ? "in-process" : "Completed"}</StatusButton>
                         </Right>
                     </ContentContainer>
              )}
