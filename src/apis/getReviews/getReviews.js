@@ -3,7 +3,7 @@ import { REACT_APP_URL } from "../apiURL";
 const axios = require("axios");
 
 const instance = axios.create({
-  baseURL: REACT_APP_URL,
+  baseURL: "http://localhost:3001",
 });
 
 async function getReviews() {

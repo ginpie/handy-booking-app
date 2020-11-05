@@ -32,7 +32,7 @@ const Input = styled.input`
 const OrderInput = (props) => (
     <Container>
         <Label htmlFor={props.name}>{props.children}</Label>
-        <Input name={props.name} type={props.type} />
+        <Input name={props.name} type={props.type} value={props.value} onChange={props.onChange} />
     </Container>
 );
 

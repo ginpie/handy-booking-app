@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import OrderInput from './component/OrderInput';
-
+import withFetch from "../../../../../../../withFetch";
+import withForm from "../../../../../../../withForm";
+import compose from "../../../../../../../../utils/compose";
+// import form from "./form";
+import createInquiry from '../../../../../../../../apis/createInquiry'
 const Form = styled.form`
     margin: 40px 0;
 `;
@@ -44,36 +48,106 @@ const SubmitBtn = styled.input`
     border-radius: 5px;
 `;
 
-const OrderForm = () => (
-    <Form>
+class OrderForm extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            inquiryForm:{
+                smallFurniture: "",
+                mediumFurniture: "",
+                largeFurniture: "",
+                name: "",
+                email: "",
+                phone: "",
+                address1: "",
+                address2: "",
+                suburt: "",
+                state: "",
+                postcode: "",
+                message: "",
+            }
+        };
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event) {
+        // return (event)=>{
+        //     event.preventDefault();
+        //     const {value} = event.target;
+        //     this.setState((preState)=>({
+        //         inquiryForm:{
+        //             ...preState.inquiryForm,
+        //             [target]:value
+        //         }
+        //     }));
+        // }
+        const target = event.target;
+        
+        const name = target.name;
+        
+        const value = target.value;
+        
+        this.setState((prevState)=>({
+            inquiryForm:{
+                ...prevState.inquiryForm,
+                [name]: value}
+          }));
+        // this.setState({ inquiryForm: { value: event.target.value } });
+      }
+    handleFormSubmit(event){
+        const { inquiryForm } = this.state;
+        // const {
+        //     fetch,
+        //   } = this.props;
+        event.preventDefault();
+        // const {address1, address2} = 
+        // const email = formData.email.value;
+        // fetch(() => createInquiry(inquiryForm)).then((id) => {
+        //     // customerSendInquiry(id)
+        //   });
+        createInquiry(inquiryForm)
+    }
+    render(){
+        return (
+        <Form onSubmit={this.handleFormSubmit}>
         <FormHeader>Order Details</FormHeader>
         <InputRow>
-            <OrderInput name="small_furniture" type="number">Small Furniture:</OrderInput>
-            <OrderInput name="medium_furniture" type="number">Medium Furniture:</OrderInput>
-            <OrderInput name="large_furniture" type="number">Large Furniture:</OrderInput>
+            <OrderInput name="smallFurniture" type="number"  value={this.state.inquiryForm.smallFurniture} onChange={this.handleChange}>Small Furniture:</OrderInput>
+            <OrderInput name="mediumFurniture" type="number" value={this.state.inquiryForm.mediumFurniture} onChange={this.handleChange}>Medium Furniture:</OrderInput>
+            <OrderInput name="largeFurniture" type="number" value={this.state.inquiryForm.largeFurniture} onChange={this.handleChange}>Large Furniture:</OrderInput>
         </InputRow>
         <InputRow>
-            <OrderInput name="name" type="text">Name:</OrderInput>
-            <OrderInput name="email" type="text">Email:</OrderInput>
+            <OrderInput name="name" type="text" value={this.state.inquiryForm.name} onChange={this.handleChange}>Name:</OrderInput>
+            <OrderInput name="email" type="text" value={this.state.inquiryForm.email} onChange={this.handleChange}>Email:</OrderInput>
         </InputRow>
         <InputRow>
-            <OrderInput name="phone" type="text">Phone No:</OrderInput>
-            <OrderInput name="address" type="text">Address:</OrderInput>
+            <OrderInput name="phone" type="text" value={this.state.inquiryForm.phone} onChange={this.handleChange}>Phone No:</OrderInput>
+            <OrderInput name="address1" type="text" value={this.state.inquiryForm.address1} onChange={this.handleChange}>Address1:</OrderInput>
         </InputRow>
         <InputRow>
-            <OrderInput name="address2" type="text">Address2:</OrderInput>
-            <OrderInput name="suburt" type="text">Suburb:</OrderInput>
+            <OrderInput name="address2" type="text" value={this.state.inquiryForm.address2} onChange={this.handleChange}>Address2:</OrderInput>
+            <OrderInput name="suburt" type="text" value={this.state.inquiryForm.suburt} onChange={this.handleChange}>Suburb:</OrderInput>
         </InputRow>
         <InputRow>
-            <OrderInput name="state" type="text">State:</OrderInput>
-            <OrderInput name="postcode" type="text">Postcode:</OrderInput>
+            <OrderInput name="state" type="text" value={this.state.inquiryForm.state} onChange={this.handleChange}>State:</OrderInput>
+            <OrderInput name="postcode" type="text" value={this.state.inquiryForm.postcode} onChange={this.handleChange}>Postcode:</OrderInput>
         </InputRow>
-        <Label htmlFor="addition">Additional Details</Label>
-        <TextArea name="addition" />
+        <Label htmlFor="addition" >Additional Details</Label>
+        <TextArea name="addition"  value={this.state.inquiryForm.addition} onChange={this.handleChange} />
         <SubmitWrapper>
             <SubmitBtn type="submit" value="GET PRICE NOW" />
         </SubmitWrapper>
     </Form>
-);
+        )
+    }
+}
 
+// const EnhancedOrderForm = compose(
+//     // withForm(form),
+//     withFetch,
+//   )(OrderForm);
+  
+  
+// export default EnhancedOrderForm;
+  
 export default OrderForm;

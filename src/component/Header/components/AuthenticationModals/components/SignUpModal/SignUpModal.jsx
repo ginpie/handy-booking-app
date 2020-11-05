@@ -75,9 +75,13 @@ class SignUpModal extends React.Component {
     if (userType.value === "customer") {
       fetch(() => signUpUser(data)).then((user) => {
         onClose();
+        
         authentication.setUser(user);
+      
         signUpCustomer(email);
+     
         connectUserToCustomer(email)
+     
 
       });
     } else if (userType.value === "tradie") {

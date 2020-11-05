@@ -94,16 +94,20 @@ const StarUnchecked = styled.i`
 `;
 
 const Rating = (rating) => {
-  return (
-    <RatingBox>
-      {[...Array(rating.rating)].map((e, i) => (
-        <StarChecked className="fa fa-star" key={i} />
-      ))}
-      {[...Array(5 - rating.rating)].map((e, i) => (
-        <StarUnchecked className="fa fa-star" key={i} />
-      ))}
-    </RatingBox>
-  );
+  if (rating.rating) {
+    return (
+      <RatingBox>
+        {[...Array(rating.rating)].map((e, i) => (
+          <StarChecked className="fa fa-star" key={i} />
+        ))}
+        {[...Array(5 - rating.rating)].map((e, i) => (
+          <StarUnchecked className="fa fa-star" key={i} />
+        ))}
+      </RatingBox>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 const Card = ({ img, price, title, description, href, rating }) => (

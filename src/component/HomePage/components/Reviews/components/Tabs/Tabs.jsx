@@ -14,23 +14,25 @@ class Tab_s extends React.Component {
   }
 
   componentDidMount() {
-    getReviews().then((data) => {
-      let cards = [];
-      data.forEach((i) => {
-        let a = {};
-        a.price = i.totalPrice;
-        a.title = i.name;
-        a.comment = i.comment;
-        a.rating = i.rating;
-        a.avatar = i.avatar;
+    getReviews()
+      .then((data) => {
+        let cards = [];
+        data.forEach((i) => {
+          let a = {};
+          a.price = i.totalPrice;
+          a.title = i.name;
+          a.comment = i.comment;
+          a.rating = i.rating;
+          a.avatar = i.avatar;
 
-        cards.push(a);
-      });
+          cards.push(a);
+        });
 
-      this.setState({
-        cards: cards,
-      });
-    });
+        this.setState({
+          cards: cards,
+        });
+      })
+      .catch((e) => {});
   }
 
   render() {
