@@ -16,7 +16,9 @@ const ServiceDetail = ({ serviceType }) => (
     <Header scrollAnime={false} />
     <Layout>
       <ServiceFilter />
-      <ServiceContent title={serviceType.toUpperCase()} />
+      <ServiceContent
+        title={(serviceType && serviceType.toUpperCase()) || "service"}
+      />
     </Layout>
     <Footer />
   </Container>
