@@ -110,49 +110,6 @@ class UserProfile extends Component {
   };
 
   render() {
-<<<<<<< HEAD
-      const navItems = [
-          {key: 'MYINQUIRY', value: 'My Inquiry', icon:placeOrderIcon, content:(<MyInquiry />)},
-          {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders role={this.state.role} userData={this.state.userData}/>)},
-          {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.userData} role={this.state.role}/>)},
-          {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div/>))},
-      ]
-      const { userData, currentPage, displaySidebar} = this.state
-      return (
-              <Container>
-                  <Header scrollAnime={true}/>
-                  <ContentContainer>
-                      <SidebarMenu
-                          onClick={this.toggleSidebar}
-                      >Menu
-                      </SidebarMenu>
-                      <SideBar 
-                          fakeUserData={userData}
-                          navItems={navItems}
-                          currentPage={currentPage}
-                          onPageChange={this.handleNavItemChange}
-                          displaySidebar={displaySidebar}
-                          onCloseSidebar={this.toggleSidebar}
-                      />
-                      <Content>
-                            {navItems.map((item)=>{
-                                if(currentPage!==item.value) {
-                                    return null
-                                }
-                                return (
-                                <React.Fragment key={item.key}>
-                                    {item.content}
-                                </React.Fragment>
-                                )
-                            })}
-                        </Content>
-                  </ContentContainer>
-                  <div style={{width:"100%"}}>
-                      <Footer/>
-                  </div>
-              </Container>
-         );
-=======
     const navItems = [
       {
         key: "MYINQUIRY",
@@ -211,7 +168,6 @@ class UserProfile extends Component {
         </div>
       </Container>
     );
->>>>>>> 6fd15fd80da6cffa0b7e4a341eef9f3be8424287
   }
 }
 
