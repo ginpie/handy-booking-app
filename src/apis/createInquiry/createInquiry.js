@@ -7,6 +7,9 @@ const instance = axios.create({
 
 const createInquiry = ( data ) =>{
     instance.post('/api/inquiry', data)
-
+    // instance.post('/api/inquiry', data).then((res)=>{
+    //     const id = res.data
+    //     console.log(res.data.data)
+    // })
 }
 export default createInquiry;
