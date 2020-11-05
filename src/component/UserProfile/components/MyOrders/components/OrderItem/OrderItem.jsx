@@ -10,7 +10,8 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     position: relative;
-    height: 550px;
+    font-size: 13px;
+    height: 500px;
     transition: 0.3s;
     ${(props) => !props.showAll && css`
         height: 80px;
@@ -49,10 +50,16 @@ const InfoRow = styled.div`
     margin-top: 10px;
     display: flex;
     max-height: 50px;
-    @media screen and (max-width: 500px) {
-        display: flex;
-        flex-direction: column;
-    }
+    align-items: center;
+`;
+
+const Title = styled.div`
+    font-weight: 500;
+`;
+
+const Info = styled.div`
+    margin-left: 5px;
+    text-decoration:underline;
 `;
 
 const MessageBox = styled.textarea`
@@ -81,8 +88,8 @@ const Left = styled.div`
 `;
 
 const ServiceName = styled.div`
-    font: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: bold;
 `;
 
 const LeftBottom = styled.div`
@@ -169,17 +176,23 @@ const DisplayOrderItem = ({order}) => {
                         </ServiceName>
                     </InfoRow>
                     <InfoRow>
-                        Tradie Name: Mingxin Dong
+                        <Title>From:</Title>
+                        <Info>Mingxin Dong</Info>
                         &nbsp; &nbsp;
-                        Phone Number: 0468925504
+                        <Title>Phone</Title>
+                        <Info>0468925504</Info>     
                     </InfoRow>
                     <InfoRow>
-                        Email Address: Ming@trade.com
+                        <Title>Email:</Title>
+                        <Info>Ming@trade.com</Info>
                         &nbsp; &nbsp;
-                        OrderId: order123456
+                        <Title>Id:</Title>
+                        <Info>order123456</Info>
                     </InfoRow>
                     <InfoRow>
-                        Message:
+                        <Title>
+                            Message:
+                        </Title>
                     </InfoRow>
                     <MessageBox
                         value="aaaaaaaaa"
@@ -188,17 +201,19 @@ const DisplayOrderItem = ({order}) => {
                         readOnly 
                     />
                     <InfoRow>
-                        Price: 600$
+                        <Title>Price:</Title>
+                        <Info>600$</Info>
                     </InfoRow>
                     <InfoRow>
-                        Order Status:
+                        <Title>Order Status:</Title>
                         <StatusButton>Completed</StatusButton>
                     </InfoRow>
                     <InfoRow>
-                        Order create date: 08/10/2020
+                        <Title>date: </Title> 
+                        <Info>08/10/2020</Info>
                     </InfoRow>
                     <InfoRow>
-                        What do you think about the sevice
+                        <Title>What do you think about the sevice</Title>
                     </InfoRow>
                     <InfoRow>
                         Rating: &nbsp;

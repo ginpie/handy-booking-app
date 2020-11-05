@@ -138,7 +138,8 @@ const General = ({fakeUserData, role}) => {
             "lastName" : lastName,
             "phoneNumber" : phone
         }
-        await updateAccount(fakeUserData._id, data)        
+        await updateAccount(fakeUserData._id, data)
+        window.location.reload();        
     }
 
     const handleUpdateAddress = async(event) => {
@@ -158,6 +159,7 @@ const General = ({fakeUserData, role}) => {
         if (role.tradie) {
             await updateTradiePostCode(fakeUserData.email, newPostCode)
         }
+        window.location.reload();
     }   
 
     return (
