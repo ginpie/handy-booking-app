@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import OrderInput from './component/OrderInput';
-import withFetch from "../../../../../../../withFetch";
-import withForm from "../../../../../../../withForm";
-import compose from "../../../../../../../../utils/compose";
-import form from "./form";
 import createInquiry from '../../../../../../../../apis/createInquiry'
 const Form = styled.form`
     margin: 40px 0;
@@ -53,15 +49,15 @@ class OrderForm extends React.Component{
         super(props)
         this.state = {
             inquiryForm:{
-                smallFurniture: "",
-                mediumFurniture: "",
-                largeFurniture: "",
+                smallFurniture: 0,
+                mediumFurniture: 0,
+                largeFurniture: 0,
                 name: "",
                 email: "",
                 phone: "",
                 address1: "",
                 address2: "",
-                suburt: "",
+                suburb: "",
                 state: "",
                 postcode: "",
                 message: "",
@@ -71,33 +67,51 @@ class OrderForm extends React.Component{
         this.handleChange = this.handleChange.bind(this);
     }
     handleChange(event) {
-        // return (event)=>{
-        //     event.preventDefault();
-        //     const {value} = event.target;
-        //     this.setState((preState)=>({
-        //         inquiryForm:{
-        //             ...preState.inquiryForm,
-        //             [target]:value
-        //         }
-        //     }));
-        // }
         const target = event.target;
-        
         const name = target.name;
-        
         const value = target.value;
         
         this.setState((prevState)=>({
             inquiryForm:{
                 ...prevState.inquiryForm,
                 [name]: value}
-          }));
-        // this.setState({ inquiryForm: { value: event.target.value } });
-      }
+        }));
+    }
+
     handleFormSubmit(event){
-        const { inquiryForm } = this.state;
+        const {
+            smallFurniture,
+            mediumFurniture,
+            largeFurniture,
+            name,
+            email,
+            phone,
+            address1,
+            address2,
+            suburb,
+            state,
+            postcode,
+            message,
+        } = this.state.inquiryForm;
+        const { tradieId } = this.props.tradieId;
+
         event.preventDefault();
-        createInquiry(inquiryForm)
+
+        const inquiryData = {
+            address: {
+                address1,
+                address2,
+                suburb,
+                state,
+                zipCode: postcode,
+            },
+            contactNo: phone,
+            email,
+            name,
+            message: `small furniture: ${smallFurniture} medium furniture: ${mediumFurniture} large furniture: ${largeFurniture} ${message}`,
+        }
+        createInquiry(inquiryData);
+
     }
     render(){
         return (
@@ -118,16 +132,16 @@ class OrderForm extends React.Component{
         </InputRow>
         <InputRow>
             <OrderInput name="address2" type="text" value={this.state.inquiryForm.address2} onChange={this.handleChange}>Address2:</OrderInput>
-            <OrderInput name="suburt" type="text" value={this.state.inquiryForm.suburt} onChange={this.handleChange}>Suburb:</OrderInput>
+            <OrderInput name="suburb" type="text" value={this.state.inquiryForm.suburb} onChange={this.handleChange}>Suburb:</OrderInput>
         </InputRow>
         <InputRow>
             <OrderInput name="state" type="text" value={this.state.inquiryForm.state} onChange={this.handleChange}>State:</OrderInput>
             <OrderInput name="postcode" type="text" value={this.state.inquiryForm.postcode} onChange={this.handleChange}>Postcode:</OrderInput>
         </InputRow>
-        <Label htmlFor="addition" >Additional Details</Label>
-        <TextArea name="addition"  value={this.state.inquiryForm.addition} onChange={this.handleChange} />
+        <Label htmlFor="message" >Additional Details</Label>
+        <TextArea name="message"  value={this.state.inquiryForm.message} onChange={this.handleChange} />
         <SubmitWrapper>
-            <SubmitBtn type="submit" value="GET PRICE NOW" />
+            <SubmitBtn type="submit" value="GET PRICE NOW" onClick={this.handleFormSubmit} />
         </SubmitWrapper>
     </Form>
         )
