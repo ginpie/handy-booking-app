@@ -12,7 +12,7 @@ const Container = styled.div`
 const CONTENT = {
     "distance": ["10km", "20km", "30km", "40km", "50km"],
     "rate": ["low to high", "high to low"],
-    "time": "",
+    "time": ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 };
 
 const LINK = ["distance", "rate", "time"];
@@ -39,7 +39,7 @@ class FilterBar extends React.Component {
         const prev = this.state.active;
         const current = event.target.id;
         this.setState({
-            active: (prev===current)?"":current,
+            active: (prev===current) ? "" : current,
         })
     }
 
