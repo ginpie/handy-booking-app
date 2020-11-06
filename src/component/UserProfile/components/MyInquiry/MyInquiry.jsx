@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import styled from 'styled-components';
 import Header from '../Header';
 import InnerNavBar from '../InnerNavbar';
@@ -31,13 +31,37 @@ const ContentWrapper = styled.div`
     }
 `;
 
-const MyInquiry = () => {
-    const [currentInnerPage, setCurrentInnerPage] = useState('CURRENT');
+const MyInquiry = ({userData, role}) => {
+    const [currentInnerPage, setCurrentInnerPage] = useState('');
 
-    const innerNavItems = [
-        {key:"CURRENT", value:"CURRENT", content:(<CurrentInquiry />)},
-        {key:"CLOSED", value:"CLOSED", content:(<ClosedInquiry />)},
-    ]
+    useEffect(()=>{
+        if(role.tradie) {
+            setCurrentInnerPage('TRADIE')
+        }
+        if(role.customer) {
+            setCurrentInnerPage('CLIENT')
+        }
+    },[role.tradie,role.customer])
+
+    let innerNavItems = []
+
+    const getInnerNavItems = () => {
+        if(role.customer && role.tradie) {
+            innerNavItems = [
+                {key:"CLIENT", value:"CLIENT", content:(<CurrentInquiry userData={userData}/>)},
+                {key:"TRADIE", value:"TRADIE", content:(<ClosedInquiry userData={userData}/>)},
+            ]
+        } else if(role.customer && !role.tradie){
+            innerNavItems = [
+                {key:"CLIENT", value:"CLIENT", content:(<CurrentInquiry userData={userData}/>)},
+            ]
+        } else if(role.tradie) {
+            innerNavItems = [
+                {key:"TRADIE", value:"TRADIE", content:(<ClosedInquiry userData={userData}/>)},
+            ]
+        }
+    }
+    getInnerNavItems();
     return ( 
         <Container>
             <HeaderWrapper>

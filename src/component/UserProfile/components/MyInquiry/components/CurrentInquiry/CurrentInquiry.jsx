@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import BoxContainer from '../../../BoxContainer';
 import CustomEmptyContent from '../../../CustomEmptyContent';
 import ShowInquiry from '../ShowInquiry';
+import getInquiries from '../../../../../../apis/getInquiries';
 import boxIcon from '../../../icons/box.png';
 
 const Container = styled.div`
@@ -24,64 +25,44 @@ const Container = styled.div`
 
 `;
 
-const CurrentInquiry = () => {
-    const [currentInquiries, setCurrentInquiries] = useState([]);
+const CurrentInquiry = ({userData}) => {
+    const [clientInquiries, setClientInquiries] = useState([]);
     const [searchQuery, setSearchQuery] = useState(null);
 
     useEffect(()=>{
-        const fetchCurrentInquiries = async() => {
-            setCurrentInquiries([
-                {
-                    serviceName: "House Clean",
-                    inquiryId:"id645321",
-                    tradie: "Bruce Lee",
-                    createTime:"19/10/2020",
-                    status: "pending",
-                    phoneNumber:"0468925505",
-                    email:"Bruce@tradie.com",
-                    address:"fake st, robina, QLD",
-                    message:"Hi, this is Bruce, I would Like to take the house cleaning job",
-                    price: "300$",
-                },
-                {
-                    serviceName: "House Moving",
-                    inquiryId:"id666",
-                    tradie: "Jakey Chen",
-                    createTime:"20/10/2020",
-                    status: "Accept",
-                    phoneNumber:"0498925506",
-                    email:"Jakey@tradie.com",
-                    address:"fake st, southport, QLD",
-                    message:"Hi, this is Jakey, I would Like to take the House Moving job",
-                    price: "400$",
-                }
-            ]);
+        const fetchClientInquiries = async() => {
+            const data = await getInquiries(userData.email,"customers")
+            const newData = data.inquiries
+                .filter(inquiry=>(inquiry.deleted!==true))
+                .filter(inquiry=>(inquiry.accepted!==true))
+                .map(inquiry=>({...inquiry, customer:true}))
+            setClientInquiries(newData)
         }
-        fetchCurrentInquiries()
+        fetchClientInquiries()
     },[])
 
     let filteredInquiries = {}
 
-    if (searchQuery) {
-        filteredInquiries = currentInquiries.filter(inquiry =>
-            inquiry.serviceName.toLowerCase().trim().startsWith(searchQuery.toLowerCase())
-        );
-    }
-    else {
-        filteredInquiries = currentInquiries
-    }
+    // if (searchQuery) {
+    //     filteredInquiries = clientInquiries.filter(inquiry =>
+    //         inquiry.serviceName.toLowerCase().trim().startsWith(searchQuery.toLowerCase())
+    //     );
+    // }
+    // else {
+    //     filteredInquiries = clientInquiries
+    // }
 
     return ( 
         <BoxContainer 
-            title="Current Inquiries"
+            title="Client Inquiries"
             needSearchBar
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
+            // searchQuery={searchQuery}
+            // setSearchQuery={setSearchQuery}
         >
             <Container>
-                {(filteredInquiries.length !== 0) ? (
-                    currentInquiries.map((inquiry=>(
-                        <Fragment key={inquiry.inquiryId}>
+                {(clientInquiries.length !==0) ? (
+                    clientInquiries.map(((inquiry)=>(
+                        <Fragment key={inquiry._id}>
                             <ShowInquiry inquiry={inquiry}/>
                         </Fragment>
                     )))
