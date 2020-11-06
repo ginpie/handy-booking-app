@@ -1,7 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import OrderInput from "./component/OrderInput";
-import createInquiry from "../../../../../../../../apis/createInquiry";
+
+import React from 'react';
+import styled from 'styled-components';
+import { CSSTransition } from "react-transition-group";
+import OrderInput from './component/OrderInput';
+import createInquiry from '../../../../../../../../apis/createInquiry';
+import  { AuthenticationContext} from '../../../../../../../withAuthentication';
+import AuthenticationModals from '../../../../../../../Header/components/AuthenticationModals';
+import withAuthentication from '../../../../../../../withAuthentication';
+import compose from "../../../../../../../../utils/compose";
 const Form = styled.form`
   margin: 40px 0;
 `;
@@ -44,41 +50,54 @@ const SubmitBtn = styled.input`
   border-radius: 5px;
 `;
 
-class OrderForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inquiryForm: {
-        smallFurniture: 0,
-        mediumFurniture: 0,
-        largeFurniture: 0,
-        name: "",
-        email: "",
-        phone: "",
-        address1: "",
-        address2: "",
-        suburb: "",
-        state: "",
-        postcode: "",
-        message: "",
-      },
-    };
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(event) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
+class OrderForm extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            inquiryForm:{
+                smallFurniture: 0,
+                mediumFurniture: 0,
+                largeFurniture: 0,
+                name: "",
+                email: "",
+                phone: "",
+                address1: "",
+                address2: "",
+                suburb: "",
+                state: "",
+                postcode: "",
+                message: "",
+            },
+            authenticationModal: null,
+        };
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.setAuthenticationModal = this.setAuthenticationModal.bind(this);
+    }
+    
+    setAuthenticationModal(target) {
+        return (event) => {
+          if (event) {
+            event.preventDefault();
+          }
+    
+          this.setState({
+            authenticationModal: target,
+          });
+        };
+      }
 
-    this.setState((prevState) => ({
-      inquiryForm: {
-        ...prevState.inquiryForm,
-        [name]: value,
-      },
-    }));
-  }
-
+    handleChange(event) {
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+        const {authentication,} = this.props;
+        this.setState((prevState)=>({
+            inquiryForm:{
+                ...prevState.inquiryForm,
+                [name]: value}
+        }));
+    }
   handleFormSubmit(event) {
     const {
       smallFurniture,
@@ -94,29 +113,33 @@ class OrderForm extends React.Component {
       postcode,
       message,
     } = this.state.inquiryForm;
+    const {authentication,} = this.props;
     const tradieId = this.props.tradieId;
+    const customerId = authentication.user.email
 
-    event.preventDefault();
-
-    const inquiryData = {
-      address: {
-        address1,
-        address2,
-        suburb,
-        state,
-        zipCode: postcode,
-      },
-      contactNo: phone,
-      email,
-      name,
-      message: `small furniture: ${smallFurniture} medium furniture: ${mediumFurniture} large furniture: ${largeFurniture} ${message}`,
-      tradies: tradieId,
-    };
-    createInquiry(inquiryData);
-  }
-  render() {
-    return (
-      <Form onSubmit={this.handleFormSubmit}>
+        const inquiryData = {
+            address: {
+                address1,
+                address2,
+                suburb,
+                state,
+                zipCode: postcode,
+            },
+            contactNo: phone,
+            email,
+            name,
+            message: `small furniture: ${smallFurniture} medium furniture: ${mediumFurniture} large furniture: ${largeFurniture} ${message}`,
+            tradies: tradieId,
+            customers:customerId,
+        }
+        if(authentication.user){
+            createInquiry(inquiryData);
+        }
+    }
+    render(){
+        const { authenticationModal } = this.state;
+        return (
+        <Form onSubmit={this.handleFormSubmit}>
         <FormHeader>Order Details</FormHeader>
         <InputRow>
           <OrderInput
@@ -223,14 +246,36 @@ class OrderForm extends React.Component {
           onChange={this.handleChange}
         />
         <SubmitWrapper>
-          <SubmitBtn
-            type="submit"
-            value="GET PRICE NOW"
-            onClick={this.handleFormSubmit}
-          />
+            <AuthenticationContext.Consumer>
+            {(Authentication)=>Authentication.user?(
+                 <SubmitBtn type="submit" value="GET PRICE NOW" onClick={this.handleFormSubmit} />
+             ):(
+                <>
+                    <SubmitBtn type="submit" value="Sign In" onClick={this.setAuthenticationModal('signIn')} />
+                    {authenticationModal && (
+                        <CSSTransition
+                            in={!(authenticationModal === null)}
+                            appear={true}
+                            timeout={1000}
+                            classNames="model"
+                        >
+                            <AuthenticationModals
+                                initialModal={authenticationModal}
+                                 onClose={this.setAuthenticationModal()}
+                            />
+                        </CSSTransition>
+                    )}
+                </>
+             )}  
+            </AuthenticationContext.Consumer>
         </SubmitWrapper>
       </Form>
     );
   }
 }
-export default OrderForm;
+
+const EnhancedOrderForm = compose(
+    withAuthentication,
+  )(OrderForm);
+  
+export default EnhancedOrderForm;

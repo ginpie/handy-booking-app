@@ -50,7 +50,7 @@ class ServiceSearch extends React.Component {
 
   // get all services when search bar is mounted
   componentDidMount() {
-    fetch("http://localhost:3001/api/services").then((res) => {
+    fetch("http://localhost:3000/api/services").then((res) => {
       if (res.status !== 200) {
         console.log(
           "Looks like there was a problem. status code: " + res.status
