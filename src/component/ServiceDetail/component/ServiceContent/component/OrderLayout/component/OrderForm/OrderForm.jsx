@@ -97,9 +97,6 @@ class OrderForm extends React.Component{
                 ...prevState.inquiryForm,
                 [name]: value}
         }));
-        // console.log(authentication.user.email)
-        // const tradieId = this.props.tradieId;
-        // console.log(tradieId)
     }
   handleFormSubmit(event) {
     const {
