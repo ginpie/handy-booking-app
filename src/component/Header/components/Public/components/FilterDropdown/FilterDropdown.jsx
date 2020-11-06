@@ -59,7 +59,7 @@ const DropSet = (type, content, click) => {
             );
           })
         : null,
-    calendar: <DropCalendar type="date" min="2019-01-01" max="2025-12-31" />,
+    calendar: <DropCalendar type="date" min="2019-01-01" max="2025-12-31" onClick={click}/>,
     nav:
       content !== ""
         ? content.map((item) => {
