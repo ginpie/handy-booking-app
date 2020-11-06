@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled, { css } from 'styled-components';
 import Moment from 'react-moment';
 import arrowIcon from '../../../icons/updownarrow.png';
 import StarIcon from '@material-ui/icons/Star';
+import updateReview from '../../../../../../apis/updateReview';
+import updateOrderComplete from '../../../../../../apis/updateOrderComplete';
 
 const Container = styled.div`
     width: 100%;
@@ -12,10 +14,10 @@ const Container = styled.div`
     justify-content: center;
     position: relative;
     font-size: 13px;
-    height: 500px;
+    height: 520px;
     transition: 0.3s;
     ${(props) => props.orderType === "current" && css`
-        height: 300px;
+        height: 380px;
     `}
     ${(props) => !props.showAll && css`
         height: 80px;
@@ -164,13 +166,41 @@ const DisplayOrderItem = ({order, orderType}) => {
     const [hoverRating, setHoverRating] = useState(null);
     const [comment, setComment] = useState(null);
 
+    useEffect(()=>{
+        const fetchReview = () => {
+            if(order.rating) {
+                setRating(order.rating)
+            }
+            if(order.comment) {
+                setComment(order.comment)
+            }
+        }
+        fetchReview()
+    },[]);
+
     const handleShow = (event) => {
         event.preventDefault();
         setShowAll(!showAll)
     }
 
+    const handleReviewSubmit = async (event) => {
+        event.preventDefault();
+        const review = {
+            "rating" : rating,
+            "comment" : comment
+        }
+        await updateReview(order._id, review)
+        window.location.reload()
+    }
+
+    const handleOrderComplete = async (event) => {
+        event.preventDefault();
+        await updateOrderComplete(order._id);
+        window.location.reload();
+    }
+
     return (
-        <Container showAll={showAll} orderType={orderType}>
+        <Container showAll={showAll} orderType={orderType} order={order}>
             {showAll ? (
                 <ContentContainer>
                     <InfoRow>
@@ -218,6 +248,14 @@ const DisplayOrderItem = ({order, orderType}) => {
                             </Moment>
                         </Info>
                     </InfoRow>
+                    {order.tradie ? (
+                        <InfoRow>
+                            <Title>Address: </Title>
+                            <Info>{`${order.address.address1}, ${order.address.suburb}, ${order.address.state}, ${order.address.zipCode}`}</Info>
+                        </InfoRow>
+                    ):(
+                        <></>
+                    )}
                     {(orderType==="closed") ? (
                         <>
                         <InfoRow>
@@ -234,6 +272,7 @@ const DisplayOrderItem = ({order, orderType}) => {
                                             name="rating" 
                                             value={ratingValue}
                                             onClick={()=>setRating(ratingValue)}
+                                            disabled={order.tradie ? true : false}
                                         />
                                         <Star 
                                             ratingvalue={ratingValue} 
@@ -249,13 +288,18 @@ const DisplayOrderItem = ({order, orderType}) => {
                         <MessageBox
                             value={comment || ""}
                             onChange={(event) => setComment(event.target.value)}
+                            readOnly={order.tradie ? true : false}
                             cols="30" 
                             rows="5"
                             placeholder="Describe your experience.." 
                         />
-                        <InfoRow>
-                            <SubmitButton>Submit</SubmitButton>
-                        </InfoRow>
+                        {(!order.tradie) ? (
+                            <InfoRow>
+                                <SubmitButton onClick={handleReviewSubmit}>Submit</SubmitButton>
+                            </InfoRow>
+                        ):(
+                            <></>
+                        )}
                         </>
                     ) : (
                         <></>
@@ -266,6 +310,11 @@ const DisplayOrderItem = ({order, orderType}) => {
                     >
                         <ArrowIcon src={arrowIcon} alt="arrow"/>
                     </ArrowButton>
+                    {orderType=="current" && order.tradie && (
+                        <InfoRow>
+                            <SubmitButton onClick={handleOrderComplete}>Order Complete</SubmitButton>
+                        </InfoRow>
+                    )}
                 </ContentContainer>
             ):(
                 <ContentContainer showAll={showAll}>

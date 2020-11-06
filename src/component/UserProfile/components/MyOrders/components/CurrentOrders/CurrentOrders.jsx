@@ -29,8 +29,8 @@ const CurrentOrders = ({currentOrders, currentTradieOrders}) => {
     const showOrders = () => {
         if(currentOrders.length !== 0 && currentTradieOrders.length !== 0) {
             return (
-                currentOrders.concat(currentTradieOrders).map((order=>(
-                    <Fragment key={order._id}>
+                currentOrders.concat(currentTradieOrders).map(((order,index)=>(
+                    <Fragment key={index}>
                         <OrderItem order={order} orderType="current"/>
                     </Fragment>
                 )))

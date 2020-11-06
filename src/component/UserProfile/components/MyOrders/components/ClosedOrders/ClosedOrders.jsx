@@ -28,8 +28,8 @@ const ClosedOrders = ({closedOrders, closedTradieOrders}) => {
     const showOrders = () => {
         if(closedOrders.length !== 0 && closedTradieOrders.length !== 0) {
             return (
-                closedOrders.concat(closedTradieOrders).map((order=>(
-                    <Fragment key={order._id}>
+                closedOrders.concat(closedTradieOrders).map(((order,index)=>(
+                    <Fragment key={index}>
                         <OrderItem order={order} orderType="closed"/>
                     </Fragment>
                 )))

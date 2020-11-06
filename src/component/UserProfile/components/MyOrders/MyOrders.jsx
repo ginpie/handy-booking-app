@@ -52,7 +52,7 @@ const MyOrders = ({role, userData}) => {
             }
             fetchCustomerOrders();
         }
-    },[]);
+    },[role.customer, userData]);
 
     useEffect(()=>{
         if(role.tradie) {
@@ -69,7 +69,7 @@ const MyOrders = ({role, userData}) => {
             }
             fetchCustomerOrders();
         }
-    },[]);
+    },[role.customer, userData]);
 
     const innerNavItems = [
         {key:"CURRENT", value:"CURRENT", content:(<CurrentOrders currentOrders={currentOrders} currentTradieOrders={currentTradieOrders}/>)},
