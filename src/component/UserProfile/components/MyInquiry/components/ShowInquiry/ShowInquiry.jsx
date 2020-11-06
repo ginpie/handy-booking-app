@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import styled, { css } from 'styled-components';
+import deleteInquiry from '../../../../../../apis/deleteInquiry';
+import acceptInquiry from '../../../../../../apis/acceptInquiry';
+import addPriceToInquiry from '../../../../../../apis/addPriceToInquiry';
 import arrowIcon from '../../../icons/updownarrow.png';
 
 const Container = styled.div`
@@ -10,8 +13,14 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     position: relative;
-    height: 300px;
+    height: 250px;
     transition: 0.3s;
+    ${(props)=>props.inquiry.tradie && css`
+        height: 330px;
+    `}
+    ${(props) => props.inquiry.totalPrice && props.inquiry.customer && css`
+        height: 320px;
+    `}
     @media screen and (max-width: 768px) {
         height: 300px;
         font-size: 10px;
@@ -52,10 +61,13 @@ const StatusButton = styled.button`
     font-size: 13px;
     border-radius: 10px;
     cursor: pointer;
-    margin-left: 10px;
     :focus {
         outline:0;
     }
+    ${(props)=>props.type==="red" && css`
+        background-color:#e65b65;
+        margin:0px;
+    `}
 `;
 
 const ArrowButton = styled.button`
@@ -133,36 +145,60 @@ const Info = styled.div`
     text-decoration:underline;
 `;
 
+const AddPrice = styled.input`
+    width: 60px;
+    margin-left: 10px;
+`;
+
 
 const ShowInquiery = ({inquiry}) => {
     const [showAll, setShowAll] = useState(false)
+    const [price, setPrice] = useState()
 
     const handleShow = (event) => {
         event.preventDefault();
         setShowAll(!showAll)
     }
+
+    const handleDelete = async(event) => {
+        event.preventDefault();
+        await deleteInquiry(inquiry._id);
+        window.location.reload();
+    }
+
+    const handleAccept = async(event) => {
+        event.preventDefault();
+        await acceptInquiry(inquiry._id);
+        window.location.reload();
+    }
+
+    const handleSubmitPrice = async(event) => {
+        event.preventDefault();
+        const data = {
+            "totalPrice" : price
+        }
+        await addPriceToInquiry(inquiry._id, data)
+        window.location.reload();
+    }
     return ( 
-        <Container showAll={showAll}>
+        <Container showAll={showAll} inquiry={inquiry}>
             {showAll ? (
                 <ContentContainer>
                     <InfoRow>
                         <ServiceName>
-                            {inquiry.serviceName}
+                            {inquiry._id}
                         </ServiceName>
                     </InfoRow>
                     <InfoRow>
                         <Title>From:</Title>
-                        <Info>{inquiry.tradie}</Info>
+                        <Info>{inquiry.name}</Info>
                         &nbsp; &nbsp;
                         <Title>Phone:</Title>
-                        <Info>{inquiry.phoneNumber}</Info>
+                        <Info>{inquiry.contactNo}</Info>
                     </InfoRow>
                     <InfoRow>
                         <Title>Email:</Title>
                         <Info>{inquiry.email}</Info>
-                        &nbsp; &nbsp;
-                        <Title>OrderId:</Title>
-                        <Info>{inquiry.inquiryId}</Info>
                     </InfoRow>
                     <InfoRow>
                         <Title>
@@ -175,18 +211,45 @@ const ShowInquiery = ({inquiry}) => {
                         rows="5"
                         readOnly 
                     />
-                    <InfoRow>
-                        <Title>Price:</Title>
-                        <Info>{inquiry.price}</Info>
-                    </InfoRow>
-                    <InfoRow>
-                        <Title>Order Status:</Title>
-                        <StatusButton>{inquiry.status}</StatusButton>
-                    </InfoRow>
-                    <InfoRow>
-                        <Title>Date:</Title>
-                        <Info>{inquiry.createTime}</Info>
-                    </InfoRow>
+                    {inquiry.totalPrice && inquiry.customer && (
+                        <>
+                        <InfoRow>
+                            <Title>Price:</Title>
+                            <Info>{`${inquiry.totalPrice}$`}</Info>
+                        </InfoRow>
+                        <InfoRow>
+                            <StatusButton onClick={handleAccept}>Accept Order</StatusButton>
+                        </InfoRow>
+                        </>
+                    )}
+                    {inquiry.tradie && (
+                        <InfoRow>
+                            <Title>Address: </Title>
+                            <Info>{`${inquiry.address.address1}, ${inquiry.address.suburb}, ${inquiry.address.state}, ${inquiry.address.zipCode || ""}`}</Info>
+                        </InfoRow>
+                    )}
+                    {inquiry.customer && (
+                        <InfoRow>
+                            <StatusButton type="red" onClick={handleDelete}>Delete Order</StatusButton>
+                        </InfoRow>
+                    )}
+                    {inquiry.tradie && inquiry.totalPrice &&(
+                        <InfoRow>
+                            <Title>Current Price:</Title>
+                            <Info>{`${inquiry.totalPrice}$`}</Info>
+                        </InfoRow>
+                    )}
+                    {inquiry.tradie && (
+                        <>
+                            <InfoRow>
+                                <Title>Enter Your Price:</Title>
+                                <AddPrice type="number" value={price} onChange={(event) => setPrice(event.currentTarget.value)}/>
+                            </InfoRow>
+                            <InfoRow>
+                                <StatusButton onClick={handleSubmitPrice} >Submit</StatusButton>
+                            </InfoRow>
+                        </>
+                    )}
                     <ArrowButton
                         onClick={handleShow}
                     >
@@ -202,17 +265,21 @@ const ShowInquiery = ({inquiry}) => {
                     </ArrowButton>
                     <Left>
                         <ServiceName>
-                            {inquiry.serviceName}
+                            {inquiry._id}
                         </ServiceName>
                         <LeftBottom>
-                            <LeftBottomItem>{inquiry.tradie}</LeftBottomItem>
-                            <LeftBottomItem>{inquiry.inquiryId}</LeftBottomItem>
-                            <LeftBottomItem border="none">{inquiry.price}</LeftBottomItem>
-                            <Price>Price: {inquiry.price}</Price>
+                            <LeftBottomItem>{inquiry.name}</LeftBottomItem>
+                            <LeftBottomItem>{inquiry.email}</LeftBottomItem>
+                            <LeftBottomItem border="none">{inquiry.contactNo}</LeftBottomItem>
+                            {inquiry.totalPrice && (
+                                <Price>Price: {inquiry.totalPrice}$</Price>
+                            )}
                         </LeftBottom>
                     </Left>
                     <Right>
-                        <StatusButton>{inquiry.status}</StatusButton>
+                        {inquiry.customer &&(
+                            <StatusButton type="red" onClick={handleDelete}>Delete</StatusButton>
+                        )}
                     </Right>
                 </ContentContainer>
             )}
