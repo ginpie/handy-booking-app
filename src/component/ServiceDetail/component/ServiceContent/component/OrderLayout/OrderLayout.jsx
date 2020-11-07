@@ -11,6 +11,10 @@ const Layout = styled.div`
     border: 2px rgb(196, 196, 196) solid;
     width: 600px;
     border-radius: 5px;
+    position: absolute;
+    right: 20px;
+    max-height: 960px;
+    overflow: scroll;
 `;
 
 const OrderLayout = (props) => (

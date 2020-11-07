@@ -6,6 +6,8 @@ const Wrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    max-height: 960px;
+    overflow: scroll;
 
 
     ${props => props.isClicked && css`
