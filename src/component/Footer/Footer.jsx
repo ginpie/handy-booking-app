@@ -8,6 +8,7 @@ const Container = styled.footer`
   background-color: #a0a0a0;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   color: #fff;
 `;
 
