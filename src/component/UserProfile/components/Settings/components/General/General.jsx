@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { store } from 'react-notifications-component';
 import BoxContainer from "../../../BoxContainer";
 import updateAccount from "../../../../../../apis/updateAccount";
 import updateCustomerAddress from "../../../../../../apis/updateCustomerAddress";
@@ -104,17 +105,17 @@ const Button = styled.button`
   border-radius: 5px;
 `;
 
-const General = ({ fakeUserData, role }) => {
-  const [firstName, setFirstName] = useState(fakeUserData.firstName);
-  const [lastName, setlastName] = useState(fakeUserData.lastName);
-  const [dateOfBirth, setDateOfBirth] = useState(fakeUserData.DOB);
-  const [phone, setPhone] = useState(fakeUserData.phone);
-  const [postCode, setPostCode] = useState(fakeUserData.postCode);
+const General = ({ userData, role }) => {
+  const [firstName, setFirstName] = useState(userData.firstName);
+  const [lastName, setlastName] = useState(userData.lastName);
+  const [dateOfBirth, setDateOfBirth] = useState(userData.DOB);
+  const [phone, setPhone] = useState(userData.phone);
+  const [postCode, setPostCode] = useState(userData.postCode);
   const [address, setAddress] = useState({
-    address1: fakeUserData.address.address1,
-    address2: fakeUserData.address.address2,
-    suburb: fakeUserData.address.suburb,
-    zipCode: fakeUserData.address.zipCode,
+    address1: userData.address.address1,
+    address2: userData.address.address2,
+    suburb: userData.address.suburb,
+    zipCode: userData.address.zipCode,
   });
 
   const accountItems = [
@@ -152,8 +153,20 @@ const General = ({ fakeUserData, role }) => {
       lastName: lastName,
       phoneNumber: phone,
     };
-    await updateAccount(fakeUserData._id, data);
-    window.location.reload();
+    await updateAccount(userData._id, data);
+    // window.location.reload();
+    store.addNotification({
+      title:"Succusful",
+      message:"Your Account Infomation has been Updated",
+      type:"info",
+      container: "top-center",
+      animationIn: ["animate__animated", "animate__zoomIn"],
+      animationOut: ["animate__animated", "animate__zoomOut"],
+      dismiss: {
+        duration: 2000,
+        onScreen: true
+      }
+    })
   };
 
   const handleUpdateAddress = async (event) => {
@@ -166,14 +179,26 @@ const General = ({ fakeUserData, role }) => {
         zipCode: address.zipCode,
       },
     };
-    await updateCustomerAddress(fakeUserData.email, data);
+    await updateCustomerAddress(userData.email, data);
     const newPostCode = {
       PostCode: postCode,
     };
     if (role.tradie) {
-      await updateTradiePostCode(fakeUserData.email, newPostCode);
+      await updateTradiePostCode(userData.email, newPostCode);
     }
-    window.location.reload();
+    // window.location.reload();
+    store.addNotification({
+      title:"Succusful",
+      message:"Your address has been Updated",
+      type:"info",
+      container: "top-center",
+      animationIn: ["animate__animated", "animate__zoomIn"],
+      animationOut: ["animate__animated", "animate__zoomOut"],
+      dismiss: {
+        duration: 2000,
+        onScreen: true
+      }
+    })
   };
 
   return (
