@@ -6,10 +6,11 @@ import Reviews from "./component/Reviews";
 
 const Layout = styled.div`
   box-sizing: border-box;
-  margin-top: 20px;
+  margin-top: 0;
   padding: 0 30px 0 30px;
   border: 2px rgb(196, 196, 196) solid;
   width: 65%;
+  height: 100%;
   border-radius: 5px;
   max-height: 1060px;
   overflow: scroll;

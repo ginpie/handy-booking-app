@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-import "animate.css";
+// import "animate.css";
 import Header from "../Header";
 import Footer from "../Footer";
 import SideBar from "./components/SideBar";
@@ -143,7 +143,7 @@ class UserProfile extends Component {
       <div className="app-container">
         <ReactNotification />
         <Container>
-          <Header scrollAnime={true} />
+          <Header scrollAnime={false} />
           <ContentContainer>
             <SidebarMenu onClick={this.toggleSidebar}>Menu</SidebarMenu>
             <SideBar

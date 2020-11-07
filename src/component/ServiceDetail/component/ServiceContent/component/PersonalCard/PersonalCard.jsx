@@ -16,7 +16,6 @@ const Card = styled.div`
     0px 2px 2px rgb(142, 142, 146, 0.4);
   position: relative;
   cursor: pointer;
-  direction: ltr;
 `;
 
 const Title = styled.p`

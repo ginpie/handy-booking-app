@@ -4,14 +4,17 @@ import PersonalCard from "../PersonalCard";
 
 const Wrapper = styled.div`
   width: 30%;
+  height: 100%;
+  max-height: 1060px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  max-height: 960px;
+
   overflow: scroll;
-  margin-right: 10px;
-  direction: rtl;
+  margin: 0 10px 20px 0;
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
 
   @media screen and (max-width: 900px) {
     width: 100%;
@@ -21,11 +24,10 @@ const Wrapper = styled.div`
       -webkit-appearance: none;
       width: 20px;
     }
-  }
-
-  ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 15px;
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
   }
 
   ::-webkit-scrollbar-thumb {
