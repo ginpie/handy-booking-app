@@ -8,11 +8,14 @@ import RatingRender from "../../../RatingRender";
 
 const Layout = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const Left = styled.div`
   width: 250px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 const Right = styled.div`
@@ -28,8 +31,8 @@ const Avatar = styled.img`
 
 const Rating = styled.div`
   display: flex;
-  align-items: center;
-  width: 60%;
+  align-items: flex-start;
+  width: 100%;
   margin: 0 auto;
 `;
 
@@ -40,15 +43,15 @@ const RatingText = styled.p`
 
 const AddressWrapper = styled.div`
   display: flex;
-  width: 60%;
+  width: 100%;
   padding-top: 10px;
-  margin: 0 auto;
+  margin: 0;
   text-align: left;
 `;
 
 const Address = styled.p`
   font-size: 0.8rem;
-  margin-left: 20px;
+  margin: 0 0 0 20px;
   color: rgb(139, 137, 137);
   line-height: 1.4em;
 `;
@@ -77,8 +80,7 @@ const TradiesDetail = (props) => {
         <AddressWrapper>
           <FontAwesomeIcon icon={faMapMarkerAlt} size="sm" />
           <Address>
-            {`${person.address},`} <br />
-            Australia
+            {`${person.address},`} Australia
             <br />
             Member since
             <br />

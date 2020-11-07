@@ -19,6 +19,9 @@ const TextBox = styled.div`
   padding: 10px 30px;
   display: flex;
   justify-content: space-around;
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 const TextWrapper = styled.div`

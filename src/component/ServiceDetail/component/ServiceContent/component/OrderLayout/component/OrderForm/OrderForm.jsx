@@ -19,6 +19,7 @@ const InputRow = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
+  flex-wrap: wrap;
 `;
 
 const TextArea = styled.textarea`
