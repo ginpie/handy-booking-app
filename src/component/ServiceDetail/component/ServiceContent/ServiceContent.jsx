@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import CardWrapper from "./component/CardWrapper";
 import OrderLayout from "./component/OrderLayout";
 import { getTradies } from "../../../../apis/getTradies/getTradies";
@@ -18,12 +18,11 @@ const Header = styled.h1`
 
 const Content = styled.div`
   display: flex;
+  justify-content: space-between;
 
-  ${(props) =>
-    props.isClicked &&
-    css`
-      width: 260px;
-    `}
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 const data = [
@@ -56,6 +55,7 @@ class ServiceContent extends React.Component {
       isClicked: false,
       loaded: false,
       tradiesData: null,
+      active: 0,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -63,11 +63,12 @@ class ServiceContent extends React.Component {
   }
 
   handleClick(data, event) {
+    console.log(data, event);
     event.preventDefault();
-    this.setState({
+    this.setState((prevState) => ({
       current: data,
-      isClicked: true,
-    });
+      isClicked: !prevState.isClicked,
+    }));
   }
 
   componentDidMount() {
@@ -99,7 +100,7 @@ class ServiceContent extends React.Component {
                 isClicked={isClicked}
                 tradiesData={tradiesData}
               />
-              {isClicked && <OrderLayout currentTradie={current} />}
+              <OrderLayout currentTradie={current} />
             </Content>
           ) : (
             <p>Loading</p>

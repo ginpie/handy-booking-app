@@ -5,11 +5,13 @@ import Search from "./component/Search";
 
 const Layout = styled.div`
   width: 100vw;
-  height: 70px;
+  min-height: 70px;
+  padding: 10px;
   border-top: 1px solid #000000;
   border-bottom: 1px solid #000000;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const ServiceDetail = () => (

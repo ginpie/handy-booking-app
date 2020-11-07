@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   position: relative;
-  margin-left: 30px;
+  margin: 10px 20px;
 `;
 
 class FilterDropdown extends React.Component {
