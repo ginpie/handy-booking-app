@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import "animate.css";
 import Header from "../Header";
 import Footer from "../Footer";
 import SideBar from "./components/SideBar";
@@ -50,15 +53,8 @@ const SidebarMenu = styled.button`
 
 class UserProfile extends Component {
   state = {
-    fakeUserData: {},
-    fakeUserInquiries: {},
-    role: { customer: "", tradie: "" },
-    currentPage: "",
-    displaySidebar: false,
-  };
-
-  state = {
     userData: {},
+    role: { customer: "", tradie: "" },
     currentPage: "",
     displaySidebar: false,
   };
@@ -132,7 +128,7 @@ class UserProfile extends Component {
         value: "Settings",
         icon: settingsIcon,
         content: (
-          <Settings fakeUserData={this.state.userData} role={this.state.role} />
+          <Settings userData={this.state.userData} role={this.state.role} />
         ),
       },
       {
@@ -144,33 +140,36 @@ class UserProfile extends Component {
     ];
     const { userData, currentPage, displaySidebar } = this.state;
     return (
-      <Container>
-        <Header scrollAnime={false} />
-        <ContentContainer>
-          <SidebarMenu onClick={this.toggleSidebar}>Menu</SidebarMenu>
-          <SideBar
-            fakeUserData={userData}
-            navItems={navItems}
-            currentPage={currentPage}
-            onPageChange={this.handleNavItemChange}
-            displaySidebar={displaySidebar}
-            onCloseSidebar={this.toggleSidebar}
-          />
-          <Content>
-            {navItems.map((item) => {
-              if (currentPage !== item.value) {
-                return null;
-              }
-              return (
-                <React.Fragment key={item.key}>{item.content}</React.Fragment>
-              );
-            })}
-          </Content>
-        </ContentContainer>
-        <div style={{ width: "100%" }}>
-          <Footer />
-        </div>
-      </Container>
+      <div className="app-container">
+        <ReactNotification />
+        <Container>
+          <Header scrollAnime={true} />
+          <ContentContainer>
+            <SidebarMenu onClick={this.toggleSidebar}>Menu</SidebarMenu>
+            <SideBar
+              fakeUserData={userData}
+              navItems={navItems}
+              currentPage={currentPage}
+              onPageChange={this.handleNavItemChange}
+              displaySidebar={displaySidebar}
+              onCloseSidebar={this.toggleSidebar}
+            />
+            <Content>
+              {navItems.map((item) => {
+                if (currentPage !== item.value) {
+                  return null;
+                }
+                return (
+                  <React.Fragment key={item.key}>{item.content}</React.Fragment>
+                );
+              })}
+            </Content>
+          </ContentContainer>
+          <div style={{ width: "100%" }}>
+            <Footer />
+          </div>
+        </Container>
+      </div>
     );
   }
 }

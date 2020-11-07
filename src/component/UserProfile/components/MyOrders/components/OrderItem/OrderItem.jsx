@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import Moment from "react-moment";
+import { store } from 'react-notifications-component';
 import arrowIcon from "../../../icons/updownarrow.png";
 import StarIcon from "@material-ui/icons/Star";
 import updateReview from "../../../../../../apis/updateReview";
@@ -188,7 +189,7 @@ const DisplayOrderItem = ({ order, orderType }) => {
       }
     };
     fetchReview();
-  });
+  },[]);
 
   const handleShow = (event) => {
     event.preventDefault();
@@ -198,17 +199,41 @@ const DisplayOrderItem = ({ order, orderType }) => {
   const handleReviewSubmit = async (event) => {
     event.preventDefault();
     const review = {
-      rating: rating,
-      comment: comment,
+      "rating": rating,
+      "comment": comment,
     };
     await updateReview(order._id, review);
-    window.location.reload();
+    store.addNotification({
+      title:"Succusful",
+      message:"Review Updated",
+      type:"info",
+      container: "top-center",
+      animationIn: ["animate__animated", "animate__zoomIn"],
+      animationOut: ["animate__animated", "animate__zoomOut"],
+      dismiss: {
+        duration: 2000,
+        onScreen: true
+      }
+    })
+    // window.location.reload();
   };
 
   const handleOrderComplete = async (event) => {
     event.preventDefault();
     await updateOrderComplete(order._id);
-    window.location.reload();
+    store.addNotification({
+      title:"Complete",
+      message:"Upate Order to completed",
+      type:"info",
+      container: "top-center",
+      animationIn: ["animate__animated", "animate__zoomIn"],
+      animationOut: ["animate__animated", "animate__zoomOut"],
+      dismiss: {
+        duration: 2000,
+        onScreen: true
+      }
+    })
+    // window.location.reload();
   };
 
   return (
@@ -301,7 +326,7 @@ const DisplayOrderItem = ({ order, orderType }) => {
               {!order.tradie ? (
                 <InfoRow>
                   <SubmitButton onClick={handleReviewSubmit}>
-                    Submit
+                    Add review
                   </SubmitButton>
                 </InfoRow>
               ) : (
