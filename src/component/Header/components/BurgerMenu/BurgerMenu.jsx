@@ -111,7 +111,7 @@ class BurgerMenu extends React.Component {
   }
 
   render() {
-    const { authenticationModal, user } = this.state;
+    const { authenticationModal } = this.state;
 
     return (
       <Container>

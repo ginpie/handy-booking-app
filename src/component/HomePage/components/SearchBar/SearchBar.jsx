@@ -100,7 +100,7 @@ class SearchBar extends React.Component {
   handleClick = () => {
     // get search input element
     const inputValue = this.searchRef.current.ref.current.props.value;
-    this.props.history.push("/" + inputValue.toLowerCase().replace(/\s/g, ""));
+    this.props.history.push("/" + inputValue.toLowerCase().replace(/\s/g, "-"));
   };
 
   render() {

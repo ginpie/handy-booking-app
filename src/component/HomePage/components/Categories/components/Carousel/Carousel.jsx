@@ -18,22 +18,28 @@ const Link = styled.a`
   width: 200px;
 `;
 
-const Icon = styled.i`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
+const IconBox = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 50%;
   background-color: #ffda44;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Icon = styled.i`
+  text-align: center;
+  font-size: 40px;
 `;
 
 const Cell = ({ href, icon, description }) => (
   <StyledCell>
     <Link href={href}>
-      <Icon className={icon}></Icon>
+      <IconBox>
+        <Icon className={icon}></Icon>
+      </IconBox>
       <Job>{description}</Job>
     </Link>
   </StyledCell>

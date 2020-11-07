@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Search from "../Search";
+import getServices from "../../../../../../apis/getServices";
 
 const DropList = styled.ul`
   width: 370px;
@@ -50,20 +51,12 @@ class ServiceSearch extends React.Component {
 
   // get all services when search bar is mounted
   componentDidMount() {
-    fetch("http://localhost:3000/api/services").then((res) => {
-      if (res.status !== 200) {
-        console.log(
-          "Looks like there was a problem. status code: " + res.status
-        );
-        return;
-      }
-      res.json().then((data) => {
-        let s = [];
-        data.forEach((i) => {
-          s.push(i.serviceName);
-        });
-        this.setState(() => ({ allServices: s }));
+    getServices().then((data) => {
+      let s = [];
+      data.forEach((i) => {
+        s.push(i.serviceName);
       });
+      this.setState(() => ({ allServices: s }));
     });
   }
 

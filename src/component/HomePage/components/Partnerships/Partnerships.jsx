@@ -6,6 +6,7 @@ import "../../../../assets/fonts.css";
 const Container = styled.section`
   min-height: 600px;
   width: auto;
+  padding: 20px 0 20px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -28,6 +29,7 @@ const Wrapper = styled.div`
 const Title = styled.h3`
   width: 100%;
   text-align: left;
+  padding-left: 20px;
   font-size: 28px;
   font-family: "Roboto Condensed", sans-serif;
 `;
@@ -44,7 +46,9 @@ const Box = styled.div`
 
 const Column = styled.div`
   width: 50%;
+  min-width: 200px;
   height: 100%;
+  min-height: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,6 +59,7 @@ const Icons = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const Icon = styled.p`
@@ -70,13 +75,15 @@ const Icon = styled.p`
 
 const Contents = styled.div`
   height: 100%;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: flex-end;
 `;
 
 const Text = styled.p`
-  height: 100px;
+  min-height: 100px;
 `;
 
 const Button = styled.div`
@@ -99,13 +106,18 @@ const Button = styled.div`
 
 const ImgWrap = styled.div`
   width: 350px;
-  height: 370px;
+  height: 400px;
   overflow: hidden;
   border-radius: 0 0 50% 50%;
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+
+  @media screen and (max-width: 600px) {
+    width: 280px;
+    height: 320px;
+  }
 `;
 
 const Circle = styled.div`
@@ -113,15 +125,21 @@ const Circle = styled.div`
   height: 350px;
   border-radius: 50%;
   background-color: #aaa;
+  @media screen and (max-width: 600px) {
+    width: 280px;
+    height: 280px;
+  }
 `;
 
 const Image = styled.img`
-  width: 260px;
-  height: 370px;
+  max-width: 100%;
+  max-height: 100%;
   position: absolute;
+  margin: auto;
   top: 0;
-  right: 45px;
-
+  left: 0;
+  bottom: 0;
+  right: 0;
   @keyframes up {
     0% {
       transform: translateY(300px);

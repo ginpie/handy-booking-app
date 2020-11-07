@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "./components/Link";
 
 const Container = styled.footer`
-  height: 300px;
+  min-height: 300px;
   padding: 30px 50px;
   background-color: #a0a0a0;
   display: flex;
@@ -19,6 +19,7 @@ const Title = styled.h5`
 
 const Wrapper = styled.div`
   width: 30%;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
 `;
