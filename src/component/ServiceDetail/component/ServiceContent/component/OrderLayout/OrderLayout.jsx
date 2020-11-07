@@ -11,7 +11,7 @@ const Layout = styled.div`
   border: 2px rgb(196, 196, 196) solid;
   width: 65%;
   border-radius: 5px;
-  max-height: 1060px;
+  max-height: 960px;
   overflow: scroll;
 
   @media screen and (max-width: 900px) {
