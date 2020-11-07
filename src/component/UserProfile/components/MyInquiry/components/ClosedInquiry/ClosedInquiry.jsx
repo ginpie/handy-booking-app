@@ -31,6 +31,7 @@ const ClosedInquiry = ({ userData }) => {
       const data = await getInquiries(userData.email, "tradies");
       const newData = data.inquiries
         .filter((inquiry) => inquiry.accepted !== true)
+        .filter((inquiry) => inquiry.deleted !== true)
         .map((inquiry) => ({ ...inquiry, tradie: true }));
       setTradieInquiries(newData);
     };
