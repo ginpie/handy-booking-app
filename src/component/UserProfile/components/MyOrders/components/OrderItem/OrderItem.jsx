@@ -23,6 +23,12 @@ const Container = styled.div`
       height: 380px;
     `}
   ${(props) =>
+  props.orderType === "current" &&
+  !props.order.tradie &&
+  css`
+    height: 330px;
+  `}
+  ${(props) =>
     !props.showAll &&
     css`
       height: 80px;
@@ -215,25 +221,12 @@ const DisplayOrderItem = ({ order, orderType }) => {
         onScreen: true
       }
     })
-    // window.location.reload();
   };
 
   const handleOrderComplete = async (event) => {
     event.preventDefault();
     await updateOrderComplete(order._id);
-    store.addNotification({
-      title:"Complete",
-      message:"Upate Order to completed",
-      type:"info",
-      container: "top-center",
-      animationIn: ["animate__animated", "animate__zoomIn"],
-      animationOut: ["animate__animated", "animate__zoomOut"],
-      dismiss: {
-        duration: 2000,
-        onScreen: true
-      }
-    })
-    // window.location.reload();
+    window.location.reload();
   };
 
   return (

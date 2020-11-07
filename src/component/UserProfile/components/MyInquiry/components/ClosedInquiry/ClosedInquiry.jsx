@@ -35,7 +35,7 @@ const ClosedInquiry = ({ userData }) => {
       setTradieInquiries(newData);
     };
     fetchTradieInquiries();
-  },[]);
+  },[userData.email]);
   return (
     <BoxContainer title="Tradie Inquiries" needSearchBar>
       <Container>

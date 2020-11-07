@@ -37,7 +37,7 @@ const CurrentInquiry = ({ userData }) => {
       setClientInquiries(newData);
     };
     fetchClientInquiries();
-  },[]);
+  },[userData.email]);
 
   return (
     <BoxContainer title="Client Inquiries" needSearchBar>
