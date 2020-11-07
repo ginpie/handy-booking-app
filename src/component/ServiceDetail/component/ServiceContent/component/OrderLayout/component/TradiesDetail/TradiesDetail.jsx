@@ -60,7 +60,7 @@ const person = {
   about:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis eget lectus dui. Neque duis id imperdiet amet. Pulvinar massa varius ipsum adipiscing tincidunt ultrices lectus libero. A arcu aliquet lorem non metus.",
   address: "South Yarra VIC",
-  rating: 3,
+  rating: 0,
   register_date: "12th Mar 2018",
 };
 
@@ -82,7 +82,7 @@ const TradiesDetail = (props) => {
             <br />
             Member since
             <br />
-            {props.data.createdAt}
+            {props.data.createdAt && props.data.createdAt.substr(0, 10)}
           </Address>
         </AddressWrapper>
       </Left>

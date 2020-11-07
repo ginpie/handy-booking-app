@@ -13,7 +13,10 @@ const Table = styled.table`
 const Row = styled.tr`
 `;
 
-const Head = styled.th``;
+const Head = styled.th`
+    text-transform: uppercase;
+    text-align: left;
+`;
 
 const Content = styled.td`
     padding-left: 10px;
