@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import 'animate.css';
 import Header from "../Header";
 import Footer from "../Footer";
 import SideBar from "./components/SideBar";
@@ -50,15 +53,8 @@ const SidebarMenu = styled.button`
 
 class UserProfile extends Component {
   state = {
-    fakeUserData: {},
-    fakeUserInquiries: {},
-    role: { customer: "", tradie: "" },
-    currentPage: "",
-    displaySidebar: false,
-  };
-
-  state = {
     userData: {},
+    role: { customer: "", tradie: "" },
     currentPage: "",
     displaySidebar: false,
   };
@@ -113,11 +109,13 @@ class UserProfile extends Component {
     const navItems = [
       {key: 'MYINQUIRY', value: 'My Inquiry', icon:placeOrderIcon, content:(<MyInquiry role={this.state.role} userData={this.state.userData}/>)},
       {key: 'MYORDERS', value: 'My orders', icon:myOrdersIcon, content:(<MyOrders role={this.state.role} userData={this.state.userData}/>)},
-      {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings fakeUserData={this.state.userData} role={this.state.role}/>)},
+      {key: 'SETTING', value: 'Settings', icon:settingsIcon, content:(<Settings userData={this.state.userData} role={this.state.role}/>)},
       {key: 'HELPCENTRE', value: 'Help Centre', icon:helpCentreIcon, content:((<div/>))},
   ]
   const { userData, currentPage, displaySidebar} = this.state
   return (
+    <div className="app-container">
+          <ReactNotification />
           <Container>
               <Header scrollAnime={true}/>
               <ContentContainer>
@@ -150,6 +148,7 @@ class UserProfile extends Component {
                   <Footer/>
               </div>
           </Container>
+        </div>
      );
   }
 }

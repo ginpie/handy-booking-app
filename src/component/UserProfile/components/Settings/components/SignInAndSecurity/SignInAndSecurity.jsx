@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { store } from 'react-notifications-component';
 import BoxContainer from '../../../BoxContainer';
 import styled from 'styled-components';
 import SetPasswordModal from '../SetPasswordModal';
@@ -72,8 +73,8 @@ const SetPassowrdButton = styled.button`
 
 
 
-const SignInAndSecurity = ({fakeUserData}) => {
-    const [email] = useState(fakeUserData.email);
+const SignInAndSecurity = ({userData}) => {
+    const [email] = useState(userData.email);
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState('')
     const [showModal, setShowModal] = useState(false)
@@ -97,8 +98,20 @@ const SignInAndSecurity = ({fakeUserData}) => {
         const data = {
             password: password
         };
-        await updateUserPassword(fakeUserData._id, data);
+        await updateUserPassword(userData._id, data);
         setShowModal(!showModal);
+        store.addNotification({
+            title:"Succusful",
+            message:"Your Password has been Updated",
+            type:"info",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__zoomIn"],
+            animationOut: ["animate__animated", "animate__zoomOut"],
+            dismiss: {
+              duration: 2000,
+              onScreen: true
+            }
+          })
     }
 
     return ( 

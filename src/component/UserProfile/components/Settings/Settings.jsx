@@ -29,12 +29,12 @@ const Content = styled.div`
 
 
 
-const Settings = ({fakeUserData, role}) => {
+const Settings = ({userData, role}) => {
     const [currentInnerPage, setCurrentInnerPage] = useState('GENERAL');
 
     const innerNavItems = [
-        {key:"GENERAL", value:"GENERAL", content:(<General fakeUserData={fakeUserData} role={role}/>)},
-        {key:"SINGINANDSECURITY", value:"SING IN AND SECURITY", content:(<SignInAndSecuirty fakeUserData={fakeUserData}/>)},
+        {key:"GENERAL", value:"GENERAL", content:(<General userData={userData} role={role}/>)},
+        {key:"SINGINANDSECURITY", value:"SING IN AND SECURITY", content:(<SignInAndSecuirty userData={userData}/>)},
     ]
 
     return ( 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { store } from 'react-notifications-component';
 import styled, {css} from 'styled-components';
 import Modal from '../../../Modal';
 

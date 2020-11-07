@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled, { css } from 'styled-components';
+import { store } from 'react-notifications-component';
 import deleteInquiry from '../../../../../../apis/deleteInquiry';
 import acceptInquiry from '../../../../../../apis/acceptInquiry';
 import addPriceToInquiry from '../../../../../../apis/addPriceToInquiry';
@@ -153,7 +154,7 @@ const AddPrice = styled.input`
 
 const ShowInquiery = ({inquiry}) => {
     const [showAll, setShowAll] = useState(false)
-    const [price, setPrice] = useState()
+    const [price, setPrice] = useState('')
 
     const handleShow = (event) => {
         event.preventDefault();
@@ -169,7 +170,19 @@ const ShowInquiery = ({inquiry}) => {
     const handleAccept = async(event) => {
         event.preventDefault();
         await acceptInquiry(inquiry._id);
-        window.location.reload();
+        store.addNotification({
+            title:"Succusful",
+            message:"Succusful Accept inqury",
+            type:"info",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__zoomIn"],
+            animationOut: ["animate__animated", "animate__zoomOut"],
+            dismiss: {
+              duration: 2000,
+              onScreen: true
+            }
+          })
+        //   window.location.reload();
     }
 
     const handleSubmitPrice = async(event) => {
@@ -178,7 +191,19 @@ const ShowInquiery = ({inquiry}) => {
             "totalPrice" : price
         }
         await addPriceToInquiry(inquiry._id, data)
-        window.location.reload();
+        store.addNotification({
+            title:"Succusful",
+            message:"Succusful update price",
+            type:"info",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__zoomIn"],
+            animationOut: ["animate__animated", "animate__zoomOut"],
+            dismiss: {
+              duration: 2000,
+              onScreen: true
+            }
+          })
+        //   window.location.reload();
     }
     return ( 
         <Container showAll={showAll} inquiry={inquiry}>
@@ -230,7 +255,7 @@ const ShowInquiery = ({inquiry}) => {
                     )}
                     {inquiry.customer && (
                         <InfoRow>
-                            <StatusButton type="red" onClick={handleDelete}>Delete Order</StatusButton>
+                            <StatusButton type="red" onClick={handleDelete}>Delete Inquiry</StatusButton>
                         </InfoRow>
                     )}
                     {inquiry.tradie && inquiry.totalPrice &&(
