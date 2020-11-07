@@ -31,7 +31,7 @@ class FilterBar extends React.Component {
     super(props);
     const content = {
       distance: "Distance",
-      rate: "Sort by date",
+      rate: "Sort by Rating",
       time: "Available Time",
     };
     this.state = {
